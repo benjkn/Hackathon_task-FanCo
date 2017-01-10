@@ -1,3 +1,5 @@
+// not required anywhere yet! To be required if we add registered users
+
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
