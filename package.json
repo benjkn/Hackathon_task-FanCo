@@ -1,0 +1,33 @@
+{
+  "name": "hackathon2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjkn/Hackathon_task-FanCo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjkn/Hackathon_task-FanCo/issues"
+  },
+  "homepage": "https://github.com/benjkn/Hackathon_task-FanCo#readme",
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.3.2",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "express-jwt": "^5.1.0",
+    "jquery": "^3.1.1",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.7.6",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
