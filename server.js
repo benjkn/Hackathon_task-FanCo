@@ -1,11 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var path = require('path');
 
-mongoose.connect('mongodb://localhost/fanco');
+mongoose.connect(process.env.MONGOLAB_ROSE_URI || 'mongodb://localhost/fanco');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+// var users = require('./routes/users'); ********** uncomment to add user registration
 
 var app = express();
 
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/users', users); ********** uncomment to add user registration
 
 var port = process.env.PORT || '7000';
 

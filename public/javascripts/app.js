@@ -1,12 +1,12 @@
-var app = angular.module('fanco', ['ui.router']);
+var app = angular.module('fanco', []);
 
-app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-  	.state('home', {
-  		url: '/home',
-  		templateUrl: '/templates/home.html',
-      controller: 'MainCtrl'
-  	})
+// app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+//   $stateProvider
+//   	.state('home', {
+//   		url: '/home',
+//   		templateUrl: '/templates/home.html',
+//       controller: 'MainCtrl'
+//   	})
 
-  $urlRouterProvider.otherwise('home');
- }]);
+//   $urlRouterProvider.otherwise('home');
+//  }]);

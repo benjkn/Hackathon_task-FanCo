@@ -1,3 +1,5 @@
+// not required anywhere yet! To be required if we add registered users
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
