@@ -21,5 +21,5 @@ app.use('/users', users);
 var port = process.env.PORT || '7000';
 
 app.listen(port, function () {
-  console.log('ok!')
+  console.log('ok! On: localhost:' + port)
 });

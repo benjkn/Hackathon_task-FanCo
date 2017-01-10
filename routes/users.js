@@ -7,7 +7,7 @@ var passport = require('passport');
 
 require('../config/passport');
 
-//Models to be added here if necessary
+var User = require('../models/Users');
 
 // ----------  basic register and login ----------
 router.post('/register', function(req, res, next){
