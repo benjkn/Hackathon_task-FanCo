@@ -28,10 +28,12 @@ app.get('/forecast', function(req, res){
 		// var myReadStream = fs.createReadStream((body.data), { encoding: 'utf8' });
 		// var myWriteStream = fs.createWriteStream('data/forecast.json');
 		// myReadStream.pipe(myWriteStream);
-		fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
-	  if (err) return console.log(err);
-	  // console.log();
-		});
+
+		// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
+		// fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
+	 //  		if (err) return console.log(err);
+	 //  		// console.log();
+		// });
 	    res.send(body);
 	  }
 	});
@@ -44,10 +46,10 @@ app.get('/history', function(req, res){
 	  if (!error && response.statusCode == 200) {
 	    console.log(body);
 		
-
-			fs.writeFile('data/history.json', body, 'utf8', function (err) {
-		  	if (err) return console.log(err);
-			});
+	    	// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
+			// fs.writeFile('data/history.json', body, 'utf8', function (err) {
+		 //  	if (err) return console.log(err);
+			// });
 
 		  res.send(body);
 
