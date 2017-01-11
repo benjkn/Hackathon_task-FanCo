@@ -2,29 +2,22 @@
 <html>
 <head>
 
-	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	<!-- <meta charset="utf-8"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"> -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap-clearmin.min.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/roboto.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/material-design.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/small-n-flat.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.min.css">
 	<script src="angular/angular.js"></script>
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 	
 	<title>FanCo</title>
-	<!-- <style>.panel > h3{margin:0;padding:20px;border-bottom:1px solid #ddd;}
-    .anchor{position:relative;top:-70px}
-    body { position: relative;}
-  </style> -->
 </head>
 
 <body class="cm-no-transition cm-1-navbar" data-spy="scroll" data-target="#cm-menu-scroller" ng-app="fanco" ng-controller="MainCtrl">
 
 	<div id="cm-menu">
     <nav class="cm-navbar cm-navbar-turquoise">
-      <div class="cm-flex cm-logo">FanCo</div>
+      <div class="cm-flex">FanCo</div>
       <div class="btn btn-turquoise md-menu-white" data-toggle="cm-menu"></div>
     </nav>
 
@@ -75,24 +68,18 @@
   </div>
 
   <header id="cm-header">
-    <nav class="cm-navbar cm-navbar-turquoise">
+    <nav class="navbar navbar-default" id="orizontalnav">
       <div class="btn btn-turquoise md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
 
 
       <!-- Inline-block not working! add it on css file -->
-      <div class="cm-flex">
-      	<ul style="display:inline-block">
+      <div class="cm-flex" >
+      	<ul id="navlist">
       		<li>Sales</li>
+
       		<li>Forcast</li>
       	</ul>
       </div>
-
-<!--  Search Bar
-			<div class="pull-right">
-        <div id="cm-search-btn" class="btn btn-primary md-search-white" data-toggle="cm-search"></div>
-      </div> -->
-
-
 
       <div class="dropdown pull-right">
         <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>

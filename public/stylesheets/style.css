@@ -1,3 +1,20 @@
 .container-fluid {
-	padding: 10px;
+	padding: 80px 50px;
+}
+
+#navlist {
+	list-style-type: none;
+	font-size: 25px;
+	margin: auto;
+}
+
+#navlist li {
+	display: inline;
+	margin-right: 15px;
+	color: white;
+}
+
+#orizontalnav {
+	height:52px;
+	background-color: green;
 }
