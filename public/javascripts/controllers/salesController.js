@@ -1,4 +1,4 @@
-app.controller("salesCtrl", ["$scope", function($scope) {
+app.controller("salesCtrl", ["$scope", "$interval", function($scope, $interval) {
 
 	$scope.salesData = [
 
@@ -14,16 +14,23 @@ app.controller("salesCtrl", ["$scope", function($scope) {
 	    {hour: 10,sales: 30}
 	];
 
+	$interval(function(){
+        var hour=$scope.salesData.length+1;
+        var sales= Math.round(Math.random() * 100);
+        $scope.salesData.push({hour: hour, sales:sales});
+    }, 1000, 10);
+
 }] );
 
 
-app.directive("linearChart", ['$window', function($window) {
+app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 	return {
 		restrict: "EA",
 		template: "<svg width='600' height='200'></svg>",
 		controller:"salesCtrl",
 		link: function(scope, elem, attrs) {
-			var salesDataToPlot=scope[attrs.chartData];
+			var exp = $parse(attrs.chartData);
+			var salesDataToPlot=exp(scope);
 			var padding = 20;
 			var pathClass = "path";
 			var xScale, yScale, xAxisGen, yAxisGen, lineFun;
@@ -31,6 +38,11 @@ app.directive("linearChart", ['$window', function($window) {
 			var d3 = $window.d3;
 			var rawSvg = elem.find("svg")[0];
 			var svg = d3.select(rawSvg);
+
+			scope.$watchCollection(exp, function(newVal, oldVal){
+               salesDataToPlot=newVal;
+               redrawLineChart();
+           });
 
 			function setChartParameters(){
 				  xScale = d3.scale.linear()
@@ -87,6 +99,20 @@ app.directive("linearChart", ['$window', function($window) {
 				        "class": pathClass
 				   });
 				}
+
+				function redrawLineChart() {
+
+	               setChartParameters();
+
+	               svg.selectAll("g.y.axis").call(yAxisGen);
+
+	               svg.selectAll("g.x.axis").call(xAxisGen);
+
+	               svg.selectAll("."+pathClass)
+	                   .attr({
+	                       d: lineFun(salesDataToPlot)
+	                   });
+	           }
 
 				drawLineChart();
 		}
