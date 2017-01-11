@@ -1,10 +1,14 @@
 app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 
 	function getData() {
-		return $http.get('/whatever').then(function(response, err) {
+		return $http.get('/forecast').then(function(response, err) {
 			if (err) {console.log(err);}
-			// console.log(response.data.list);
 
+			for (i=0; i<response.data.list.length; i++) {
+				var temper = Math.floor((response.data.list[i].temp.day-273.15)*100)/100
+				var date = new Date(response.data.list[i].dt)
+				console.log('On day (' + i + '): ' + response.data.list[i].dt + ' the temp will be: ' + temper + 'celcius');
+			}
 		});
 	}
 	// getData();
@@ -12,10 +16,10 @@ app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 	function getHistory() {
 		return $http.get('/history').then(function(response, err) {
 			if (err) {console.log(err);}
-			console.log(response);
-
+				console.log(response.data.data.weather);
 		});
 	}
+
 	getHistory();
 
 
