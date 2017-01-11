@@ -1,0 +1,38 @@
+[
+  {
+    "Product": "FanCo. Classic",
+    "SKU": "RED - SPECIAL EDITION - FanCo. Classic",
+    "Channel": "Direct Sales",
+    "Revenue Per Unit Sold ($)": 14.99
+  },
+  {
+    "Product": "FanCo. Classic",
+    "SKU": "RED - SPECIAL EDITION - FanCo. Classic",
+    "Channel": "Retail",
+    "Revenue Per Unit Sold ($)": 8.94
+  },
+  {
+    "Product": "FanCo. Classic",
+    "SKU": "GREEN - FanCo. Classic",
+    "Channel": "Direct Sales",
+    "Revenue Per Unit Sold ($)": 11.99
+  },
+  {
+    "Product": "FanCo. Classic",
+    "SKU": "GREEN - FanCo. Classic",
+    "Channel": "Retail",
+    "Revenue Per Unit Sold ($)": 6.59
+  },
+  {
+    "Product": "FanCo. Classic",
+    "SKU": "ORANGE - FanCo. Classic",
+    "Channel": "Direct Sales",
+    "Revenue Per Unit Sold ($)": 11.99
+  },
+  {
+    "Product": "FanCo. Classic",
+    "SKU": "ORANGE - FanCo. Classic",
+    "Channel": "Retail",
+    "Revenue Per Unit Sold ($)": 6.59
+  }
+]
