@@ -10,7 +10,6 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/material-design.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/small-n-flat.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/highlight.css">
 	<script src="angular/angular.js"></script>
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 	
@@ -25,7 +24,7 @@
 
 	<div id="cm-menu">
     <nav class="cm-navbar cm-navbar-turquoise">
-      <div class="cm-flex cm-logo" style="background-image:url(assets/img/logo.svg)">FanCo</div>
+      <div class="cm-flex cm-logo">FanCo</div>
       <div class="btn btn-turquoise md-menu-white" data-toggle="cm-menu"></div>
     </nav>
 
@@ -33,52 +32,41 @@
       <div id="cm-menu-items-wrapper">
         <div id="cm-menu-scroller">
           <ul class="cm-menu-items nav">
+          	<!-- Make it responsive onchange, not on button click -->
           	<li> <a class="dropdown" ng-Click=(show1=!show1) href="#">Products</a>
           		<ul id="myDropdown" class="dropdown-content" ng-show=show1>
-	          		<li><input type="checkbox"> Red </input></li>
-	          		<li><input type="checkbox"> Green </input></li>
-	          		<li><input type="checkbox"> Orange </input></li>
-	          		<li><input type="checkbox"> All </input></li>
+          			<!-- Make "all" select all options -->
+         				<li ng-repeat="p in products"><input type="checkbox" class="productList" value={{p}}>{{p}}</li>
           		</ul>
           	</li>
             <li> <a class="dropdown" ng-Click=(show2=!show2) href="#">Channel</a>
             	<ul id="myDropdown" class="dropdown-content" ng-show=show2>
-            		<li><input type="radio" name="channel"> Direct Sales </input></li>
-          			<li><input type="radio" name="channel"> Retail </input></li>
-          			<li><input type="radio" name="channel" checked> Both </input></li>
+            		<li ng-repeat="c in channels"><input type="radio" name="channel" class="channelList" value={{c}}>{{c}}</li>
 							</ul>
           	</li>
             <li> <a class="dropdown" ng-Click=(show3=!show3) href="#">Neighborhood</a>
             	<ul id="myDropdown" class="dropdown-content" ng-show=show3>
-            		<li><input type="checkbox"> Allston </input></li>
-          			<li><input type="checkbox"> Back Bay </input></li>
-          			<li><input type="checkbox"> Charleston </input></li>
-          			<li><input type="checkbox"> Downtown </input></li>
-          			<li><input type="checkbox"> Jamaica Plain </input></li>
-          			<li><input type="checkbox"> North End </input></li>
-          			<li><input type="checkbox"> South End </input></li>
-          			<li><input type="checkbox"> West End </input></li>
-          			<li><input type="checkbox"> All </input></li>
-							</ul>	
+            		<li ng-repeat="n in neighborhoods"><input type="checkbox" class="neighList" value={{n}}>{{n}}</li>
+							</ul>
           	</li>
           	<!-- Problem in toggling custom Dates -->
             <li> <a class="dropdown" ng-Click=(show4=!show4) href="#">Custom Dates</a>
             	<ul id="myDropdown" class="dropdown-content" ng-show=show4>
-          			<li><input type="radio" name="dates"> Custom </input>
-          				<form ng-submit="">
+          			<li><input type="radio" name="dates" class="datesPick" value="{{fromDate}} until {{toDate}}"> Custom </input>
+          				<form>
           					<div>
-          						From: <input type="date">
+          						From: <input type="date" ng-model="fromDate">
           					</div>
           					<div>
-          						To: <input type="date">
-          					</div>
-          					<div>
-          						<input type="submit" class="btn btn-turquoise" value="Go!">
+          						To: <input type="date" ng-model="toDate">
           					</div>
           				</form>
           			</li>
-          			<li><input type="radio" name="dates" checked> All </input></li>
+          			<li><input type="radio" name="dates" class="datesPick" value="All" checked> All </input></li>
 							</ul>
+          	</li>
+        		<li>
+        			<button ng-click="getDetails()">GO!</button>  
           	</li>
           </ul>
         </div>
@@ -90,6 +78,8 @@
     <nav class="cm-navbar cm-navbar-turquoise">
       <div class="btn btn-turquoise md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
 
+
+      <!-- Inline-block not working! add it on css file -->
       <div class="cm-flex">
       	<ul style="display:inline-block">
       		<li>Sales</li>
@@ -97,34 +87,42 @@
       	</ul>
       </div>
 
-      <div class="pull-right">
+<!--  Search Bar
+			<div class="pull-right">
         <div id="cm-search-btn" class="btn btn-primary md-search-white" data-toggle="cm-search"></div>
-      </div>
+      </div> -->
+
+
 
       <div class="dropdown pull-right">
         <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
-        <ul class="dropdown-menu">
-          <li class="disabled text-center">
-            <strong>John Smith</strong>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-fw fa-cog"></i> Settings</a>
-          </li>
-          <li>
-            <i class="fa fa-fw fa-sign-out"></i> Sign out
-          </li>
-        </ul>
+<!--			Uncomment if we add users
+	        <ul class="dropdown-menu">
+	          <li class="disabled text-center">
+	            <strong>John Smith</strong>
+	          </li>
+	          <li>
+	            <a href="#">Profile</a>
+	          </li>
+	          <li>
+	            <a href="#">Settings</a>
+	          </li>
+	          <li>
+	            Sign out
+	          </li>
+        	</ul> -->
       </div>
 
     </nav>
   </header>
   
-  <ui-view></ui-view>
 
-	<footer class="cm-footer"><span class="pull-right">&copy; Martha, Nati and Ben dream-team</span></footer>
+  <div class="uiviews">
+  	<ui-view></ui-view>
+  </div>
+  
+
+  <footer class="cm-footer"><span class="pull-right">&copy; Martha, Nati and Ben dream-team</span></footer>
 
 
 
@@ -135,7 +133,7 @@
   <!-- <script src="assets/js/fastclick.min.js"></script> -->
 	<!--  <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/clearmin.min.js"></script> -->
-  <script src="node_modules/dist/jquery.min.js"></script>
+  <script src="jquery/dist/jquery.js"></script>
 	<script src="javascripts/app.js"></script>
 	<script src="javascripts/controllers/mainController.js"></script>
 </body>
