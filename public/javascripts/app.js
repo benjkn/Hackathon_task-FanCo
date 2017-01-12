@@ -1,4 +1,4 @@
-var app = angular.module('fanco', ['ui.router', 'chartjs']);
+var app = angular.module('fanco', ['ui.router']);
 
 app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider
