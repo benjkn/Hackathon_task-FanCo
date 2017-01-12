@@ -1,17 +1,13 @@
 app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 
-	function getData() {
-		return $http.get('/forecast').then(function(response, err) {
-			if (err) {console.log(err);}
+	// function hello () {
+	// 	console.log('in hello func in controller');
+	// 	duckService.gethistory().then(function(msg) {
+	// 			console.log(msg)
+	// 	});
+	// }
+	// hello();
 
-			for (i=0; i<response.data.list.length; i++) {
-				var temper = Math.floor((response.data.list[i].temp.day-273.15)*100)/100
-				var date = new Date(response.data.list[i].dt)
-				console.log('On day (' + i + '): ' + response.data.list[i].dt + ' the temp will be: ' + temper + 'celcius');
-			}
-		});
-	}
-	// getData();
 
 	function getHistory() {
 		return $http.get('/history').then(function(response, err) {
@@ -19,15 +15,12 @@ app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 				console.log(response.data.data.weather);
 		});
 	}
-
 	// getHistory();
 
 
 
 	$scope.products = ['Red', 'Green', 'Orange', 'All'];
-
 	$scope.channels = ['Retail', 'Direct Sales', 'Both'];
-
 	$scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];
 
 	$scope.getDetails = function () {
