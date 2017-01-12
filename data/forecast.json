@@ -16,26 +16,27 @@
     {
       "dt": 1484150400,
       "temp": {
-        "day": 282.35,
-        "min": 282.35,
-        "max": 282.35,
-        "night": 282.35,
-        "eve": 282.35,
-        "morn": 282.35
+        "day": 282.92,
+        "min": 282.92,
+        "max": 282.92,
+        "night": 282.92,
+        "eve": 282.92,
+        "morn": 282.92
       },
-      "pressure": 1036.3,
-      "humidity": 97,
+      "pressure": 1032.61,
+      "humidity": 94,
       "weather": [
         {
-          "id": 804,
-          "main": "Clouds",
-          "description": "overcast clouds",
-          "icon": "04n"
+          "id": 501,
+          "main": "Rain",
+          "description": "moderate rain",
+          "icon": "10d"
         }
       ],
-      "speed": 4.31,
-      "deg": 188,
-      "clouds": 92
+      "speed": 5.66,
+      "deg": 177,
+      "clouds": 92,
+      "rain": 4.27
     },
     {
       "dt": 1484236800,
