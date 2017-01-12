@@ -2494,4 +2494,8 @@ Week Of,City,Neighborhood,Product,SKU,Channel,Sales (Units)
 2015-06-22,Boston,West End,FanCo. Classic,ORANGE - FanCo. Classic,Retail,367
 2015-06-15,Boston,West End,FanCo. Classic,ORANGE - FanCo. Classic,Retail,353
 2015-06-08,Boston,West End,FanCo. Classic,ORANGE - FanCo. Classic,Retail,336
+<<<<<<< HEAD
 2015-06-01,Boston,West End,FanCo. Classic,ORANGE - FanCo. Classic,Retail,336
+=======
+2015-06-01,Boston,West End,FanCo. Classic,ORANGE - FanCo. Classic,Retail,336
+>>>>>>> master
