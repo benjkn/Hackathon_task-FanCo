@@ -45,8 +45,8 @@ app.get('/history', function(req, res){
 	request('http://api.worldweatheronline.com/premium/v1/past-weather.ashx?q=Boston&format=json&date=2016-05-16&enddate=2016-05-30&key=22b79bd1845840e6a68110850171101&tp=24', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	    console.log(body);
-		
-	    	// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
+
+	    	// ***************CAUTION --- if u uncomment and run this, overwrites history.json file
 			// fs.writeFile('data/history.json', body, 'utf8', function (err) {
 		 //  	if (err) return console.log(err);
 			// });

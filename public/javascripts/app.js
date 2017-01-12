@@ -1,4 +1,4 @@
-var app = angular.module('fanco', ['ui.router']);
+var app = angular.module('fanco', ['ui.router','highcharts-ng']);
 
 app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider
