@@ -1,10 +1,12 @@
 app.factory('duckService', ['$http', function($http) {
+	
+  service = {}
 
-	var salesService = {
+  // service.gethistory = function () {
+  //   console.log("inside gethistory function");
+  //   return $http.get('/data/history.json');
+  // };
 
-
-	};
-
-  return  salesService;
+  return service
 
 }]);

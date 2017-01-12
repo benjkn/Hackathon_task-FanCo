@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap-clearmin.min.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/material-design.css">
+  <!-- <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css"> -->
 	<script src="angular/angular.js"></script>
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 
@@ -77,9 +78,9 @@
       <!-- Inline-block not working! add it on css file -->
       <div class="cm-flex" >
       	<ul id="navlist">
-      		<li>Sales</li>
+      		<li><a ui-sref="home"> Sales </a></li>
 
-      		<li>Forecast</li>
+      		<li><a ui-sref="forecast"> Forecast </a></li>
       	</ul>
       </div>
 
@@ -106,7 +107,7 @@
   </header>
 
   <div class="uiviews">
-  	<ui-view></ui-view>
+  	<div ui-view></div>
   </div>
 
 
@@ -126,5 +127,6 @@
 	<script src="javascripts/app.js"></script>
 	<script src="javascripts/controllers/mainController.js"></script>
 	<script src="javascripts/controllers/salesController.js"></script>
+  <script src="javascripts/controllers/forecastController.js"></script>
 </body>
 </html>

@@ -24,16 +24,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/forecast', function(req, res){
 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-	    // console.log(body);
+	    console.log(body);
 		// var myReadStream = fs.createReadStream((body.data), { encoding: 'utf8' });
 		// var myWriteStream = fs.createWriteStream('data/forecast.json');
 		// myReadStream.pipe(myWriteStream);
 
 		// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
-		// fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
-	 //  		if (err) return console.log(err);
-	 //  		// console.log();
-		// });
+		fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
+	  		if (err) return console.log(err);
+	  		console.log('dasf');
+		});
 	    res.send(body);
 	  }
 	});
@@ -46,7 +46,7 @@ app.get('/history', function(req, res){
 	  if (!error && response.statusCode == 200) {
 	    console.log(body);
 		
-	    	// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
+	    	// ***************CAUTION --- if u uncomment and run this, overwrites history.json file
 			// fs.writeFile('data/history.json', body, 'utf8', function (err) {
 		 //  	if (err) return console.log(err);
 			// });
