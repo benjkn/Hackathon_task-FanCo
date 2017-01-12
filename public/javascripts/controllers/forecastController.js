@@ -241,7 +241,7 @@ app.directive("helloChart", ['$window', '$parse', function($window, $parse) {
 			  svg.append("svg:path")
 			  .attr({
 	        d: lineFun(salesDataToPlot),
-	        "stroke": "blue",
+	        "stroke": "orange",
 	        "stroke-width": 2,
 	        "fill": "none",
 	        "class": pathClass
