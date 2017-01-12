@@ -139,7 +139,7 @@ app.directive("forecastChart", ['$window', '$parse', '$rootScope', function($win
 
 //==================================================================================
 
-app.controller("ForecastCtrl", ["$scope", "$interval", function($scope, $interval) {
+app.controller("ForecastCtrl", ["$scope", function($scope) {
 
 	$scope.forecastData = [
 
@@ -240,7 +240,7 @@ app.directive("helloChart", ['$window', '$parse', function($window, $parse) {
 			  svg.append("svg:path")
 			  .attr({
 	        d: lineFun(salesDataToPlot),
-	        "stroke": "blue",
+	        "stroke": "orange",
 	        "stroke-width": 2,
 	        "fill": "none",
 	        "class": pathClass

@@ -1,26 +1,24 @@
 app.controller("salesCtrl", ["$scope", "$interval", function($scope, $interval) {
 
-$scope.testing = function () {
+	$scope.salesData = [
 
-	// var parseDate = d3.timeParse("%Y-%m-%d");
+		{hour: 1,sales: 54},
+	    {hour: 2,sales: 66},
+	    {hour: 3,sales: 77},
+	    {hour: 4,sales: 70},
+	    {hour: 5,sales: 60},
+	    {hour: 6,sales: 63},
+	    {hour: 7,sales: 55},
+	    {hour: 8,sales: 47},
+	    {hour: 9,sales: 55},
+	    {hour: 10,sales: 30}
+	];
 
-	d3.csv("javascripts/controllers/FanCoSales.csv")
-    .row(function(d){ return { Day: d["Week Of"], Neighborhood: d["Neighborhood"], SKU: d["SKU"], Channel: d["Channel"], Sales: Number(d["Sales (Units)"])}; })
-    .get(function(error, data){
-    	if (error) {console.log(error)}
-    	console.log(data)
-      $scope.salesData = data
-    })
-}
-
-$scope.testing()
-
-
-	// $interval(function(){
- //        var hour=$scope.salesData.length+1;
- //        var sales= Math.round(Math.random() * 100);
- //        $scope.salesData.push({hour: hour, sales:sales});
- //    }, 1000, 10);
+	$interval(function(){
+        var hour=$scope.salesData.length+1;
+        var sales= Math.round(Math.random() * 50)+30;
+        $scope.salesData.push({hour: hour, sales:sales});
+    }, 1000, 10);
 
 }] );
 
@@ -29,12 +27,10 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 	return {
 		restrict: "EA",
 		template: "<svg width='600' height='200'></svg>",
-
 		controller:"salesCtrl",
 		link: function(scope, elem, attrs) {
 			var exp = $parse(attrs.chartData);
 			var salesDataToPlot=exp(scope);
-			// console.log(salesDataToPlot);
 			var padding = 20;
 			var pathClass = "path";
 			var xScale, yScale, xAxisGen, yAxisGen, lineFun;
@@ -43,22 +39,19 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 			var rawSvg = elem.find("svg")[0];
 			var svg = d3.select(rawSvg);
 
-			// scope.$watchCollection(exp, function(newVal, oldVal){
-	  //     salesDataToPlot=newVal;
-	  //     console.log ('newVal:' + newVal);
-	  //     console.log ('oldVal:' + oldVal);
-	  //     console.log ('exp:' + exp);
-	  //     redrawLineChart();
-   // 		});
+			scope.$watchCollection(exp, function(newVal, oldVal){
+	      salesDataToPlot=newVal;
+	      redrawLineChart();
+   		});
 
 			function setChartParameters(){
 				xScale = d3.scale.linear()
-        .domain([salesDataToPlot[0].Day, salesDataToPlot[salesDataToPlot.length - 1].Day])
+        .domain([salesDataToPlot[0].hour, salesDataToPlot[salesDataToPlot.length - 1].hour])
         .range([padding + 5, rawSvg.clientWidth - padding]);
 
         yScale = d3.scale.linear()
         .domain([0, d3.max(salesDataToPlot, function (d) {
-        	return d.Sales;
+        	return d.sales;
       	})])
         .range([rawSvg.clientHeight - padding, 0]);
 
@@ -75,10 +68,10 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 
 				lineFun = d3.svg.line()
         .x(function (d) {
-          return xScale(d.Day);
+          return xScale(d.hour);
         })
         .y(function (d) {
-          return yScale(d.Sales);
+          return yScale(d.sales);
         })
         .interpolate("basis");
 			}
