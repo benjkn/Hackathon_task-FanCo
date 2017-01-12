@@ -1,14 +1,5 @@
 app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 
-	// function hello () {
-	// 	console.log('in hello func in controller');
-	// 	duckService.gethistory().then(function(msg) {
-	// 			console.log(msg)
-	// 	});
-	// }
-	// hello();
-
-
 	function getHistory() {
 		return $http.get('/history').then(function(response, err) {
 			if (err) {console.log(err);}
@@ -16,7 +7,6 @@ app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 		});
 	}
 	// getHistory();
-
 
 
 	$scope.products = ['Red', 'Green', 'Orange', 'All'];
@@ -64,6 +54,8 @@ app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 			neighborhoods: neighborhoodSelected,
 			dates: datesSelected
 		};
+
+		console.log ('The graphs data will be for: ' +  $scope.options.prods + ' sold through ' + $scope.options.channel + ', in the following neighborhoods: ' + $scope.options.neighborhoods + ' for the following dates: ' + $scope.options.dates);
 	};
 
 

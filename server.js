@@ -30,10 +30,10 @@ app.get('/forecast', function(req, res){
 		// myReadStream.pipe(myWriteStream);
 
 		// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
-		fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
-	  		if (err) return console.log(err);
-	  		console.log('dasf');
-		});
+		// fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
+	 //  		if (err) return console.log(err);
+	 //  		console.log('dasf');
+		// });
 	    res.send(body);
 	  }
 	});

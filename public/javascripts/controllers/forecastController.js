@@ -2,7 +2,6 @@ app.controller('ForecastCtrl', ['$scope','$http', function($scope, $http){
 
 //forecastArray contains 15 OBJECTS with date and temp!!!!!!!!!
 $scope.getData = function () {
-	console.log('im in here');
 	return $http.get('/forecast').then(function(response, err) {
 		if (err) {console.log(err);}
 		var temporary = response.data.list
@@ -20,7 +19,5 @@ $scope.getData = function () {
 }
 
 $scope.getData()
-
-
 
 }])
