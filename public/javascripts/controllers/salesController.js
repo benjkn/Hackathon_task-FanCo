@@ -16,7 +16,7 @@ app.controller("salesCtrl", ["$scope", "$interval", function($scope, $interval) 
 
 	$interval(function(){
         var hour=$scope.salesData.length+1;
-        var sales= Math.round(Math.random() * 100);
+        var sales= Math.round(Math.random() * 50)+30;
         $scope.salesData.push({hour: hour, sales:sales});
     }, 1000, 10);
 

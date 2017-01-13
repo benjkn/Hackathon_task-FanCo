@@ -15,6 +15,62 @@
 }
 
 #orizontalnav {
-	height:52px;
-	background-color: green;
+	height:50.5px;
+	background-color: #1abc9c;
+      border-color: #148f77;
+}
+
+.gobtn {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 15px;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  border: solid #284b61 2px;
+  text-decoration: none;
+}
+
+.gobtn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+
+.goli {
+  text-align: center;
+}
+
+.topnav {
+  font-size: 20px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.topnav a {
+  text-decoration: none;
+  color: white;
+}
+
+.topnav a:hover {
+  text-decoration: none;
+  color: #1abc9c;
+  background-color: white;
+}
+
+.topnav a:active {
+  text-decoration: none;
+  color: white;
+  background-color: #1abc9c;
+}
+
+.topnav a:focus {
+  text-decoration: none;
+  color: white;
+  background-color: #1abc9c;
+}
+
+.ikillu {
+  margin: auto;
 }

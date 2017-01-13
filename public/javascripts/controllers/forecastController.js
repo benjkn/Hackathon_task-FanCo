@@ -4,7 +4,6 @@ $scope.forecastArr = [];
 // console.log($scope.getData);
 //forecastArray contains 15 OBJECTS with date and temp!!!!!!!!!
 $scope.getData = function () {
-	console.log('im in here');
 	return $http.get('/forecast').then(function(response, err) {
 		if (err) {console.log(err);}
 		var temporary = response.data.list;
@@ -140,7 +139,7 @@ app.directive("forecastChart", ['$window', '$parse', '$rootScope', function($win
 
 //==================================================================================
 
-app.controller("ForecastCtrl", ["$scope", "$interval", function($scope, $interval) {
+app.controller("ForecastCtrl", ["$scope", function($scope) {
 
 	$scope.forecastData = [
 
