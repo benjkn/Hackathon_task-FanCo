@@ -1,11 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var path = require('path');
 var request = require('request');
 var fs = require('fs');
 
-// mongoose.connect(process.env.MONGOLAB_ROSE_URI || 'mongodb://localhost/fanco');
+mongoose.connect(process.env.MONGOLAB_ROSE_URI || 'mongodb://localhost/fanco');
+
+//change to mongoose default promises lib, when you call .then
+mongoose.Promise = global.Promise;
+
+//get the sales schema
+var Sales = require('./models/SalesFanco');
 
 // var routes = require('./routes/index');
 // var users = require('./routes/users'); ********** uncomment to add user registration
@@ -41,11 +47,11 @@ app.get('/forecast', function(req, res){
 
 
 app.get('/history', function(req, res){
-
+	console.log('this is the history');
 	request('http://api.worldweatheronline.com/premium/v1/past-weather.ashx?q=Boston&format=json&date=2016-05-16&enddate=2016-05-30&key=22b79bd1845840e6a68110850171101&tp=24', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-	    console.log(body);
-		
+	    //console.log(body);
+
 	    	// ***************CAUTION --- if u uncomment and run this, overwrites history.json file
 			// fs.writeFile('data/history.json', body, 'utf8', function (err) {
 		 //  	if (err) return console.log(err);
@@ -54,6 +60,16 @@ app.get('/history', function(req, res){
 		  res.send(body);
 
 		}
+	});
+});
+
+//get the data from sales collection
+app.get('/sales', function(req, res) {
+	console.log('sales entry point');
+	//console.log(req);
+	Sales.find(function(error, sales) {
+		console.log(sales);
+		res.send(sales);
 	});
 });
 
