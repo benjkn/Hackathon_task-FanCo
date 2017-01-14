@@ -4,12 +4,10 @@ app.factory('sales', ['$http', function($http) {
   	sales: [],
 
   	getAll: function() {
-  		return $http.get('/sales').then(function(data) {
-  			console.log(data);
-  		});
+  		return $http.get('/sales');
   	}
 
-  } //end of salesService
+  }; //end of salesService
 
 
 
@@ -18,6 +16,6 @@ app.factory('sales', ['$http', function($http) {
   //   return $http.get('/data/history.json');
   // };
 
-  return salesService
+  return salesService;
 
 }]);

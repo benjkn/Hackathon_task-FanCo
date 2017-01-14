@@ -66,9 +66,9 @@ app.get('/history', function(req, res){
 //get the data from sales collection
 app.get('/sales', function(req, res) {
 	console.log('sales entry point');
-	//console.log(req);
+	// Sales.find({"SKU": "RED - SPECIAL EDITION - FanCo. Classic", "Channel": "Retail"}, function(error, sales) {
 	Sales.find(function(error, sales) {
-		console.log(sales);
+		// console.log(sales);
 		res.send(sales);
 	});
 });
