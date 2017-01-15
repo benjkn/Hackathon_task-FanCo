@@ -1,38 +1,21 @@
 app.controller("salesCtrl", ["$scope", "sales", function($scope, sales) {
 
-// filter the array to get specific data
-var tempArray = [];
-$scope.weatherHistory = [];
-$scope.salesData = [];
+	var tempArray = [];
+	var count = 0;
+	$scope.weatherHistory = [];
+	$scope.salesData = [];
 
-// init sales collection with new values
-$scope.getthesales = function () {
-	sales.getSales().then(function (sales) {
-		$scope.salesData = sales.data;
-	 	 	console.log($scope.salesData);
-	 });
-};
-
-$scope.getthehistory = function () {
-	sales.getHistory().then(function (history) {
-		tempArray = history.data;
-		for (i=0; i<tempArray.length; i++) {
-			var count = 0
-			for (j=0; j<7; j++) {
-				count = count+tempArray[i].maxtempC+tempArray[i].mintempC
-			}
-			var obj = {
-				temperature: (Math.round(count*100/14))/100,
-				WeekOf: $scope.salesData[365-i].WeekOf
-			}
-			$scope.weatherHistory.push(obj);
-		}
-		console.log($scope.weatherHistory);
-	});
-};
-
+	$scope.getAll = function () {
+	 sales.getAll()
+	}
 
 }] ); // end of controller
+
+//get data to different arrays
+//weather array
+//sales array
+
+
 
 
 app.directive("linearChart", ['$window', '$parse', "service", function($window, $parse, service) {
@@ -55,7 +38,6 @@ app.directive("linearChart", ['$window', '$parse', "service", function($window, 
 		link: function(scope, elem, attrs) {
 			var exp = $parse(attrs.chartData);
 			var salesDataToPlot=exp(scope);
-			console.log(salesDataToPlot)
 			var padding = 20;
 			var pathClass = "path";
 			var xScale, yScale, xAxisGen, yAxisGen, lineFun;
