@@ -2,6 +2,7 @@ app.factory('sales', ['$http', function($http) {
 
   var salesService = {
   	sales: [],
+    test: 'test from my salesService', 
 
   	getAll: function() {
   		return $http.get('/sales');

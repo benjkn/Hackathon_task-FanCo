@@ -7,7 +7,6 @@ var HistorySchema = new Schema({
     mintempC: String
 });
 
-var History = mongoose.model('History', HistorySchema);
+var History = mongoose.model('History', HistorySchema,"History");
 
 module.exports = History;
-

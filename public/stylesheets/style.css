@@ -74,3 +74,9 @@
 .ikillu {
   margin: auto;
 }
+
+path {
+  stroke: green;
+  fill: none;
+  stroke-width: 1.5px;
+}
