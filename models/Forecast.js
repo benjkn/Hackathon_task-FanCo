@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
+//key names need to be changed
 var ForecastSchema = new mongoose.Schema({
-  dt: Number,
-  day: Number
+  day: Number,
+  temp: Number
 });
 
 var Forecast = mongoose.model('forecast', ForecastSchema);

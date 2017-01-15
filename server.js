@@ -76,7 +76,6 @@ app.get('/sales', function(req, res) {
 app.get('/history', function(req, res) {
 	History.find(function(error, history) {
 		if (error) {console.log('there is an error')}
-		console.log(history);
 		res.send(history);
 	});
 });
@@ -85,7 +84,6 @@ app.get('/history', function(req, res) {
 app.get('/forecast', function(req, res) {
 	Forecast.find(function(error, forecast) {
 		if (error) {console.log('there is an error')}
-		console.log(forecast);
 		res.send(forecast);
 	});
 });
