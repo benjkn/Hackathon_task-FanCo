@@ -1,8 +1,9 @@
 app.controller("salesCtrl", ["$scope", "sales", function($scope, sales) {
 
 // filter the array to get specific data
-$scope.salesData = [];
+var tempArray = [];
 $scope.weatherHistory = [];
+$scope.salesData = [];
 
 // init sales collection with new values
 $scope.getthesales = function () {
@@ -14,8 +15,18 @@ $scope.getthesales = function () {
 
 $scope.getthehistory = function () {
 	sales.getHistory().then(function (history) {
-		console.log(history);
-		$scope.weatherHistory = history.data;
+		tempArray = history.data;
+		for (i=0; i<tempArray.length; i++) {
+			var count = 0
+			for (j=0; j<7; j++) {
+				count = count+tempArray[i].maxtempC+tempArray[i].mintempC
+			}
+			var obj = {
+				temperature: (Math.round(count*100/14))/100,
+				WeekOf: $scope.salesData[365-i].WeekOf
+			}
+			$scope.weatherHistory.push(obj);
+		}
 		console.log($scope.weatherHistory);
 	});
 };
@@ -24,7 +35,19 @@ $scope.getthehistory = function () {
 }] ); // end of controller
 
 
-app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
+app.directive("linearChart", ['$window', '$parse', "service", function($window, $parse, service) {
+	 // return {
+  //       restrict: 'E',
+  //       scope: {
+  //         param: '=myParam',
+  //       },
+  //       template: '<button ng-click="callService(param)">Do action</button>',
+  //       link: function(scope, element, attrs) {
+  //           scope.callService = function() {
+  //               myService.myFunction();
+  //           }
+  //       }
+  //   }
 	return {
 		restrict: "EA",
 		template: "<svg width='600' height='200'></svg>",
@@ -32,6 +55,7 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 		link: function(scope, elem, attrs) {
 			var exp = $parse(attrs.chartData);
 			var salesDataToPlot=exp(scope);
+			console.log(salesDataToPlot)
 			var padding = 20;
 			var pathClass = "path";
 			var xScale, yScale, xAxisGen, yAxisGen, lineFun;
@@ -53,8 +77,8 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 			var maxdate = new Date(2016,12,31);
 
 			xScale = d3.time.scale()
-		.domain([mindate, maxdate])
-		.range([padding + 5, rawSvg.clientWidth - padding]);
+			.domain([mindate, maxdate])
+			.range([padding + 5, rawSvg.clientWidth - padding]);
 				// xScale = d3.scale.linear()
     //     .domain([salesDataToPlot[0].hour, salesDataToPlot[salesDataToPlot.length - 1].hour])
     //     .range([padding + 5, rawSvg.clientWidth - padding]);
