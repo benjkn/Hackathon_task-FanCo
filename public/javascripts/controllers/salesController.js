@@ -1,6 +1,8 @@
-app.controller("salesCtrl", ["$scope", "$interval","sales", "$filter", function($scope, $interval, sales, $filter) {
+app.controller("salesCtrl", ["$scope", "$interval","sales", function($scope, $interval, sales) {
 
-$scope.something = $filter({"SKU": "RED - SPECIAL EDITION - FanCo. Classic", "Channel": "Retail"});
+// filter the array to get specific data
+
+
 
 $scope.salesData = [];
 // init sales collection with new values
