@@ -5,7 +5,7 @@ var path = require('path');
 var request = require('request');
 var fs = require('fs');
 
-mongoose.connect(process.env.MONGOLAB_ROSE_URI || 'mongodb://localhost/fanco');
+mongoose.connect(process.env.MONGOLAB_JADE_URI || 'mongodb://localhost/fanco');
 
 //change to mongoose default promises lib, when you call .then
 mongoose.Promise = global.Promise;
