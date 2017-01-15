@@ -12,6 +12,7 @@ mongoose.Promise = global.Promise;
 
 //get the sales schema
 var Sales = require('./models/SalesFanco');
+var History = require('./models/History');
 
 // var routes = require('./routes/index');
 // var users = require('./routes/users'); ********** uncomment to add user registration
@@ -45,7 +46,7 @@ app.get('/forecast', function(req, res){
 	});
 });
 
-
+/*//entry point to history api
 app.get('/history', function(req, res){
 	console.log('this is the history');
 	request('http://api.worldweatheronline.com/premium/v1/past-weather.ashx?q=Boston&format=json&date=2016-05-16&enddate=2016-05-30&key=22b79bd1845840e6a68110850171101&tp=24', function (error, response, body) {
@@ -61,7 +62,7 @@ app.get('/history', function(req, res){
 
 		}
 	});
-});
+});*/
 
 //get the data from sales collection
 app.get('/sales', function(req, res) {
@@ -72,6 +73,17 @@ app.get('/sales', function(req, res) {
 		res.send(sales);
 	});
 });
+
+//get data from history db collection
+app.get('/history', function(req, res) {
+	console.log('history entry point');
+	History.find(function(error, history) {
+		console.log(history);
+		res.send(history);
+	});
+});
+
+
 
 var port = process.env.PORT || '7000';
 

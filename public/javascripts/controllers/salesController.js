@@ -8,6 +8,7 @@ $scope.salesData = [];
 // init sales collection with new values
  sales.getAll().then(function(products){
 	$scope.salesData = products.data;
+ 	 	console.log($scope.salesData);
  });
 
 
@@ -46,7 +47,7 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 
 			//define x scale horizontal
 
-			var mindate = new Date(2014,0,1);
+			var mindate = new Date(2015,0,1);
 			var maxdate = new Date(2016,12,31);
 
 			xScale = d3.time.scale()
@@ -64,7 +65,7 @@ app.directive("linearChart", ['$window', '$parse', function($window, $parse) {
 
 				xAxisGen = d3.svg.axis()
 	      .scale(xScale)
-	      .orient("bottom")
+	      .orient("bottom");
 	      // .ticks(salesDataToPlot.length - 1);
 
 			  yAxisGen = d3.svg.axis()
