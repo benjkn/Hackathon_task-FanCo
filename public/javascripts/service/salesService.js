@@ -3,9 +3,14 @@ app.factory('sales', ['$http', function($http) {
   var salesService = {
   	sales: [],
 
-  	getAll: function() {
+  	getSales: function() {
   		return $http.get('/sales');
-  	}
+  	},
+
+    getHistory: function() {
+      return $http.get('/history');
+    }
+
 
   }; //end of salesService
 

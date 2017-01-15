@@ -139,7 +139,14 @@ app.directive("forecastChart", ['$window', '$parse', '$rootScope', function($win
 
 //==================================================================================
 
-app.controller("ForecastCtrl", ["$scope", function($scope) {
+app.controller("ForecastCtrl", ["$scope", "forecast", function($scope, forecast) {
+
+	$scope.gettheforecast = function () {
+		forecast.getForecast().then(function (hello) {
+			console.log(hello.data);
+			$scope.forecastData = hello.data
+		})
+	}
 
 	$scope.forecastData = [
 
@@ -160,12 +167,6 @@ app.controller("ForecastCtrl", ["$scope", function($scope) {
 	    {hour: 26,sales: 4.75}
 
 	];
-
-	// $interval(function(){
- //        var hour=$scope.forecastData.length+1;
- //        var sales= Math.round(Math.random() * 100);
- //        $scope.forecastData.push({hour: hour, sales:sales});
- //    }, 1000, 10);
 
 }] );
 
