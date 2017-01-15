@@ -1,15 +1,18 @@
 app.controller("ForecastCtrl", ["$scope", "forecast", function($scope, forecast) {
 
-	$scope.forecastData = [];
 	var temporary =[]
+	$scope.forecastData = [];
 
 	$scope.gettheforecast = function () {
 		forecast.getForecast().then(function (hello) {
 			temporary = hello.data
 		for (i=0; i<temporary.length; i++) {
+			console.log (temporary[i].dt)
+			console.log (temporary[i].day)
+
 			obj = {
-				date: (new Date(temporary[i].day)+10).slice(4,10),
-				temp: Math.round((temporary[i].temp-273.15)*100)/100
+				date: new Date(temporary[i].dt),
+				temp: Math.round((temporary[i].day-273.15)*100)/100
 			};
 			$scope.forecastData.push(obj)
 		}
@@ -36,9 +39,14 @@ app.directive("helloChart", ['$window', '$parse', function($window, $parse) {
 			var rawSvg = elem.find("svg")[0];
 			var svg = d3.select(rawSvg);
 
+			scope.$watchCollection(exp, function(newVal, oldVal){
+        salesDataToPlot=newVal;
+        redrawLineChart();
+   		});
+
 
 			function setChartParameters(){
-				xScale = d3.scale.linear()
+				xScale = d3.time.scale()
         .domain([salesDataToPlot[0].date, salesDataToPlot[salesDataToPlot.length - 1].date])
         .range([padding + 5, rawSvg.clientWidth - padding]);
 
@@ -51,7 +59,7 @@ app.directive("helloChart", ['$window', '$parse', function($window, $parse) {
 				xAxisGen = d3.svg.axis()
 	      .scale(xScale)
 	      .orient("bottom")
-	      .ticks(salesDataToPlot.length - 1);
+	      // .ticks(salesDataToPlot.length - 1);
 
 			  yAxisGen = d3.svg.axis()
       	.scale(yScale)
