@@ -1,23 +1,41 @@
-app.controller("salesCtrl", ["$scope","sales", function($scope, sales) {
+// app.controller("salesCtrl", ["$scope","sales", function($scope, sales) {
 
-// filter the array to get specific data
 
-// fuck a controller
+// 	var tempArray = [];
+// 	var count = 0;
+// 	$scope.weatherHistory = [];
+// 	$scope.salesData = [];
 
-$scope.salesData = [];
-// init sales collection with new values
- sales.getAll().then(function(response){
-	$scope.salesData = response.data;
+// // fuck a controller
+
+// $scope.salesData = [];
+// // init sales collection with new values
+//  sales.getAll().then(function(response){
+// 	$scope.salesData = response.data;
  	 	
-		});
+// 		});
 
 
-}] ); // end of controller
+// }] ); // end of controller
+
+////// ================ maybe???
+// 	$scope.getAll = function () {
+// 	 sales.getAll()
+// 	}
+
+// }] ); // end of controller
+
+//get data to different arrays
+//weather array
+//sales array
+
+//// ================ maybe???
 
 
 app.directive("linearChart", [ 'sales', function(sales) {
 		
 		var link = function($scope, $el, $attrs){
+
 
 			sales.getAll().then(function(response){
 			$scope.salesData = response.data;
@@ -120,6 +138,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
                   .attr("r","2");
 
 			});
+
 		}
 		
 		return {

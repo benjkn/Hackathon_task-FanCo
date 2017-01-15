@@ -5,18 +5,12 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
   	.state('home', {
   		url: '/home',
   		templateUrl: '/templates/home.html',
-    	controller: 'MainCtrl'
+    	controller: 'salesCtrl'
   	})
   	.state('forecast', {
   		url: '/forecast',
   		templateUrl: '/templates/forecast.html',
   		controller: 'ForecastCtrl'
-  		// resolve to get data on load
-  		// resolve: {
-  		// 	getForcastData: [function () {
-  		// 		return getData();
-  		// 	}]
-  		// }
   	})
 
 	$urlRouterProvider.otherwise('home');

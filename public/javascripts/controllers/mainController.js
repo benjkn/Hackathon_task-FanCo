@@ -1,14 +1,5 @@
 app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 
-	function getHistory() {
-		return $http.get('/history').then(function(response, err) {
-			if (err) {console.log(err);}
-				console.log(response.data.data.weather);
-		});
-	}
-	// getHistory();
-
-
 	$scope.products = ['Red', 'Green', 'Orange', 'All'];
 	$scope.channels = ['Retail', 'Direct Sales', 'Both'];
 	$scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];

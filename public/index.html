@@ -17,7 +17,7 @@
 </head>
 
 
-<body class="cm-no-transition cm-1-navbar" data-spy="scroll" data-target="#cm-menu-scroller" ng-app="fanco" ng-controller="MainCtrl">
+<body class="cm-no-transition cm-1-navbar" data-spy="scroll" data-target="#cm-menu-scroller" ng-app="fanco">
 
 	<div id="cm-menu">
     <nav class="cm-navbar cm-navbar-turquoise">
@@ -26,7 +26,7 @@
       <div ng-hide=true class="btn btn-turquoise md-menu-white" data-toggle="cm-menu"></div>
     </nav>
 
-    <div id="cm-menu-content">
+    <div id="cm-menu-content" ng-controller="MainCtrl">
       <div id="cm-menu-items-wrapper">
         <div id="cm-menu-scroller">
           <ul class="cm-menu-items nav">
@@ -114,7 +114,9 @@
   </div>
 
 
+
   <!-- <footer class="cm-footer"><span class="pull-right">&copy; Martha, Nati and Ben dream-team</span></footer> -->
+
 
 
 
@@ -128,7 +130,9 @@
   <script src="jquery/dist/jquery.min.js"></script>
   <!-- <script src="d3/build/d3.min.js"></script> -->
 	<script src="javascripts/app.js"></script>
+  <script src="javascripts/service/forecastService.js"></script>
   <script src="javascripts/service/salesService.js"></script>
+  <script src="javascripts/service/test.js"></script>
 	<script src="javascripts/controllers/mainController.js"></script>
 	<script src="javascripts/controllers/salesController.js"></script>
   <script src="javascripts/controllers/forecastController.js"></script>
