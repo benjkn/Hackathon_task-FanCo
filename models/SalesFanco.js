@@ -9,6 +9,7 @@ var SalesSchema = new Schema({
   SalesUnits: {type: Number, default: 0}
 });
 
-var Sales = mongoose.model('Sale', SalesSchema);
+var Sales = mongoose.model('Sales', SalesSchema,"Sales");
+
 
 module.exports = Sales;
