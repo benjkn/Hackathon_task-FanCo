@@ -1,23 +1,25 @@
-app.controller("salesCtrl", ["$scope", "$interval","sales", function($scope, $interval, sales) {
+app.controller("salesCtrl", ["$scope", "sales", function($scope, sales) {
 
 // filter the array to get specific data
-
-
-
 $scope.salesData = [];
+$scope.weatherHistory = [];
+
 // init sales collection with new values
- sales.getAll().then(function(products){
-	$scope.salesData = products.data;
- 	 	console.log($scope.salesData);
- });
+$scope.getthesales = function () {
+	sales.getSales().then(function (sales) {
+		$scope.salesData = sales.data;
+	 	 	console.log($scope.salesData);
+	 });
+};
 
+$scope.getthehistory = function () {
+	sales.getHistory().then(function (history) {
+		console.log(history);
+		$scope.weatherHistory = history.data;
+		console.log($scope.weatherHistory);
+	});
+};
 
-
-	$interval(function(){
-        var WeekOf=$scope.salesData.length+1;
-        var SalesUnits= Math.round(Math.random() * 50)+30;
-        $scope.salesData.push({WeekOf: WeekOf, SalesUnits:SalesUnits});
-    }, 1000, 10);
 
 }] ); // end of controller
 

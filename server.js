@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 //get the sales schema
 var Sales = require('./models/SalesFanco');
 var History = require('./models/History');
+var Forecast = require('./models/Forecast');
 
 // var routes = require('./routes/index');
 // var users = require('./routes/users'); ********** uncomment to add user registration
@@ -28,23 +29,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/', routes);
 // app.use('/users', users); ********** uncomment to add user registration
 
-app.get('/forecast', function(req, res){
-	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
-	  if (!error && response.statusCode == 200) {
-	    console.log(body);
-		// var myReadStream = fs.createReadStream((body.data), { encoding: 'utf8' });
-		// var myWriteStream = fs.createWriteStream('data/forecast.json');
-		// myReadStream.pipe(myWriteStream);
+// app.get('/forecast', function(req, res){
+// 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
+// 	  if (!error && response.statusCode == 200) {
+// 	    console.log(body);
+// 		// var myReadStream = fs.createReadStream((body.data), { encoding: 'utf8' });
+// 		// var myWriteStream = fs.createWriteStream('data/forecast.json');
+// 		// myReadStream.pipe(myWriteStream);
 
-		// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
-		// fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
-	 //  		if (err) return console.log(err);
-	 //  		console.log('dasf');
-		// });
-	    res.send(body);
-	  }
-	});
-});
+// 		// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
+// 		// fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
+// 	 //  		if (err) return console.log(err);
+// 	 //  		console.log('dasf');
+// 		// });
+// 	    res.send(body);
+// 	  }
+// 	});
+// });
 
 /*//entry point to history api
 app.get('/history', function(req, res){
@@ -66,23 +67,28 @@ app.get('/history', function(req, res){
 
 //get the data from sales collection
 app.get('/sales', function(req, res) {
-	console.log('sales entry point');
-	// Sales.find({"SKU": "RED - SPECIAL EDITION - FanCo. Classic", "Channel": "Retail"}, function(error, sales) {
 	Sales.find(function(error, sales) {
-		// console.log(sales);
 		res.send(sales);
 	});
 });
 
 //get data from history db collection
 app.get('/history', function(req, res) {
-	console.log('history entry point');
 	History.find(function(error, history) {
+		if (error) {console.log('there is an error')}
 		console.log(history);
 		res.send(history);
 	});
 });
 
+//get data from forecast db collection
+app.get('/forecast', function(req, res) {
+	Forecast.find(function(error, forecast) {
+		if (error) {console.log('there is an error')}
+		console.log(forecast);
+		res.send(forecast);
+	});
+});
 
 
 var port = process.env.PORT || '7000';
