@@ -6,7 +6,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
 		sales.getSales().then(function(response){
       $scope.salesData = response.data;
-      console.log($scope.salesData);
+      // console.log($scope.salesData);
 
   		//Nest + Rollup for Total Sales
       var totalData = d3.nest()
@@ -16,7 +16,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 				  return g.SalesUnits;
 				});
 			}).entries($scope.salesData);
-			console.log(totalData);
+			// console.log(totalData);
 
 
   		// parse the date!
@@ -24,7 +24,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
   		for ( i=0; i<totalData.length; i++) {
         totalData[i].key = parseDate(totalData[i].key);
   		}
-  		console.log(totalData[0]);
+  		// console.log(totalData[0]);
 
 
       // Declare height and width variables(pixels)
@@ -35,19 +35,19 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var maxSales = d3.max(totalData,function(d,i){
         return d.values;
       });
-      console.log("Max Sales for a day is: " + maxSales);
+      // console.log("Max Sales for a day is: " + maxSales);
 
       // find max value day
       for ( i=0; i<totalData.length; i++) {
         if (totalData[i].values === maxSales){
-          console.log("most shit sold on " + totalData[i].key);
+          // console.log("most shit sold on " + totalData[i].key);
         }
       }
 
       var minDate = d3.min(totalData,function(d){ return d.key; });
       var maxDate = d3.max(totalData, function(d){ return d.key; });
-      console.log("minDate is " + minDate);
-      console.log("maxDate is " + maxDate);
+      // console.log("minDate is " + minDate);
+      // console.log("maxDate is " + maxDate);
 
 			// Declare Scales (don't forget to invert Y range)
       var y = d3.scale.linear()
