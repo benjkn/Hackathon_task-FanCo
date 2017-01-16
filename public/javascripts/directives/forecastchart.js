@@ -95,8 +95,11 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
         .y(function(d){ return y(d.temp); })
         .interpolate("cardinal");
 
+
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path").attr("d",line($scope.forecastData));
+      chartGroup.append("path")
+      .attr("stroke", "blue")
+      .attr("d",line($scope.forecastData));
 
       // Add axes (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
