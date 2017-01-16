@@ -10,12 +10,7 @@ mongoose.connect(process.env.MONGOLAB_JADE_URI || 'mongodb://localhost/fanco');
 //change to mongoose default promises lib, when you call .then
 mongoose.Promise = global.Promise;
 
-//get the sales schema
-var Sales = require('./models/SalesFanco');
-var History = require('./models/History');
-var Forecast = require('./models/Forecast');
-
-// var routes = require('./routes/index');
+var routes = require('./routes/index');
 // var users = require('./routes/users'); ********** uncomment to add user registration
 
 var app = express();
@@ -26,7 +21,7 @@ app.use(express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/', routes);
+app.use('/', routes);
 // app.use('/users', users); ********** uncomment to add user registration
 
 // app.get('/forecast', function(req, res){
@@ -64,85 +59,6 @@ app.get('/history', function(req, res){
 		}
 	});
 });*/
-
-//get the data from sales collection
-app.get('/sales', function(req, res) {
-	Sales.find(function(error, sales) {
-		res.send(sales);
-	});
-});
-
-//get data from history db collection
-app.get('/history', function(req, res) {
-	History.find(function(error, history) {
-		if (error) {console.log('there is an error')}
-		res.send(history);
-	});
-});
-
-//get data from forecast db collection
-app.get('/forecast', function(req, res) {
-	Forecast.find(function(error, forecast) {
-		if (error) {console.log('there is an error')}
-		res.send(forecast);
-	});
-});
-
-app.param('product', function (req, res, next, preferences) {
-	//all 3 params
-	if (preferences.Neighborhood && preferences.SKU && preferences.Channel) {
-		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
-			if (!sale) {return next(new Error('no matches found')); }
-			req.sale = sale;
-			return next();
-		})
-	//2 of 3 params, 3rd "all"
-	} else if (preferences.Neighborhood && preferences.SKU && !preferences.Channel) {
-		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
-			if (!sale) {return next(new Error('no matches found')); }
-			req.sale = sale;
-			return next();
-		})
-	} else if (preferences.Neighborhood && !preferences.SKU && preferences.Channel) {
-		Sales.find({Neighborhood: preferences.Neighborhood, Channel: preferences.Channel}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
-			if (!sale) {return next(new Error('no matches found')); }
-			req.sale = sale;
-			return next();
-		})
-	} else if (!preferences.Neighborhood && preferences.SKU && preferences.Channel) {
-		Sales.find({SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
-			if (!sale) {return next(new Error('no matches found')); }
-			req.sale = sale;
-			return next();
-		})
-	//Only one of 3 params, rest 2 "all"
-	} else if (preferences.Neighborhood) {
-		Sales.find({Neighborhood: preferences.Neighborhood}).exec(function (err, sale) {
-		if (err) {console.log ('error!')}
-		if (!sale) {return next(new Error('no matches found')); }
-		req.sale = sale;
-		return next();
-		})
-	} else if (preferences.SKU) {
-		Sales.find({SKU: preferences.SKU}).exec(function (err, sale) {
-		if (err) {console.log ('error!')}
-		if (!sale) {return next(new Error('no matches found')); }
-		req.sale = sale;
-		return next();
-		})
-	} else if (preferences.Channel) {
-		Sales.find({Channel: preferences.Channel}).exec(function (err, sale) {
-		if (err) {console.log ('error!')}
-		if (!sale) {return next(new Error('no matches found')); }
-		req.sale = sale;
-		return next();
-		})
-	}
-})
 
 var port = process.env.PORT || '7000';
 
