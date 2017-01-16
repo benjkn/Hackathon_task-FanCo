@@ -118,7 +118,8 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom");
+        .orient("bottom")
+        .tickFormat(d3.time.format("%b %y'"));
 
       var yAxis = d3.svg.axis()
         .scale(y)
@@ -162,10 +163,16 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
-      .attr("transform", "translate(0, "+height+")").call(xAxis);
+      .attr("transform", "translate(0, "+height+")").call(xAxis)
+      .selectAll("text")
+          .attr("dx", "-0.9em")
+          .attr("dy", ".15em")
+          .attr("transform", "rotate(-45)")
+          .style("text-anchor", "end");
+
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
       
-      // temp axis
+      // weather axis
       chartGroup.append("g").attr("class", "y2 axis")
       .attr("transform", "translate("+width+",0)").call(yAxis2);
 
@@ -187,7 +194,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html(formatTime(d.key) + "<br/>"  + d.values)	
+            div.html(formatTime(d.key) + "<br/>"  + d.values)	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             })					
@@ -195,15 +202,18 @@ app.directive("linearChart", [ 'sales', function(sales) {
             div.transition()		
                 .duration(500)		
                 .style("opacity", 0);	
+           
       });
       
-      // chartGroup.selectAll("circle")
-      //   .data(weatherData)
-      //   .enter().append("circle")
-      //     .attr("class",function(d,i){ return "temp"+i; })
-      //     .attr("cx",function(d,i){ return x(d.date); })
-      //     .attr("cy",function(d,i){ return y2(d.maxtempC); })
-      //     .attr("r","2");
+      // Text label for the Y axis
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("x", margin.top - (height / 2))
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Units Sold Weekly");
+     
       });
 		});
 	};
