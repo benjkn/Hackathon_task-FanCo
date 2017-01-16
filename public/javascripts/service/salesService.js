@@ -1,68 +1,135 @@
 app.factory('sales', ['$http', function($http) {
 
+
   var salesService = {
     weatherHistory: [],
     temporaryArray: [],
-    temporaryArray2: [],
     count: 0,
 
     // init sales collection with new values
     //we get back an array of 2496 objects. 52 weeks * 3 products * 8 neighborhoods * 2 Channels
-  	getSales: function(prefs) {
-      if (!prefs) {
-  		return $http.get('/sales');
+    getSales: function(prefs) {
+
+      //every variable is true WHEN there IS the attribute (default is no attribute and means -->ALL) && that attribue is NOT ALL ===> then it is custom
+      //if a true then CUSTOM PRODUCTS
+      var a = (prefs.prods.length && prefs.prods.length !== 3);
+      //if b true then CUSTOM NEIGHBORHOODS
+      var b = (prefs.neighborhoods.length && prefs.neighborhoods.length !== 8);
+      //if c true then CUSTOM CHANNELS
+      var c = (prefs.channel && prefs.channel !== "Both");
+      //if d true then CUSTOM DATES
+      var d = (prefs.dates && prefs.dates !== "All");
+
+
+      // db.products.find({$or: [{Channel: "Direct Sales"}, {Channel: "Retail"}]}).count() <--- 6
+
+      if (!(a || b || c || d)) {
+      //(0 custom, 4 'all')
+        return $http.get('/sales');
+      } else if (a && b && c && d) {
+      //(4 custom, 0 'all')
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a && c && d) {
+      //(3 custom, 1 'all') - Customized: Products AND Channels AND Dates ------- ALL: Neighborhoods
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (b && c && d) {
+      //(3 custom, 1 'all') - Customized: Neighborhoods AND Channels AND Dates ------- ALL: Products
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a && b && d) {
+      //(3 custom, 1 'all') - Customized: Products AND Neighborhoods AND Dates ------- ALL: Channels
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a && b && c) {
+      //(3 custom, 1 'all') - Customized: Products AND Neighborhoods AND Channels ------- ALL: Dates
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a && b) {
+      //(2 custom, 2 'all') - Customized: Products AND Neighborhoods ------- ALL: Dates, Channels
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a && c) {
+      //(2 custom, 2 'all') - Customized: Products AND Channels ------- ALL: Neighborhoods AND Dates
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a && d) {
+      //(2 custom, 2 'all') - Customized: Products AND Dates ------- ALL: Neighborhoods AND Channels
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (b && c) {
+      //(2 custom, 2 'all') - Customized: Neighborhoods AND Channels ------- ALL: Products AND Dates
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (b && d) {
+      //(2 custom, 2 'all') - Customized: Neighborhoods AND Dates ------- ALL: Products AND Channels
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (c && d) {
+      //(2 custom, 2 'all') - Customized: Channels AND Dates ------- ALL: Neighborhoods AND Products
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (a) {
+      //(1 custom, 3 'all') - Customized: Products ------- ALL: Neighborhoods AND  Channels AND Dates
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (b) {
+      //(1 custom, 3 'all') - Customized: Neighborhoods ------- ALL: Products AND Channels AND Dates
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (c) {
+      //(1 custom, 3 'all') - Customized: Channels ------- ALL: Neighborhoods AND Products AND Dates
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
+      } else if (d) {
+      //(1 custom, 3 'all') - Customized: Dates ------- ALL: Neighborhoods AND Products AND Channels
+
+        //Add the special params I am sending
+        return $http.get('/sales' + );
+
       } else {
-/*      // means that I get in here if I have specific preferences...
-        if (prefs.prods.length && prefs.prods.length !== 3) {
-        //i get in here if i have specific products (not all)...
-
-        } else if (prefs.neighborhoods.length && prefs.neighborhoods.length !==8) {
-        //i get in here if i have specific neighborhoods (NOT all) but NOT specific products (ALL)...
-          if (prefs.channel !== 'Both') {
-            if (prefs.dates !== 'All') {
-            //specific: Products, not specific (All): Dates & Neighborhoods & Channel
-
-            //TODO
-
-            } else {
-
-            }
-          } else {
-
-          }
-
-        } else if (prefs.channel !== 'Both') {
-        //i get in here if i have specific channel (RETAIL or DIRECT SALES) but NOT specific products (ALL) and NOT specific neighborhoods (ALL)
-          if (prefs.dates !== 'All') {
-          //specific: Dates & Channel, not specific (All): Products & Neighborhoods
-
-          //TODO
-
-          } else {
-          //specific: Channel, not specific (All): Products & Neighborhoods & Dates
-
-          //TODO
-
-          }
-        } else if (prefs.dates !== 'All') {
-        //specific: Dates, not specific (All): Products & Neighborhoods & Channel
-
-        //TODO
-
-        } else {
-          console.log ('I should NEVER get in here! :)')
-        }*/
+      //(0 custom, 4 'all') - Covered it 1st
+        console.log ('I should NEVER get in here! :)')
       }
   	},
 
 
     //finally weatherHistory is an array of 52 objects with the first day of each week in 1433019600000 format and the average temp!
     //this date format is easily comparable and can be turned into a date by new Date(1436648400000)
-    
+
     getRawHistory: function(){
       return $http.get('/history');
     },
-    
+
     getHistory: function() {
       return $http.get('/history').then(function (history) {
         salesService.temporaryArray = history.data;
@@ -83,11 +150,6 @@ app.factory('sales', ['$http', function($http) {
         // console.log(salesService.weatherHistory.length);
       });
     }
-
-    // getAllofThem: function () {
-    //   salesService.getHistory();
-    //   salesService.getSales();
-    // }
 
 
   };
