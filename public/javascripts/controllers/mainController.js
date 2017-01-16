@@ -103,8 +103,6 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 	};
 
 
-
-
 	// sales.getSales($scope.preferences)
 
 
