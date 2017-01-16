@@ -1,56 +1,91 @@
-// var express = require('express');
-// var router = express.Router();
-// // var mongoose = require('mongoose');
-// var fs = require('fs');
-// const csv=require('csvtojson')
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
 
-// //Models to be added here if necessary
 
-// var Sale = require('../models/Sales');
+var Sales = require('../models/SalesFanco');
+var History = require('../models/History');
+var Forecast = require('../models/Forecast');
 
 // //Here are all the necessary router.get, router.post, router.put and router.param commands
 
-// // **************************converting fails**************************
-// // router.get('/sales', function (req, res) {
-// // 	console.log('hey')
+//get the data from sales collection
+router.get('/sales', function(req, res) {
+	Sales.find(function(error, sales) {
+		res.send(sales);
+	});
+});
 
-// // 	var sales = new Sales();
+//get data from history db collection
+router.get('/history', function(req, res) {
+	History.find(function(error, history) {
+		if (error) {console.log('there is an error')}
+		res.send(history);
+	});
+});
 
-// // 	sales.convertToJson('../data/FanCoSales.csv').then((data) => {
-// // 		Sales.collection.insertMany(data)
-// // 	}, function(err) {
-// // 		console.error(err);
-// // 	});
+//get data from forecast db collection
+router.get('/forecast', function(req, res) {
+	Forecast.find(function(error, forecast) {
+		if (error) {console.log('there is an error')}
+		res.send(forecast);
+	});
+});
 
-// // 	sales.save(function(err, data) {
-// // 		if (err) {return console.error(err)}
-// // 		console.log(data);
-// // 		res.end();
-// // 	});
-// // });
+router.param('product', function (req, res, next, preferences) {
+	//all 3 params
+	if (preferences.Neighborhood && preferences.SKU && preferences.Channel) {
+		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {
+			if (err) {console.log ('error!')}
+			if (!sale) {return next(new Error('no matches found')); }
+			req.sale = sale;
+			return next();
+		})
+	//2 of 3 params, 3rd "all"
+	} else if (preferences.Neighborhood && preferences.SKU && !preferences.Channel) {
+		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU}).exec(function (err, sale) {
+			if (err) {console.log ('error!')}
+			if (!sale) {return next(new Error('no matches found')); }
+			req.sale = sale;
+			return next();
+		})
+	} else if (preferences.Neighborhood && !preferences.SKU && preferences.Channel) {
+		Sales.find({Neighborhood: preferences.Neighborhood, Channel: preferences.Channel}).exec(function (err, sale) {
+			if (err) {console.log ('error!')}
+			if (!sale) {return next(new Error('no matches found')); }
+			req.sale = sale;
+			return next();
+		})
+	} else if (!preferences.Neighborhood && preferences.SKU && preferences.Channel) {
+		Sales.find({SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {
+			if (err) {console.log ('error!')}
+			if (!sale) {return next(new Error('no matches found')); }
+			req.sale = sale;
+			return next();
+		})
+	//Only one of 3 params, rest 2 "all"
+	} else if (preferences.Neighborhood) {
+		Sales.find({Neighborhood: preferences.Neighborhood}).exec(function (err, sale) {
+		if (err) {console.log ('error!')}
+		if (!sale) {return next(new Error('no matches found')); }
+		req.sale = sale;
+		return next();
+		})
+	} else if (preferences.SKU) {
+		Sales.find({SKU: preferences.SKU}).exec(function (err, sale) {
+		if (err) {console.log ('error!')}
+		if (!sale) {return next(new Error('no matches found')); }
+		req.sale = sale;
+		return next();
+		})
+	} else if (preferences.Channel) {
+		Sales.find({Channel: preferences.Channel}).exec(function (err, sale) {
+		if (err) {console.log ('error!')}
+		if (!sale) {return next(new Error('no matches found')); }
+		req.sale = sale;
+		return next();
+		})
+	}
+})
 
-
-// // router.get('/getSales', (req, res, next) => {
-	
-// // 	const csvFilePath='../data/FanCoSales.csv'
-// // 	const csv=require('csvtojson')
-// // 	csv()
-// // 	.fromFile(csvFilePath)
-// // 	.on('json',(jsonObj)=>{
-// // 	    // combine csv header row and csv line to a json object 
-// // 	    // jsonObj.a ==> 1 or 4 
-// // 	})
-// // 	.on('done',(error)=>{
-// // 	    console.log('end')
-// // 	})
-
-// // });
-
-// // var myReadStream = fs.createReadStream(__dirname + '/data/FanCoSales.csv', {encoding: 'utf8'});
-// // var myWriteStream = fs.createWriteStream(__dirname + '/data/FancoSalesConverted.json');
-
-// // myReadStream.pipe(csv).pipe(myWriteStream);
-// // ********************************************************************
-
-
-// module.exports = router;
+module.exports = router;
