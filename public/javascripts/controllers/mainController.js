@@ -1,55 +1,111 @@
 app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 
-	$scope.products = ['Red', 'Green', 'Orange', 'All'];
+	$scope.products = ['RED - SPECIAL EDITION - FanCo. Classic', 'GREEN - FanCo. Classic', 'ORANGE - FanCo. Classic', 'All'];
 	$scope.channels = ['Retail', 'Direct Sales', 'Both'];
 	$scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];
+	$scope.preferences = {};
 
-	$scope.getDetails = function () {
-		var selectedProds = document.getElementsByClassName('productList');
-		var prodsSelected = '';
+	var theProds = document.getElementsByClassName('productList');
+	var theChannel = document.getElementsByClassName('channelList');
+	var theNeighborhoods = document.getElementsByClassName('neighList');
+	var theDates = document.getElementsByClassName('datesPick');
 
-		for (i=0; i<$scope.products.length; i++) {
-			if (selectedProds[i].checked) {
-				prodsSelected += selectedProds[i].value + ", ";
+
+	$scope.pickProducts = function (prod) {
+		var prodcounter = 0;
+		var productSelected = [];
+		for (i=0; i<theProds.length-1; i++) {
+			if (theProds[i].checked) {
+				prodcounter += 1
+				productSelected.push($scope.products[i])
 			}
 		}
 
-		var selectedChannel = document.getElementsByClassName('channelList');
-		var channelSelected = '';
-
-		for (j=0; j<$scope.channels.length; j++) {
-			if (selectedChannel[j].checked) {
-				channelSelected = selectedChannel[j].value;
+		if (prod.$index === 3) {
+			var productSelected = [];
+			if (theProds[3].checked) {
+				for (i=0; i<theProds.length-1; i++) {
+					theProds[i].checked = theProds[3].checked
+					productSelected.push($scope.products[i])
+				}
+			} else {
+				for (i=0; i<theProds.length-1; i++) {
+					theProds[i].checked = theProds[3].checked
+				}
 			}
-		}
-
-		var selectedNeighborhood = document.getElementsByClassName('neighList');
-		var neighborhoodSelected = '';
-
-		for (y=0; y<$scope.neighborhoods.length; y++) {
-			if (selectedNeighborhood[y].checked) {
-				neighborhoodSelected += selectedNeighborhood[y].value + ", ";
-			}
-		}
-
-		var selectedDates = document.getElementsByClassName('datesPick');
-		if (selectedDates[0].checked) {
-			var datesSelected = selectedDates[0].value;
+		} else if (prodcounter === 3) {
+			theProds[3].checked = true
 		} else {
-			var datesSelected = selectedDates[1].value;
+			theProds[3].checked = false
+		}
+		// RESULT:
+		$scope.preferences.prods = productSelected;
+		console.log($scope.preferences);
+	}
+
+	$scope.pickChannel = function () {
+		for (j=0; j<$scope.channels.length; j++) {
+			if (theChannel[j].checked) {
+				var channelSelected = theChannel[j].value;
+			}
+		}
+		// RESULT:
+		$scope.preferences.channel = channelSelected;
+		console.log($scope.preferences);
+	}
+
+	$scope.pickNeighborhoods = function (neigh) {
+		var neighcounter = 0;
+		var neighborhoodSelected = [];
+
+		for (y=0; y<theNeighborhoods.length-1; y++) {
+			if (theNeighborhoods[y].checked) {
+				neighcounter +=1
+				neighborhoodSelected.push($scope.neighborhoods[y])
+			}
 		}
 
-		$scope.preferences = {
-			prods: prodsSelected,
-			channel: channelSelected,
-			neighborhoods: neighborhoodSelected,
-			dates: datesSelected
-		};
+		if (neigh.$index === 8) {
+			neighborhoodSelected = []
+			if (theNeighborhoods[8].checked) {
+				for (y=0; y<theNeighborhoods.length-1; y++) {
+					theNeighborhoods[y].checked = theNeighborhoods[8].checked
+					neighborhoodSelected.push($scope.neighborhoods[y]);
+				}
+			} else {
+				for (y=0; y<theNeighborhoods.length-1; y++) {
+					theNeighborhoods[y].checked = theNeighborhoods[8].checked
+				}
+			}
+		} else if (neighcounter === 8) {
+			theNeighborhoods[8].checked = true;
+		} else {
+			theNeighborhoods[8].checked = false;
+		}
+		// RESULT:
+		$scope.preferences.neighborhoods = neighborhoodSelected;
+		console.log($scope.preferences);
+	}
 
-		console.log ('The graphs data will be for: ' +  $scope.preferences.prods + ' sold through ' + $scope.preferences.channel + ', in the following neighborhoods: ' + $scope.preferences.neighborhoods + ' for the following dates: ' + $scope.preferences.dates);
+	$scope.pickDate = function () {
+		if (theDates[0].checked) {
+			$scope.showmode = true;
+		} else if (theDates[1].checked) {
+			$scope.showmode = false;
+			$scope.preferences.dates = 'All';
+			console.log($scope.preferences);
+		}
+	}
 
-		sales.
+	$scope.getDateDetails = function () {
+		$scope.preferences.dates = theDates[1].value;
+		console.log($scope.preferences);
 	};
+
+
+
+
+	// sales.getSales($scope.preferences)
 
 
 }]);

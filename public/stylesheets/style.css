@@ -20,28 +20,6 @@
       border-color: #148f77;
 }
 
-.gobtn {
-  -webkit-border-radius: 10;
-  -moz-border-radius: 10;
-  border-radius: 10px;
-  font-family: Georgia;
-  color: #ffffff;
-  font-size: 15px;
-  background: #3498db;
-  padding: 10px 20px 10px 20px;
-  border: solid #284b61 2px;
-  text-decoration: none;
-}
-
-.gobtn:hover {
-  background: #3cb0fd;
-  text-decoration: none;
-}
-
-.goli {
-  text-align: center;
-}
-
 .topnav {
   font-size: 20px;
   text-align: center;

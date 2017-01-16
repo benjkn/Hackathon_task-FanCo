@@ -31,42 +31,42 @@
         <div id="cm-menu-scroller">
           <ul class="cm-menu-items nav">
           	<!-- Make it responsive onchange, not on button click -->
-          	<li> <a class="dropdown" ng-Click=(show1=!show1) href="#">Products</a>
+          	<li> <a class="dropdown" ng-Click=(show1=!show1)>Products</a>
           		<ul id="myDropdown" class="dropdown-content" ng-show=show1>
-          			<!-- Make "all" select all options -->
-         				<li ng-repeat="p in products"><input type="checkbox" class="productList" value={{p}}>{{p}}</li>
+         				<li ng-repeat="p in products"><input type="checkbox" class="productList" value={{p}} ng-click="pickProducts(this)" checked>{{p}}</li>
           		</ul>
           	</li>
-            <li> <a class="dropdown" ng-Click=(show2=!show2) href="#">Channel</a>
+            <li> <a class="dropdown" ng-Click=(show2=!show2)>Channel</a>
             	<ul id="myDropdown" class="dropdown-content" ng-show=show2>
-            		<li ng-repeat="c in channels"><input type="radio" name="channel" class="channelList" value={{c}}>{{c}}</li>
+            		<li ng-repeat="c in channels"><input type="radio" name="channel" class="channelList" value={{c}} ng-click="pickChannel()" checked>{{c}}</li>
 							</ul>
           	</li>
-            <li> <a class="dropdown" ng-Click=(show3=!show3) href="#">Neighborhood</a>
+            <li> <a class="dropdown" ng-Click=(show3=!show3)>Neighborhood</a>
             	<ul id="myDropdown" class="dropdown-content" ng-show=show3>
-            		<li ng-repeat="n in neighborhoods"><input type="checkbox" class="neighList" value={{n}}>{{n}}</li>
+            		<li ng-repeat="n in neighborhoods"><input type="checkbox" class="neighList" value={{n}} ng-click="pickNeighborhoods(this)" checked>{{n}}</li>
 							</ul>
           	</li>
           	<!-- Problem in toggling custom Dates -->
-            <li> <a class="dropdown" ng-Click=(show4=!show4) href="#">Custom Dates</a>
+            <li> <a class="dropdown" ng-Click=(show4=!show4)>Custom Dates</a>
             	<ul id="myDropdown" class="dropdown-content" ng-show=show4>
-          			<li><input type="radio" name="dates" class="datesPick" value="{{fromDate}} until {{toDate}}"> Custom </input>
-          				<form>
+          			<li><input type="radio" name="dates" class="datesPick" value="{{fromDate}} until {{toDate}}" ng-click="pickDate()"> Custom </input>
+          				<form ng-show=showmode ng-click="getDateDetails()">
           					<div>
           						From: <input type="date" ng-model="fromDate">
           					</div>
           					<div>
           						To: <input type="date" ng-model="toDate">
           					</div>
+                    <div>
+                      <input type="submit" Value="Go!">
+                    </div>
           				</form>
-          			</li>
-          			<li><input type="radio" name="dates" class="datesPick" value="All" checked> All </input></li>
-							</ul>
-          	</li>
+                </li>
+                <li><input type="radio" name="dates" class="datesPick" value="All" ng-click="pickDate()" checked> All </input>
+                </li>
+              </ul>
+            </li>
             <br>
-        		<li class="goli">
-        			<button class="gobtn" ng-click="getDetails()">GO!</button>
-          	</li>
           </ul>
         </div>
       </div>
