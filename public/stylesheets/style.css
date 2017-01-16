@@ -31,29 +31,6 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
     font-size: 16px;
 }
 
-.gobtn {
-  -webkit-border-radius: 10;
-  -moz-border-radius: 10;
-  border-radius: 10px;
-  font-family: Georgia;
-  color: #ffffff;
-  font-size: 15px;
-  background: #3498db;
-  padding: 8px 18px 8px 18px;
-  border: solid #f4f4f4 2px;
-  text-decoration: none;
-  font-family: sans-serif;
-}
-
-.gobtn:hover {
-  background: #3cb0fd;
-  text-decoration: none;
-}
-
-.goli {
-  text-align: center;
-}
-
 .topnav {
   font-size: 22px;
   text-align: center;
