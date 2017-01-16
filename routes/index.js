@@ -20,6 +20,7 @@ router.get('/sales', function(req, res) {
 router.get('/history', function(req, res) {
 	History.find(function(error, history) {
 		if (error) {console.log('there is an error');}
+		console.log("gimme history");
 		res.send(history);
 	});
 });
