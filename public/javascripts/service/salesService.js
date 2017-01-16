@@ -58,6 +58,11 @@ app.factory('sales', ['$http', function($http) {
 
     //finally weatherHistory is an array of 52 objects with the first day of each week in 1433019600000 format and the average temp!
     //this date format is easily comparable and can be turned into a date by new Date(1436648400000)
+    
+    getRawHistory: function(){
+      return $http.get('/history');
+    },
+    
     getHistory: function() {
       return $http.get('/history').then(function (history) {
         salesService.temporaryArray = history.data;
@@ -74,8 +79,8 @@ app.factory('sales', ['$http', function($http) {
           }
           salesService.count = salesService.count+parseInt(salesService.temporaryArray[i].maxtempC, 10)+parseInt(salesService.temporaryArray[i].mintempC, 10);
         }
-        console.log(salesService.weatherHistory);
-        console.log(salesService.weatherHistory.length);
+        // console.log(salesService.weatherHistory);
+        // console.log(salesService.weatherHistory.length);
       });
     }
 
