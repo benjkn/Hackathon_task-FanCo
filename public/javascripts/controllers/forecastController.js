@@ -20,6 +20,7 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function($scope, forecast)
 		console.log($scope.forecastData);
 	};
 
+
 }] );
 
 
