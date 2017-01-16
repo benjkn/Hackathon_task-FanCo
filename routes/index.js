@@ -19,7 +19,7 @@ router.get('/sales', function(req, res) {
 //get data from history db collection
 router.get('/history', function(req, res) {
 	History.find(function(error, history) {
-		if (error) {console.log('there is an error')}
+		if (error) {console.log('there is an error');}
 		res.send(history);
 	});
 });
@@ -27,7 +27,7 @@ router.get('/history', function(req, res) {
 //get data from forecast db collection
 router.get('/forecast', function(req, res) {
 	Forecast.find(function(error, forecast) {
-		if (error) {console.log('there is an error')}
+		if (error) {console.log('there is an error');}
 		res.send(forecast);
 	});
 });
@@ -36,56 +36,56 @@ router.param('product', function (req, res, next, preferences) {
 	//all 3 params
 	if (preferences.Neighborhood && preferences.SKU && preferences.Channel) {
 		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
+			if (err) {console.log ('error!');}
 			if (!sale) {return next(new Error('no matches found')); }
 			req.sale = sale;
 			return next();
-		})
+		});
 	//2 of 3 params, 3rd "all"
 	} else if (preferences.Neighborhood && preferences.SKU && !preferences.Channel) {
 		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
+			if (err) {console.log ('error!');}
 			if (!sale) {return next(new Error('no matches found')); }
 			req.sale = sale;
 			return next();
-		})
+		});
 	} else if (preferences.Neighborhood && !preferences.SKU && preferences.Channel) {
 		Sales.find({Neighborhood: preferences.Neighborhood, Channel: preferences.Channel}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
+			if (err) {console.log ('error!');}
 			if (!sale) {return next(new Error('no matches found')); }
 			req.sale = sale;
 			return next();
-		})
+		});
 	} else if (!preferences.Neighborhood && preferences.SKU && preferences.Channel) {
 		Sales.find({SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {
-			if (err) {console.log ('error!')}
+			if (err) {console.log ('error!');}
 			if (!sale) {return next(new Error('no matches found')); }
 			req.sale = sale;
 			return next();
-		})
+		});
 	//Only one of 3 params, rest 2 "all"
 	} else if (preferences.Neighborhood) {
 		Sales.find({Neighborhood: preferences.Neighborhood}).exec(function (err, sale) {
-		if (err) {console.log ('error!')}
+		if (err) {console.log ('error!');}
 		if (!sale) {return next(new Error('no matches found')); }
 		req.sale = sale;
 		return next();
-		})
+		});
 	} else if (preferences.SKU) {
 		Sales.find({SKU: preferences.SKU}).exec(function (err, sale) {
-		if (err) {console.log ('error!')}
+		if (err) {console.log ('error!');}
 		if (!sale) {return next(new Error('no matches found')); }
 		req.sale = sale;
 		return next();
-		})
+		});
 	} else if (preferences.Channel) {
 		Sales.find({Channel: preferences.Channel}).exec(function (err, sale) {
-		if (err) {console.log ('error!')}
+		if (err) {console.log ('error!');}
 		if (!sale) {return next(new Error('no matches found')); }
 		req.sale = sale;
 		return next();
-		})
+		});
 	}
-})
+});
 
 module.exports = router;
