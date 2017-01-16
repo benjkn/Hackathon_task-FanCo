@@ -29,7 +29,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // Declare height and width variables(pixels)
       var height = 300;
-      var width = 1000;
+      var width = 800;
       // total = 0;
       // Work out extremes
       var maxSales = d3.max(totalData,function(d,i){
@@ -64,16 +64,17 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       var yAxis = d3.svg.axis()
         .scale(y)
+        .ticks(5)
         .orient("left");
 
 
 			var svg = d3.select($el[0]).append("svg")
       	.attr("width", "100%")
-    		.attr("height", 500)
+    		.attr("height", height + 100)
     		.attr("style", "background: #f4f4f4");
 
 		  // Declare margin object (adds buffer)
-      var margin = {left:50,right:50,top:40,bottom:0};
+      var margin = {left:80,right:50,top:40,bottom:0};
 
       // Add all elements into group
       var chartGroup = svg.append("g")
@@ -87,7 +88,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       // Finally add line; Append the path to group; run line generator on data
       chartGroup.append("path").attr("d",line(totalData));
 
-      // Add axes (shift x-axis down)
+      // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
       .attr("transform", "translate(0, "+height+")").call(xAxis);
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
