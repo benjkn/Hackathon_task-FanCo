@@ -48,7 +48,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 
 		console.log ('The graphs data will be for: ' +  $scope.preferences.prods + ' sold through ' + $scope.preferences.channel + ', in the following neighborhoods: ' + $scope.preferences.neighborhoods + ' for the following dates: ' + $scope.preferences.dates);
 
-		sales.
+		
 	};
 
 
