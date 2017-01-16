@@ -84,6 +84,19 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var maxDate2 = d3.max($scope.weatherData, function(d){ return d.date; });
       console.log(minDate);
       console.log(minDate2);
+      // console.log("Max Sales for a day is: " + maxSales);
+
+      // find max value day
+      for ( i=0; i<totalData.length; i++) {
+        if (totalData[i].values === maxSales){
+          // console.log("most shit sold on " + totalData[i].key);
+        }
+      }
+
+      var minDate = d3.min(totalData,function(d){ return d.key; });
+      var maxDate = d3.max(totalData, function(d){ return d.key; });
+      // console.log("minDate is " + minDate);
+      // console.log("maxDate is " + maxDate);
 
 
 			// Declare Scales + axes (don't forget to invert Y range)
