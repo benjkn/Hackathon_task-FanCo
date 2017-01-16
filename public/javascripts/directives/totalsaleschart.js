@@ -29,6 +29,10 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
   		// parse the dates!
       var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+      // for the tooltip dates
+      var formatTime = d3.time.format("%e %B");
+      
   		
       for ( i=0; i<totalData.length; i++) {
         totalData[i].key = parseDate(totalData[i].key);
@@ -151,7 +155,10 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // Finally add line; Append the path to group; run line generator on data
       chartGroup.append("path").attr("d",line(totalData));
-      chartGroup.append("path").attr("d",line2(weatherData));
+
+      // Weather Line
+      chartGroup.append("path").attr("d",line2(weatherData))
+      .style("stroke", "#009688").style("opacity", 0.5);
 
       // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
@@ -162,21 +169,40 @@ app.directive("linearChart", [ 'sales', function(sales) {
       chartGroup.append("g").attr("class", "y2 axis")
       .attr("transform", "translate("+width+",0)").call(yAxis2);
 
-      // circles
+
+      // Define the div for the tooltip
+      var div = d3.select("body").append("div")	
+          .attr("class", "tooltip")				
+          .style("opacity", 0);
+      
+      // circles + tooltips      
       chartGroup.selectAll("circle")
         .data(totalData)
         .enter().append("circle")
           .attr("class",function(d,i){ return "grp"+i; })
           .attr("cx",function(d,i){ return x(d.key); })
           .attr("cy",function(d,i){ return y(d.values); })
-          .attr("r","2");
+          .attr("r","2.5")
+          .on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html(formatTime(d.key) + "<br/>"  + d.values)	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+          .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+      });
       
       // chartGroup.selectAll("circle")
       //   .data(weatherData)
       //   .enter().append("circle")
       //     .attr("class",function(d,i){ return "temp"+i; })
       //     .attr("cx",function(d,i){ return x(d.date); })
-      //     .attr("cy",function(d,i){ return y(d.maxtempC); })
+      //     .attr("cy",function(d,i){ return y2(d.maxtempC); })
       //     .attr("r","2");
       });
 		});
