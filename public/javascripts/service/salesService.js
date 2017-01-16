@@ -9,24 +9,10 @@ app.factory('sales', ['$http', function($http) {
     // init sales collection with new values
     //salesData is an array of 2496 objects. 52 weeks * 6 products * 8 neighborhoods * 2 Channels
   	getSales: function() {
-  		return $http.get('/sales').then(function (sales) {
-        console.log(sales.data.length);
-        // var obj = {
-        //   WeekOf: sales.data[0].WeekOf
-        //   SalesUnits: sales.data[0].SalesUnits
-        // };
-        // temporaryArray2.push(obj);
-        // for (j=1; j<sales.data.length; j++) {
-        //   for (k=0; k<salesService.temporaryArray2.length; ++)
-        //   if(sales.data[j].WeekOf === salesService.temporaryArray2[k].WeekOf) {
-        //     salesService.temporaryArray2[k].SalesUnits += sales
-        //   }
-        // }
-        for (i=0; i<48; i++) {
-          var m = i*52
-          console.log(i + ':' + sales.data[m].WeekOf )
-        }
-      })
+  		return $http.get('/sales')
+      // .then(function (sales) {
+      //   console.log(sales.data.length);
+      // })
   	},
 
 
@@ -53,7 +39,7 @@ app.factory('sales', ['$http', function($http) {
       })
     },
 
-    getAll: function () {
+    getAllofThem: function () {
       salesService.getHistory();
       salesService.getSales();
     },
