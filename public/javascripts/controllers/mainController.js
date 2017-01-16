@@ -1,4 +1,4 @@
-app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
+app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 
 	$scope.products = ['Red', 'Green', 'Orange', 'All'];
 	$scope.channels = ['Retail', 'Direct Sales', 'Both'];
@@ -39,14 +39,16 @@ app.controller('MainCtrl', ['$scope','$http', function($scope, $http){
 			var datesSelected = selectedDates[1].value;
 		}
 
-		$scope.options = {
+		$scope.preferences = {
 			prods: prodsSelected,
 			channel: channelSelected,
 			neighborhoods: neighborhoodSelected,
 			dates: datesSelected
 		};
 
-		console.log ('The graphs data will be for: ' +  $scope.options.prods + ' sold through ' + $scope.options.channel + ', in the following neighborhoods: ' + $scope.options.neighborhoods + ' for the following dates: ' + $scope.options.dates);
+		console.log ('The graphs data will be for: ' +  $scope.preferences.prods + ' sold through ' + $scope.preferences.channel + ', in the following neighborhoods: ' + $scope.preferences.neighborhoods + ' for the following dates: ' + $scope.preferences.dates);
+
+		sales.
 	};
 
 

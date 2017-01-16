@@ -7,7 +7,7 @@ app.factory('forecast', ['$http', function($http) {
   	}
 
 
-  }; //end of salesService
+  }; //end of forecastService
 
 
   return forecastService;
