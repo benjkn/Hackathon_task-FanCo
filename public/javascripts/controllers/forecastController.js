@@ -17,6 +17,11 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function($scope, forecast)
 
 			console.log('on ' + (new Date(forecastLive[i].dt*1000)) + ' the weather will be f**ing be ' + forecastLive[i].weather[0].description);
 
+			if (($scope.info[i].weather.indexOf('rain') > 0) || ($scope.info[i].weather.indexOf('snow') > 0)) {
+				//the ones containing 'rain' and 'snow'
+				console.log('heeeeeellllllloooooo' + i);
+			}
+
 		}
 
 

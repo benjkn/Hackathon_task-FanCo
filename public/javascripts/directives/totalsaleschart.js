@@ -13,9 +13,9 @@ app.directive("linearChart", [ 'sales', function(sales) {
       weatherData = $scope.weatherData.splice(0,358);
       console.log(response);
       console.log(weatherData);
-      
 
-     
+
+
 
   		//Nest + Rollup for Total Sales
       var totalData = d3.nest()
@@ -29,7 +29,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
   		// parse the dates!
       var parseDate = d3.time.format("%Y-%m-%d").parse;
-  		
+
       for ( i=0; i<totalData.length; i++) {
         totalData[i].key = parseDate(totalData[i].key);
   		}
@@ -39,15 +39,13 @@ app.directive("linearChart", [ 'sales', function(sales) {
         d.maxtempC = +d.maxtempC;
       })
         console.log(weatherData);
-      
+
 
       // for ( i=0; i<$scope.weatherData.length; i++) {
       //   $scope.weatherData[i].date = parseDate($scope.weatherData[i].date);
   		// }
 
       // console.log($scope.weatherData);
-
-       
 
 
       // Declare height and width variables(pixels)
@@ -79,7 +77,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       var minDate = d3.min(totalData,function(d){ return d.key; });
       var maxDate = d3.max(totalData, function(d){ return d.key; });
-     
+
       var minDate2 = d3.min($scope.weatherData,function(d){ return d.date; });
       var maxDate2 = d3.max($scope.weatherData, function(d){ return d.date; });
       console.log(minDate);
@@ -143,7 +141,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .x(function(d){ return x(d.key); })
         .y(function(d){ return y(d.values); })
         .interpolate("cardinal");
-		 
+
       var line2 = d3.svg.line()
         .x(function(d){ return x(d.date); })
         .y(function(d){ return y2(d.maxtempC); })
@@ -157,7 +155,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       chartGroup.append("g").attr("class", "x axis")
       .attr("transform", "translate(0, "+height+")").call(xAxis);
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
-      
+
       // temp axis
       chartGroup.append("g").attr("class", "y2 axis")
       .attr("transform", "translate("+width+",0)").call(yAxis2);
@@ -170,7 +168,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
           .attr("cx",function(d,i){ return x(d.key); })
           .attr("cy",function(d,i){ return y(d.values); })
           .attr("r","2");
-      
+
       // chartGroup.selectAll("circle")
       //   .data(weatherData)
       //   .enter().append("circle")
