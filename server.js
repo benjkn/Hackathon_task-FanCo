@@ -24,23 +24,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes);
 // app.use('/users', users); ********** uncomment to add user registration
 
-// app.get('/forecast', function(req, res){
-// 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
-// 	  if (!error && response.statusCode == 200) {
-// 	    console.log(body);
-// 		// var myReadStream = fs.createReadStream((body.data), { encoding: 'utf8' });
-// 		// var myWriteStream = fs.createWriteStream('data/forecast.json');
-// 		// myReadStream.pipe(myWriteStream);
 
-// 		// ***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
-// 		// fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
-// 	 //  		if (err) return console.log(err);
-// 	 //  		console.log('dasf');
-// 		// });
-// 	    res.send(body);
-// 	  }
-// 	});
-// });
+/*
+		***************CAUTION --- if u uncomment and run this, overwrites forecast.json file
+		fs.writeFile('data/forecast.json', body, 'utf8', function (err) {
+	  		if (err) return console.log(err);
+	  		console.log('dasf');
+		});*/
+
+
+app.get('/forecast', function(req, res){
+	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	    console.log(body);
+	    res.send(body);
+	  }else if(error) {
+	  	console.log('hello');
+	  }
+	});
+});
 
 /*//entry point to history api
 app.get('/history', function(req, res){

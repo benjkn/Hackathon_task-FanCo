@@ -25,12 +25,13 @@ router.get('/history', function(req, res) {
 });
 
 //get data from forecast db collection
-router.get('/forecast', function(req, res) {
+/*router.get('/forecast', function(req, res) {
 	Forecast.find(function(error, forecast) {
 		if (error) {console.log('there is an error');}
 		res.send(forecast);
 	});
 });
+*/
 
 router.param('product', function (req, res, next, preferences) {
 	//all 3 params

@@ -6,7 +6,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 
 		forecast.getForecast().then(function(response){
       console.log(response);
-      $scope.forecastData = response.data;
+      $scope.forecastData = response.data.list;
       console.log($scope.forecastData);
 
   		//Nest + Rollup for Total Sales
@@ -23,8 +23,8 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
   		// parse the date!
       // var parseDate = d3.time.format("%Y-%m-%d").parse;
   		for ( i=0; i<$scope.forecastData.length; i++) {
-        $scope.forecastData[i].day = new Date($scope.forecastData[i].day*1000);
-        $scope.forecastData[i].temp = Math.round(($scope.forecastData[i].temp-273.15)*100)/100;
+        $scope.forecastData[i].dt = new Date($scope.forecastData[i].dt*1000);
+        $scope.forecastData[i].temp.day = Math.round(($scope.forecastData[i].temp.day-273.15)*100)/100;
   		}
   		console.log($scope.forecastData[0]);
 
@@ -35,28 +35,28 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
       // total = 0;
       // Work out extremes
       var maxTemp = d3.max($scope.forecastData,function(d,i){
-        return d.temp;
+        return d.temp.day;
       });
       console.log("Max Temp for a day is: " + maxTemp);
 
       var minTemp  = d3.min($scope.forecastData,function(d,i){
-        return d.temp;
+        return d.temp.day;
       });
       console.log("Min Temp for a day is: " + minTemp);
 
       // find max value day
       for ( i=0; i<$scope.forecastData.length; i++) {
-        if ($scope.forecastData[i].temp === maxTemp){
-          console.log("hottest shit temp on " + $scope.forecastData[i].day);
+        if ($scope.forecastData[i].temp.day === maxTemp){
+          console.log("hottest shit temp on " + $scope.forecastData[i].dt);
         }
 
-        if($scope.forecastData[i].temp === minTemp){
-          console.log("coldest shit temp on " + $scope.forecastData[i].day);
+        if($scope.forecastData[i].temp.day === minTemp){
+          console.log("coldest shit temp on " + $scope.forecastData[i].dt);
         }
       }
 
-      var minDate = d3.min($scope.forecastData,function(d){ return d.day; });
-      var maxDate = d3.max($scope.forecastData, function(d){ return d.day; });
+      var minDate = d3.min($scope.forecastData,function(d){ return d.dt; });
+      var maxDate = d3.max($scope.forecastData, function(d){ return d.dt; });
       console.log("minDate is " + minDate);
       console.log("maxDate is " + maxDate);
 
@@ -70,7 +70,8 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 
       var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom");
+        .orient("bottom")
+        .ticks(16);
 
 
       var yAxis = d3.svg.axis()
@@ -80,7 +81,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 
 			var svg = d3.select($el[0]).append("svg")
       	.attr("width", "100%")
-    		.attr("height", 500)
+    		.attr("height", 400)
     		.attr("style", "background: #f4f4f4");
 
 		  // Declare margin object (adds buffer)
@@ -91,8 +92,8 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
         .attr("transform", "translate("+margin.left+","+margin.top+")");
 
 		  var line = d3.svg.line()
-        .x(function(d){ return x(d.day); })
-        .y(function(d){ return y(d.temp); })
+        .x(function(d){ return x(d.dt); })
+        .y(function(d){ return y(d.temp.day); })
         .interpolate("cardinal");
 
 
@@ -111,8 +112,8 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
         .data($scope.forecastData)
         .enter().append("circle")
           .attr("class",function(d,i){ return "grp"+i; })
-          .attr("cx",function(d,i){ return x(d.day); })
-          .attr("cy",function(d,i){ return y(d.temp); })
+          .attr("cx",function(d,i){ return x(d.dt); })
+          .attr("cy",function(d,i){ return y(d.temp.day); })
           .attr("r","2");
 		});
 	};

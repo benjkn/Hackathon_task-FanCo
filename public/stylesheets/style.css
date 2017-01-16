@@ -114,6 +114,18 @@ path {
     border: 1px solid transparent;
 }
 
+.graph h3 {
+    font-family: 'Oswald',sans-serif!important;
+    color: orange;
+    font-size: 30px;
+    color: #ffac4d;
+    font-weight: bolder;
+}
+
+.provided-text {
+  color: #999;
+}
+
 ul#myDropdown input {
     margin: 4px 10px 0;
 }

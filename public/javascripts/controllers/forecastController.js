@@ -1,7 +1,30 @@
 app.controller("ForecastCtrl", ["$scope", "forecast", function($scope, forecast) {
 
-	var temporary =[];
+	$scope.info = [];
+
+
+	forecast.getForecast().then(function(data){
+		console.log(data);
+		var forecastLive = data.data.list;
+
+		for(var i = 0; i < forecastLive.length; i++) {
+
+			obj = {
+				weather: forecastLive[i].weather[0].description,
+				date: (new Date(forecastLive[i].dt*1000)+10).slice(0,11)
+			};
+			$scope.info.push(obj);
+
+			console.log('on ' + (new Date(forecastLive[i].dt*1000)) + ' the weather will be f**ing be ' + forecastLive[i].weather[0].description);
+
+		}
+
+
+	});
+
+	/*var temporary =[];
 	$scope.forecastData = [];
+
 
 	$scope.gettheforecast = function () {
 		forecast.getForecast().then(function (hello) {
@@ -19,7 +42,7 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function($scope, forecast)
 		});
 		console.log($scope.forecastData);
 	};
-
+*/
 
 }] );
 

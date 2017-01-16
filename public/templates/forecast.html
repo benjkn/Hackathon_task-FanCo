@@ -2,13 +2,24 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 
-			<div class="graph">
-				<h3>Weather Forecast for the next 15 days:</h3>
+		<div class="graph">
+			<h3>Weather Forecast for the next 15 days:</h3>
 			</div>
 
 			<forecast-chart></forecast-chart>
+			<p class="provided-text">Live data provided by OpenWeatherMap</p>
+		</div>
 
 
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="panel graph ">
+				<h3> Weakly weather notifications </h3>
+			  <p ng-repeat="x in info track by $index"> On <strong>{{x.date}}</strong> the weather will be <strong>{{x.weather}}</strong></p>
+
+			</div>
 		</div>
 	</div>
 </div>
