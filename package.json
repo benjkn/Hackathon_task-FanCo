@@ -19,22 +19,14 @@
   "homepage": "https://github.com/benjkn/Hackathon_task-FanCo#readme",
   "dependencies": {
     "angular": "1.5.5",
-    "angular-chartjs": "0.0.5",
     "angular-ui-router": "^0.3.2",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
-    "csvtojson": "^1.1.2",
     "d3": "^4.4.1",
     "express": "^4.14.0",
-    "express-jwt": "^5.1.0",
-    "fs": "0.0.1-security",
     "jquery": "^3.1.1",
-    "jsonwebtoken": "^7.2.1",
     "min-jquery": "^1.7.0",
     "mongoose": "^4.7.6",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "path": "^0.12.7",
     "request": "^2.79.0"
   }
 }
