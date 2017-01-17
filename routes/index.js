@@ -2,6 +2,40 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var request = require('request');
+var twilio = require('twilio');
+
+
+//============================= twilio =====================================
+// Create a new REST API client to make authenticated requests against the
+// twilio back end
+var client = twilio('TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN');
+
+// Pass in parameters to the REST API using an object literal notation. The
+// REST client will handle authentication and response serialzation for you.
+client.sms.messages.create({
+    to:'+972000000000',
+    from:'+14134713241',
+    body:'the weather is great today!!! go out and sale FanCo '
+}, function(error, message) {
+    // The HTTP request to Twilio will run asynchronously. This callback
+    // function will be called when a response is received from Twilio
+    // The "error" variable will contain error information, if any.
+    // If the request was successful, this value will be "falsy"
+    if (!error) {
+        // The second argument to the callback will contain the information
+        // sent back by Twilio for the request. In this case, it is the
+        // information about the text messsage you just sent:
+        console.log('Success! The SID for this SMS message is:');
+        console.log(message.sid);
+
+        console.log('Message sent on:');
+        console.log(message.dateCreated);
+    } else {
+        console.log('Oops! There was an error.' );
+        console.log(error);
+    }
+});
+////============================= twilio =====================================
 
 
 var Sales = require('../models/SalesFanco');
@@ -22,7 +56,7 @@ router.get('/sales', function(req, res) {
 router.get('/history', function(req, res) {
 	History.find(function(error, history) {
 		if (error) {console.log('there is an error');}
-		// console.log("gimme history");
+		console.log("gimme history");
 		res.send(history);
 	});
 });
@@ -48,6 +82,9 @@ router.get('/forecast', function(req, res){
 	  }
 	});
 });
+
+
+
 
 /*router.param('product', function (req, res, next, preferences) {
 	console.log(preferences)

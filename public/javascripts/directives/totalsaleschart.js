@@ -10,8 +10,11 @@ app.directive("linearChart", [ 'sales', function(sales) {
       // console.log($scope.salesData);
 
       sales.getPrice().then (function(prices) {
+        console.log(prices);
         price = prices.data;
         console.log (price);
+
+      var uniquePrice;
 
       for (a=0; a<$scope.salesData.length; a++) {
         for (b=0; b<price.length; b++) {
@@ -19,15 +22,15 @@ app.directive("linearChart", [ 'sales', function(sales) {
             uniquePrice = price[b].RevenuePerUnitSold;
           }
         }
-        $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
+        $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice;
       }
 
       sales.getRawHistory().then(function(response){
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
-      // console.log(response);
-      // console.log(weatherData);
-      console.log($scope.salesData)
+      console.log(response);
+      console.log(weatherData);
+      console.log($scope.salesData);
 
   		//Nest + Rollup for Total Sales
       var totalData = d3.nest()
@@ -226,7 +229,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .text("Units Sold Weekly");
 
       }); // thisis closing getrawhistory
-    }) // this is closing the getprices
+    }); // this is closing the getprices
 		}); //this is closing the getsales
 	}; //this is closing the var link
 
