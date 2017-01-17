@@ -1,6 +1,6 @@
 app.directive("linearChart", [ 'sales', function(sales) {
 
-  var link = function($scope, $el, $attrs){
+  var link = function($scope, $el, $attrs) {
 
     $scope.salesData = [];
     $scope.weatherData = [];
@@ -11,7 +11,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       sales.getPrice().then (function(prices) {
         price = prices.data;
-        console.log (price);
+        // console.log (price);
 
       for (a=0; a<$scope.salesData.length; a++) {
         for (b=0; b<price.length; b++) {
@@ -22,23 +22,40 @@ app.directive("linearChart", [ 'sales', function(sales) {
         $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
       }
 
+
+
       sales.getRawHistory().then(function(response){
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
 
-  		//Nest + Rollup for Total Sales
-      var totalData = d3.nest()
-			.key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
-			.rollup(function(d){
-				return d3.sum(d, function(g){
-				  return g.SalesUnits;
-				});
-			}).entries($scope.salesData);
+
+      if (sales.mode === 'Sales') {
+    		//Nest + Rollup for Total Sales
+        // console.log('1');
+        var totalData = d3.nest()
+  			.key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
+  			.rollup(function(d){
+  				return d3.sum(d, function(g){
+  				  return g.SalesUnits;
+  				});
+  			}).entries($scope.salesData);
+      } else if (sales.mode === 'Revenue') {
+        //Nest + Rollup for Total Revenue
+        // console.log('2');
+        var totalData = d3.nest()
+        .key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
+        .rollup(function(d){
+          return d3.sum(d, function(g){
+            return g.revenue;
+          });
+        }).entries($scope.salesData);
+      } else {
+        console.log ('error');
+      }
 
 
   		// parse the dates!
       var parseDate = d3.time.format("%Y-%m-%d").parse;
-
       // for the tooltip dates
       var formatTime = d3.time.format("%e %b");
 
@@ -51,13 +68,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
         d.date = parseDate(d.date);
         d.maxtempC = +d.maxtempC;
       })
-    
-
-      // for ( i=0; i<$scope.weatherData.length; i++) {
-      //   $scope.weatherData[i].date = parseDate($scope.weatherData[i].date);
-  		// }
-
-
 
 
 
@@ -97,12 +107,12 @@ app.directive("linearChart", [ 'sales', function(sales) {
       // console.log(minDate2);
       // console.log("Max Sales for a day is: " + maxSales);
 
-      // find max value day
-      for ( i=0; i<totalData.length; i++) {
-        if (totalData[i].values === maxSales){
-          // console.log("most shit sold on " + totalData[i].key);
-        }
-      }
+      // // find max value day
+      // for ( i=0; i<totalData.length; i++) {
+      //   if (totalData[i].values === maxSales){
+      //     // console.log("most shit sold on " + totalData[i].key);
+      //   }
+      // }
 
       var minDate = d3.min(totalData,function(d){ return d.key; });
       var maxDate = d3.max(totalData, function(d){ return d.key; });
@@ -166,6 +176,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       weatherColor = "#26A69A"
 
 
+
       // Finally add line; Append the path to group; run line generator on data
       chartGroup.append("path").attr("d",line(totalData))
         .attr("class", "sales")
@@ -175,7 +186,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // Weather Line
       chartGroup.append("path").attr("d",line2(weatherData))
-        .attr("class", "weather")        
+        .attr("class", "weather")
         .style("stroke", weatherColor)
         .style("opacity", 0.5)
         .style("fill", "none")
@@ -224,15 +235,26 @@ app.directive("linearChart", [ 'sales', function(sales) {
                 .style("opacity", 0);
           });
 
-      // Text label for the Y axis
-      svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("x", margin.top - (height / 2))
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Units Sold Weekly");
-     
+        if (sales.mode === 'Sales') {
+          // Text label for the Y axis
+          svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("x", margin.top - (height / 2))
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Units Sold Weekly");
+        } else {
+          // Text label for the Y axis
+          svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("x", margin.top - (height / 2))
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Weekly Revenue");
+        }
+
       // Text label for the right Y axis
       svg.append("text")
         .attr("transform", "rotate(-90)")
@@ -242,8 +264,9 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .style("text-anchor", "end")
         .text("Temperature (°C)");
 
+
       // Legend
-      
+
       // Units Sold (hardcoded..)
       svg.append("text")
         .attr("x", (width/2) + 100)
@@ -273,18 +296,20 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .attr("cy", margin.top - 5)
         .style("fill", weatherColor)
         .attr("r", "5");
-        
+
       }); // thisis closing getrawhistory
     }) // this is closing the getprices
 		}); //this is closing the getsales
 	}; //this is closing the var link
 
 
-	return {
+
+  return {
 		restrict: "EA",
 		template: '<div class="fuck"></div>',
 		replace: true,
 		link: link
 	};
+
 
 }]);

@@ -94,11 +94,20 @@ ul#myDropdown input {
 
    body a.ikillu {
     line-height: 12px;
-}
+  }
 
   ul#navlist {
     padding-left: 45px;
     padding-bottom: 14px;
+  }
+
+  .button {
+    width: 20%;
+    font-size: 1em;
+  }
+  .modebtn {
+    width: 17%;
+    font-size: .9em;
   }
 }
 
@@ -120,19 +129,54 @@ ul#myDropdown input {
   shape-rendering: crispEdges;
 }
 
-div.tooltip {	
-    position: absolute;			
-    text-align: center;			
-    width: 70px;					
-    height: 30px;					
-    padding: 2px;				
-    font: 12px sans-serif;		
-    background: lightsteelblue;	
-    border: 0px;		
-    border-radius: 8px;			
-    pointer-events: none;			
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 70px;
+    height: 30px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 
 .axis text {
   font: 12px sans-serif;
+}
+
+.modeContainer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.modebtn {
+    color: grey;
+    width: 10%;
+    height: 45px;
+    font-size: 1.1em;
+    font-family: 'Montserrat';
+    text-transform: uppercase;
+    background-color:transparent;
+    letter-spacing: .08em;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid grey;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.modebtn:hover {
+  border: 2px solid grey;
+}
+
+.modebtn:active {
+  border: 3px solid grey;
+}
+
+.modeContainer a {
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 10px;
 }
