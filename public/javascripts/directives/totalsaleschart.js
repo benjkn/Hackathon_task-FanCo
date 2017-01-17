@@ -31,7 +31,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var parseDate = d3.time.format("%Y-%m-%d").parse;
 
       // for the tooltip dates
-      var formatTime = d3.time.format("%e %B");
+      var formatTime = d3.time.format("%e %b");
       
   		
       for ( i=0; i<totalData.length; i++) {

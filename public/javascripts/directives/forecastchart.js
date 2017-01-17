@@ -114,7 +114,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
 
       // for the tooltip dates
-      var formatTime = d3.time.format("%e %B");
+      var formatTime = d3.time.format("%e %b");
 
       // Define the div for the tooltip
       var div = d3.select("body").append("div")	
@@ -150,7 +150,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
         .attr("x", margin.top - (height / 2))
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Highs (°C)");
+        .text("(°C)");
 		});
 	};
 
