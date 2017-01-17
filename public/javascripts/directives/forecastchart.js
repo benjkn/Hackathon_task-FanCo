@@ -31,7 +31,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 
       // Declare height and width variables(pixels)
       var height = 300;
-      var width = 1000;
+      var width = 800;
       // total = 0;
       // Work out extremes
       var maxTemp = d3.max($scope.forecastData,function(d,i){
@@ -104,8 +104,22 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 
       // Add axes (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
-      .attr("transform", "translate(0, "+height+")").call(xAxis);
+      .attr("transform", "translate(0, "+height+")").call(xAxis)
+      .selectAll("text")
+          .attr("dx", "-0.9em")
+          .attr("dy", ".15em")
+          .attr("transform", "rotate(-45)")
+          .style("text-anchor", "end");
+      
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
+
+      // for the tooltip dates
+      var formatTime = d3.time.format("%e %b");
+
+      // Define the div for the tooltip
+      var div = d3.select("body").append("div")	
+          .attr("class", "tooltip")				
+          .style("opacity", 0);
 
       // circles
       chartGroup.selectAll("circle")
@@ -114,7 +128,29 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
           .attr("class",function(d,i){ return "grp"+i; })
           .attr("cx",function(d,i){ return x(d.dt); })
           .attr("cy",function(d,i){ return y(d.temp.day); })
-          .attr("r","2");
+          .attr("r","2.5")
+          .on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div.html(formatTime(d.dt) + "<br/>"  + d.temp.day+" °C")	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+          .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+      });
+
+      // Text label for the Y axis
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("x", margin.top - (height / 2))
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("(°C)");
 		});
 	};
 
