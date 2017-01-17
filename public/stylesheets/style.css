@@ -45,8 +45,6 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
 .topnav a:hover {
   text-decoration: none;
   color: #1abc9c;
-  /*background-color: white;*/
-
 }
 
 .topnav a:active {
@@ -93,7 +91,6 @@ ul#myDropdown input {
 }
 
 @media (max-width: 900px) {
-
 
    body a.ikillu {
     line-height: 12px;

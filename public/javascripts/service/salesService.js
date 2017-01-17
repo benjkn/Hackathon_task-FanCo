@@ -22,7 +22,6 @@ app.factory('sales', ['$http', function($http) {
 
 
       // db.products.find({$or: [{Channel: "Direct Sales"}, {Channel: "Retail"}]}).count() <--- 6
-
       if (!(a || b || c || d)) {
       //(0 custom, 4 'all')
         console.log('we are in situation ALL is ALL!');

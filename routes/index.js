@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var request = require('request');
 
 
 var Sales = require('../models/SalesFanco');
@@ -20,21 +21,24 @@ router.get('/sales', function(req, res) {
 router.get('/history', function(req, res) {
 	History.find(function(error, history) {
 		if (error) {console.log('there is an error');}
-		console.log("gimme history");
+		// console.log("gimme history");
 		res.send(history);
 	});
 });
 
-//get data from forecast db collection
-/*router.get('/forecast', function(req, res) {
-	Forecast.find(function(error, forecast) {
-		if (error) {console.log('there is an error');}
-		res.send(forecast);
+//generate new forecast data from API
+router.get('/forecast', function(req, res){
+	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	    // console.log(body);
+	    res.send(body);
+	  }else if(error) {
+	  	console.log('there is an error');
+	  }
 	});
 });
-*/
 
-router.param('product', function (req, res, next, preferences) {
+/*router.param('product', function (req, res, next, preferences) {
 	console.log(preferences)
 	//all 3 params
 	if (preferences.Neighborhood && preferences.SKU && preferences.Channel) {
@@ -89,10 +93,6 @@ router.param('product', function (req, res, next, preferences) {
 		return next();
 		});
 	}
-});
-
-// router.get('/sales/:product', function() {
-
-// })
+});*/
 
 module.exports = router;
