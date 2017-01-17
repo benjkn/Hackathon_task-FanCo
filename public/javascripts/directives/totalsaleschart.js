@@ -5,7 +5,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
     $scope.salesData = [];
     $scope.weatherData = [];
 
-		sales.getSales().then(function(response){
+		sales.getSales(1).then(function(response){
       $scope.salesData = response.data;
 
       sales.getRawHistory().then(function(response){
@@ -220,7 +220,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
 	return {
 		restrict: "EA",
-		template: '<div class="fuck"</div>',
+		template: '<div class="fuck"></div>',
 		replace: true,
 		link: link
 	};
