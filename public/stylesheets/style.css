@@ -105,11 +105,12 @@ ul#myDropdown input {
 
 /*D3 graph stuff!*/
 
-path {
+
+/*path {
   stroke: steelblue;
   fill: none;
   stroke-width: 1.5px;
-}
+}*/
 
 .axis path,
 .axis line {
