@@ -76,8 +76,13 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
 
 .graph h3 {
     font-family: 'Oswald',sans-serif!important;
-    color: orange;
     font-size: 30px;
+    color: #ffac4d;
+    font-weight: bolder;
+}
+.graph h4 {
+    font-family: 'Oswald',sans-serif!important;
+    font-size: 20px;
     color: #ffac4d;
     font-weight: bolder;
 }
