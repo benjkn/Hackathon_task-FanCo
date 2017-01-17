@@ -24,131 +24,131 @@ app.factory('sales', ['$http', function($http) {
       // db.products.find({$or: [{Channel: "Direct Sales"}, {Channel: "Retail"}]}).count() <--- 6
       if (!(a || b || c || d)) {
       //(0 custom, 4 'all')
-        console.log('we are in situation ALL is ALL!');
+        // console.log('we are in situation ALL is ALL!');
         return $http.get('/sales');
       } else if (a && b && c && d) {
       //(4 custom, 0 'all')
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a && c && d) {
       //(3 custom, 1 'all') - Customized: Products AND Channels AND Dates ------- ALL: Neighborhoods
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (b && c && d) {
       //(3 custom, 1 'all') - Customized: Neighborhoods AND Channels AND Dates ------- ALL: Products
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a && b && d) {
       //(3 custom, 1 'all') - Customized: Products AND Neighborhoods AND Dates ------- ALL: Channels
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a && b && c) {
       //(3 custom, 1 'all') - Customized: Products AND Neighborhoods AND Channels ------- ALL: Dates
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a && b) {
       //(2 custom, 2 'all') - Customized: Products AND Neighborhoods ------- ALL: Dates, Channels
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a && c) {
       //(2 custom, 2 'all') - Customized: Products AND Channels ------- ALL: Neighborhoods AND Dates
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a && d) {
       //(2 custom, 2 'all') - Customized: Products AND Dates ------- ALL: Neighborhoods AND Channels
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (b && c) {
       //(2 custom, 2 'all') - Customized: Neighborhoods AND Channels ------- ALL: Products AND Dates
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (b && d) {
       //(2 custom, 2 'all') - Customized: Neighborhoods AND Dates ------- ALL: Products AND Channels
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (c && d) {
       //(2 custom, 2 'all') - Customized: Channels AND Dates ------- ALL: Neighborhoods AND Products
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (a) {
       //(1 custom, 3 'all') - Customized: Products ------- ALL: Neighborhoods AND  Channels AND Dates
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (b) {
       //(1 custom, 3 'all') - Customized: Neighborhoods ------- ALL: Products AND Channels AND Dates
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (c) {
       //(1 custom, 3 'all') - Customized: Channels ------- ALL: Neighborhoods AND Products AND Dates
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else if (d) {
       //(1 custom, 3 'all') - Customized: Dates ------- ALL: Neighborhoods AND Products AND Channels
 
         //Add the special params I am sending
-        console.log('we are inside a specific situation:');
-        console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
+        // console.log('we are inside a specific situation:');
+        // console.log('a is: ' + a + ', b is: ' + b + ', c is: ' + c + ' and d is: ' + d);
         return $http.get('/sales');
 
       } else {
       //(0 custom, 4 'all') - Covered it 1st
-        console.log ('I should NEVER get in here! :)');
+        // console.log ('I should NEVER get in here! :)');
       }
 
   	},

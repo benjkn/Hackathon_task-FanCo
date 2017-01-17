@@ -11,8 +11,8 @@ app.directive("linearChart", [ 'sales', function(sales) {
       sales.getRawHistory().then(function(response){
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
-      console.log(response);
-      console.log(weatherData);
+      // console.log(response);
+      // console.log(weatherData);
       
 
      
@@ -42,7 +42,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         d.date = parseDate(d.date);
         d.maxtempC = +d.maxtempC;
       })
-        console.log(weatherData);
+        // console.log(weatherData);
       
 
       // for ( i=0; i<$scope.weatherData.length; i++) {
@@ -71,13 +71,13 @@ app.directive("linearChart", [ 'sales', function(sales) {
         return d.maxtempC;
       });
 
-      console.log(maxHigh);
-      console.log(minHigh);
+      // console.log(maxHigh);
+      // console.log(minHigh);
 
       // find max temp day
       // for ( i=0; i<weatherData.length; i++) {
       //   if (weatherData[i].maxtempC === maxHigh){
-      //     console.log(weatherData[i]);
+          // console.log(weatherData[i]);
       //   }
       // }
 
@@ -86,8 +86,8 @@ app.directive("linearChart", [ 'sales', function(sales) {
      
       var minDate2 = d3.min($scope.weatherData,function(d){ return d.date; });
       var maxDate2 = d3.max($scope.weatherData, function(d){ return d.date; });
-      console.log(minDate);
-      console.log(minDate2);
+      // console.log(minDate);
+      // console.log(minDate2);
       // console.log("Max Sales for a day is: " + maxSales);
 
       // find max value day
@@ -152,14 +152,27 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var line2 = d3.svg.line()
         .x(function(d){ return x(d.date); })
         .y(function(d){ return y2(d.maxtempC); })
-        .interpolate("cardinal");
+        .interpolate("step");
+
+      // line colors
+      salesColor = "steelblue";
+      weatherColor = "#26A69A"
+
 
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path").attr("d",line(totalData));
+      chartGroup.append("path").attr("d",line(totalData))
+        .attr("class", "sales")
+        .style("stroke", salesColor)
+        .style("fill", "none")
+        .style("stroke-width", "1.5px");
 
       // Weather Line
       chartGroup.append("path").attr("d",line2(weatherData))
-      .style("stroke", "#009688").style("opacity", 0.5);
+        .attr("class", "weather")        
+        .style("stroke", weatherColor)
+        .style("opacity", 0.5)
+        .style("fill", "none")
+        .style("stroke-width", "1.5px");
 
       // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
@@ -213,6 +226,48 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Units Sold Weekly");
+     
+      // Text label for the right Y axis
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y",width+110)
+        .attr("x", margin.top - (height / 2))
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Temperature (°C)");
+
+      // Legend
+      
+      // Units Sold (hardcoded..)
+      svg.append("text")
+        .attr("x", (width/2) + 100)
+        .attr("y", margin.top)
+        .attr("class", "legend")
+        .style("fill", salesColor)
+        .style("font-weight","bold")
+        .text("Units Sold");
+
+      svg.append("circle")
+        .attr("cx", (width/2) + 90)
+        .attr("cy", margin.top - 5)
+        .style("fill", salesColor)
+        .attr("r", "5");
+
+      // Temperature (hardcoded..)
+      svg.append("text")
+        .attr("x", (width/2) + 200)
+        .attr("y", margin.top)
+        .attr("class", "legend")
+        .style("fill", weatherColor)
+        .style("font-weight","bold")
+        .text("Temperature");
+
+      svg.append("circle")
+        .attr("cx", (width/2) + 190)
+        .attr("cy", margin.top - 5)
+        .style("fill", weatherColor)
+        .attr("r", "5");
+        
      
       });
 		});
