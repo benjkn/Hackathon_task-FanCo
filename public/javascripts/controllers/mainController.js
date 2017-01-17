@@ -41,7 +41,9 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		// RESULT:
 		$scope.preferences.prods = productSelected;
 		console.log($scope.preferences);
-		sales.getSales($scope.preferences);
+		sales.getSales($scope.preferences).then(function (data) {
+			console.log (data.data);
+		});
 	}
 
 	$scope.pickChannel = function () {
@@ -53,7 +55,9 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		// RESULT:
 		$scope.preferences.channel = channelSelected;
 		console.log($scope.preferences);
-		sales.getSales($scope.preferences);
+		sales.getSales($scope.preferences).then(function (data) {
+			console.log (data.data);
+		});
 	}
 
 	$scope.pickNeighborhoods = function (neigh) {
@@ -87,7 +91,9 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		// RESULT:
 		$scope.preferences.neighborhoods = neighborhoodSelected;
 		console.log($scope.preferences);
-		sales.getSales($scope.preferences);
+		sales.getSales($scope.preferences).then(function (data) {
+			console.log (data.data);
+		});
 	}
 
 	$scope.pickDate = function () {
@@ -96,13 +102,17 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 			$scope.getDateDetails = function () {
 				$scope.preferences.dates = theDates[1].value;
 				console.log($scope.preferences);
-				sales.getSales($scope.preferences);
+				sales.getSales($scope.preferences).then(function (data) {
+					console.log (data.data);
+				});
 			}
 		} else if (theDates[1].checked) {
 			$scope.showmode = false;
 			$scope.preferences.dates = 'All';
 			console.log($scope.preferences);
-			sales.getSales($scope.preferences);
+			sales.getSales($scope.preferences).then(function (data) {
+				console.log (data.data);
+			});
 		}
 	}
 
