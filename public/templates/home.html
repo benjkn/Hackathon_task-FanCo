@@ -2,10 +2,24 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 
+
+			<div class="row">
+			  <div class="modeContainer">
+
+			    <a href="#"><button class="modebtn" ng-click="revenueSales('Sales');" style={{sstyle}}>
+			      Sales
+			    </button></a>
+
+			    <a href="#"><button class="modebtn" ng-click="revenueSales('Revenue');" style={{rstyle}}>
+			      Revenue
+			    </button></a>
+			  </div>
+			</div>
+
 			<div class="graph">
 				<h3>Sales:</h3>
 			</div>
-			<div>
+			<div my-directive="{{some.string}}">
 
 				<linear-chart></linear-chart>
 
