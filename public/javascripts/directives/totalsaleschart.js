@@ -27,13 +27,11 @@ app.directive("linearChart", [ 'sales', function(sales) {
       sales.getRawHistory().then(function(response){
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
-      // console.log(response);
-      // console.log(weatherData);
-      // console.log($scope.salesData)
+
 
       if (sales.mode === 'Sales') {
     		//Nest + Rollup for Total Sales
-        console.log('1');
+        // console.log('1');
         var totalData = d3.nest()
   			.key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
   			.rollup(function(d){
@@ -42,8 +40,8 @@ app.directive("linearChart", [ 'sales', function(sales) {
   				});
   			}).entries($scope.salesData);
       } else if (sales.mode === 'Revenue') {
-        console.log('2');
         //Nest + Rollup for Total Revenue
+        // console.log('2');
         var totalData = d3.nest()
         .key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
         .rollup(function(d){
@@ -72,6 +70,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       })
 
 
+
       // Declare height and width variables(pixels)
       var height = 300;
       var width = 800;
@@ -95,7 +94,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       // find max temp day
       // for ( i=0; i<weatherData.length; i++) {
       //   if (weatherData[i].maxtempC === maxHigh){
-      //     console.log(weatherData[i]);
+          // console.log(weatherData[i]);
       //   }
       // }
 
@@ -170,15 +169,28 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var line2 = d3.svg.line()
         .x(function(d){ return x(d.date); })
         .y(function(d){ return y2(d.maxtempC); })
-        .interpolate("cardinal");
+        .interpolate("step");
+
+      // line colors
+      salesColor = "steelblue";
+      weatherColor = "#26A69A"
+
 
 
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path").attr("d",line(totalData));
+      chartGroup.append("path").attr("d",line(totalData))
+        .attr("class", "sales")
+        .style("stroke", salesColor)
+        .style("fill", "none")
+        .style("stroke-width", "1.5px");
 
       // Weather Line
       chartGroup.append("path").attr("d",line2(weatherData))
-      .style("stroke", "#009688").style("opacity", 0.5);
+        .attr("class", "weather")
+        .style("stroke", weatherColor)
+        .style("opacity", 0.5)
+        .style("fill", "none")
+        .style("stroke-width", "1.5px");
 
       // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
@@ -243,10 +255,53 @@ app.directive("linearChart", [ 'sales', function(sales) {
             .text("Weekly Revenue");
         }
 
+      // Text label for the right Y axis
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y",width+110)
+        .attr("x", margin.top - (height / 2))
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Temperature (°C)");
+
+
+      // Legend
+
+      // Units Sold (hardcoded..)
+      svg.append("text")
+        .attr("x", (width/2) + 100)
+        .attr("y", margin.top)
+        .attr("class", "legend")
+        .style("fill", salesColor)
+        .style("font-weight","bold")
+        .text("Units Sold");
+
+      svg.append("circle")
+        .attr("cx", (width/2) + 90)
+        .attr("cy", margin.top - 5)
+        .style("fill", salesColor)
+        .attr("r", "5");
+
+      // Temperature (hardcoded..)
+      svg.append("text")
+        .attr("x", (width/2) + 200)
+        .attr("y", margin.top)
+        .attr("class", "legend")
+        .style("fill", weatherColor)
+        .style("font-weight","bold")
+        .text("Temperature");
+
+      svg.append("circle")
+        .attr("cx", (width/2) + 190)
+        .attr("cy", margin.top - 5)
+        .style("fill", weatherColor)
+        .attr("r", "5");
+
       }); // thisis closing getrawhistory
     }) // this is closing the getprices
 		}); //this is closing the getsales
 	}; //this is closing the var link
+
 
 
   return {

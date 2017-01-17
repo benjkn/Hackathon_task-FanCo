@@ -1,9 +1,11 @@
 <div class="container-fluid">
-	<div class="panel panel-default">
-		<div class="panel-body">
-
-
-			<div class="row">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="graph panel-heading">
+				<h3>Total Sales</h3>
+			</div>
+			<div class="panel-body">
+	<!-- 		<div class="row">
 			  <div class="modeContainer">
 
 			    <a href="#"><button class="modebtn" ng-click="revenueSales('Sales');" style={{sstyle}}>
@@ -14,16 +16,56 @@
 			      Revenue
 			    </button></a>
 			  </div>
-			</div>
-
-			<div class="graph">
-				<h3>Sales:</h3>
-			</div>
-			<div my-directive="{{some.string}}">
-
+			</div> -->
 				<linear-chart></linear-chart>
-
 			</div>
 		</div>
 	</div>
+
+	<div class="row">
+
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="graph panel-heading">
+					<h3>Neighborhoods</h3>
+				</div>
+				<div class="panel-body" ng-controller="PieCtrl">
+					<nvd3 options="options" data="data"></nvd3>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="graph panel-heading">
+					<h3>Products Revenue</h3>
+				</div>
+				<div class="panel-body" ng-controller="DonutCtrl">
+					<nvd3 options="options" data="data"></nvd3>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
+
+
+<!--<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">C3 Gauge</div>
+				<div class="panel-body">
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">C3 Gauge</div>
+				<div class="panel-body">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>-->
