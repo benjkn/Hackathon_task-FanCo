@@ -11,7 +11,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       sales.getPrice().then (function(prices) {
         price = prices.data;
-        // console.log (price);
 
       for (a=0; a<$scope.salesData.length; a++) {
         for (b=0; b<price.length; b++) {
@@ -21,6 +20,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         }
         $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
       }
+        // console.log ($scope.salesData);
 
 
 
