@@ -5,17 +5,26 @@ app.directive("linearChart", [ 'sales', function(sales) {
     $scope.salesData = [];
     $scope.weatherData = [];
 
-		sales.getSales(1).then(function(response){
+		sales.getSales(1).then (function(response) {
       $scope.salesData = response.data;
+      // console.log($scope.salesData);
+
+      sales.getPrice().then (function(prices) {
+        price = prices.data;
+        console.log (price);
+
+      for (a=0; a<$scope.salesData.length; a++) {
+        for (b=0; b<price.length; b++) {
+          if ($scope.salesData[a].SKU === price[b].SKU && $scope.salesData[a].Channel === price[b].Channel) {
+            uniquePrice = price[b].RevenuePerUnitSold;
+          }
+        }
+        $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
+      }
 
       sales.getRawHistory().then(function(response){
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
-      // console.log(response);
-      // console.log(weatherData);
-      
-
-     
 
   		//Nest + Rollup for Total Sales
       var totalData = d3.nest()
@@ -32,8 +41,8 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // for the tooltip dates
       var formatTime = d3.time.format("%e %b");
-      
-  		
+
+
       for ( i=0; i<totalData.length; i++) {
         totalData[i].key = parseDate(totalData[i].key);
   		}
@@ -42,16 +51,14 @@ app.directive("linearChart", [ 'sales', function(sales) {
         d.date = parseDate(d.date);
         d.maxtempC = +d.maxtempC;
       })
-        // console.log(weatherData);
-      
+    
 
       // for ( i=0; i<$scope.weatherData.length; i++) {
       //   $scope.weatherData[i].date = parseDate($scope.weatherData[i].date);
   		// }
 
-      // console.log($scope.weatherData);
 
-       
+
 
 
       // Declare height and width variables(pixels)
@@ -83,7 +90,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       var minDate = d3.min(totalData,function(d){ return d.key; });
       var maxDate = d3.max(totalData, function(d){ return d.key; });
-     
+
       var minDate2 = d3.min($scope.weatherData,function(d){ return d.date; });
       var maxDate2 = d3.max($scope.weatherData, function(d){ return d.date; });
       // console.log(minDate);
@@ -148,7 +155,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .x(function(d){ return x(d.key); })
         .y(function(d){ return y(d.values); })
         .interpolate("cardinal");
-		 
+
       var line2 = d3.svg.line()
         .x(function(d){ return x(d.date); })
         .y(function(d){ return y2(d.maxtempC); })
@@ -184,18 +191,18 @@ app.directive("linearChart", [ 'sales', function(sales) {
           .style("text-anchor", "end");
 
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
-      
+
       // weather axis
       chartGroup.append("g").attr("class", "y2 axis")
       .attr("transform", "translate("+width+",0)").call(yAxis2);
 
 
       // Define the div for the tooltip
-      var div = d3.select("body").append("div")	
-          .attr("class", "tooltip")				
+      var div = d3.select("body").append("div")
+          .attr("class", "tooltip")
           .style("opacity", 0);
-      
-      // circles + tooltips      
+
+      // circles + tooltips
       chartGroup.selectAll("circle")
         .data(totalData)
         .enter().append("circle")
@@ -203,21 +210,20 @@ app.directive("linearChart", [ 'sales', function(sales) {
           .attr("cx",function(d,i){ return x(d.key); })
           .attr("cy",function(d,i){ return y(d.values); })
           .attr("r","2.5")
-          .on("mouseover", function(d) {		
-            div.transition()		
-                .duration(200)		
-                .style("opacity", .9);		
-            div.html(formatTime(d.key) + "<br/>"  + d.values)	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
-            })					
-          .on("mouseout", function(d) {		
-            div.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
-           
-      });
-      
+          .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(formatTime(d.key) + "<br/>"  + d.values)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+          .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+          });
+
       // Text label for the Y axis
       svg.append("text")
         .attr("transform", "rotate(-90)")
@@ -268,10 +274,11 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .style("fill", weatherColor)
         .attr("r", "5");
         
-     
-      });
-		});
-	};
+      }); // thisis closing getrawhistory
+    }) // this is closing the getprices
+		}); //this is closing the getsales
+	}; //this is closing the var link
+
 
 	return {
 		restrict: "EA",
