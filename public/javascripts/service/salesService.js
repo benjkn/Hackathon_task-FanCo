@@ -156,6 +156,10 @@ app.factory('sales', ['$http', function($http) {
 
     getRawHistory: function(){
       return $http.get('/history');
+    },
+
+    getPrice: function () {
+      return $http.get('/revenue');
     }
 
     //not used now

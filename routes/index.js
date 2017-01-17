@@ -7,6 +7,7 @@ var request = require('request');
 var Sales = require('../models/SalesFanco');
 var History = require('../models/History');
 var Forecast = require('../models/Forecast');
+var Price = require('../models/Prices');
 
 // //Here are all the necessary router.get, router.post, router.put and router.param commands
 
@@ -23,6 +24,16 @@ router.get('/history', function(req, res) {
 		if (error) {console.log('there is an error');}
 		// console.log("gimme history");
 		res.send(history);
+	});
+});
+
+
+//get the pricing data from db collection
+router.get('/revenue', function (req, res) {
+	Price.find(function (error, price) {
+		if (error) {console.log('error in getting prices');}
+		console.log (' i am in server side get /revenue');
+		res.send(price);
 	});
 });
 
