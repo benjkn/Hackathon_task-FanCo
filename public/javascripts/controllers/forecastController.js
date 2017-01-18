@@ -1,16 +1,17 @@
 app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast) {
 
+forecast.sendAlert();
 	//needs format
 	var formatTime = d3.time.format("%c");
 
 	$scope.today = formatTime(new Date());
 
 	forecast.getForecast().then(function (data) {
-		// console.log(data);
+		console.log(data);
 		var forecastLive = data.data.list;
 		$scope.info = [];
 
-		for (var i = 0; i < forecastLive.length; i++) {
+		for (var i = 1; i < forecastLive.length; i++) {
 			obj = {
 				weather: forecastLive[i].weather[0].description,
 				date: (new Date(forecastLive[i].dt * 1000) + 10).slice(0, 11)
@@ -28,9 +29,31 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 			// console.log('on ' + $scope.info[j].date + ' the weather will be f**ing be ' + $scope.info[j].weather);
 		}
 
+		//send sms alert
+		forecast.sendAlert();
 		// console.log($scope.info);
 	});
 
+
+
+//=====================SMS ALERTS ================
+	//add phone number
+
+	$scope.addPhone = function() {
+	    if ($scope.name === '') { return; }
+
+	    forecast.create({
+	      name: $scope.name,
+	      phone: $scope.phone
+	    });
+
+	    console.log(forecast.create);
+	    $scope.name = '';
+	    $scope.phone = '';
+
+	};
+
+//=====================SMS ALERTS ================
 
 }]);
 

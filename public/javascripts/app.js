@@ -11,7 +11,7 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
   		url: '/forecast',
   		templateUrl: '/templates/forecast.html',
   		controller: 'ForecastCtrl'
-  	})
+  	});
 
 	$urlRouterProvider.otherwise('home');
 }]);

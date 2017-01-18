@@ -7,13 +7,13 @@ app.controller("salesCtrl", ["$scope","sales", function($scope, sales) {
 
 	$scope.revenueSales = function(x) {
 		if (x === 'Sales') {
-      $scope.sstyle = selectedStyle
-      $scope.rstyle = notSelectedStyle
+      $scope.sstyle = selectedStyle;
+      $scope.rstyle = notSelectedStyle;
     } else {
-      $scope.sstyle = notSelectedStyle
-      $scope.rstyle = selectedStyle
+      $scope.sstyle = notSelectedStyle;
+      $scope.rstyle = selectedStyle;
       }
 		sales.revenueSales(x);
-	}
+	};
 
 }]);
