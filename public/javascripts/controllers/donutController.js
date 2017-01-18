@@ -4,7 +4,7 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
             type: 'pieChart',
             height: 520,
             donut: true,
-            x: 
+            x:
             function (d) { return d.x; },
             // function (d) {
             //     // console.log(d);
@@ -12,7 +12,7 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
             //         return v.key;
             //     })
             // },
-            y: 
+            y:
             function (d) { return d.y; },
             // function (d) {
             //     console.log(d);
@@ -43,7 +43,7 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
 
     $scope.salesData = [];
 
-    sales.getSales(1).then(function (response) {
+    sales.getSales().then(function (response) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
@@ -79,7 +79,7 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
             // console.log(totalRevenue);
 
             // hardcoded :(
-            $scope.data = 
+            $scope.data =
             [
                 {
                     x: 'Green-Direct',

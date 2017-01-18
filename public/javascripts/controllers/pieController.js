@@ -1,5 +1,5 @@
 app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
-
+    console.log('pie controller')
     var moneyFormat = d3.format(",.2f");
 
     $scope.options = {
@@ -26,7 +26,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
 
     $scope.salesData = [];
 
-    sales.getSales(1).then(function (response) {
+    sales.getSales().then(function (response) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
