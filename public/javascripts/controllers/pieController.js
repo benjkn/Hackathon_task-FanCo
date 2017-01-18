@@ -35,7 +35,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                         uniquePrice = price[b].RevenuePerUnitSold;
                     }
                 }
-                $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
+                $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice;
             }
             console.log($scope.salesData);
 
@@ -61,7 +61,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
             $scope.data = [];
             $scope.data = revenueData;
 
-var margin = { top: 5, right: 35, bottom: 5, left: 0 }
+var margin = { top: 5, right: 35, bottom: 5, left: 0 };
 
 var element = document.getElementById('pi');
 console.log(element);
@@ -69,7 +69,7 @@ var positionInfo = element.getBoundingClientRect();
 console.log(positionInfo);
 var height = positionInfo.height;
 var width = positionInfo.width;
-                
+
 
 var svg = d3.select("#pi");
 var moneyFormat = d3.format(",.2f");
@@ -82,8 +82,8 @@ var moneyFormat = d3.format(",.2f");
         .style("fill", "steelblue")
         .style("font-weight","bold")
         .text("Total Revenue: $" + moneyFormat(totalRevenue));
-        
-        
+
+
         });
     });
 

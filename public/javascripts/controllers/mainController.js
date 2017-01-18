@@ -44,7 +44,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		sales.getSales($scope.preferences).then(function (data) {
 			console.log (data.data);
 		});
-	}
+	};
 
 	$scope.pickChannel = function () {
 		for (j=0; j<$scope.channels.length; j++) {
@@ -58,7 +58,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		sales.getSales($scope.preferences).then(function (data) {
 			console.log (data.data);
 		});
-	}
+	};
 
 	$scope.pickNeighborhoods = function (neigh) {
 		var neighcounter = 0;
@@ -94,7 +94,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		sales.getSales($scope.preferences).then(function (data) {
 			console.log (data.data);
 		});
-	}
+	};
 
 	$scope.pickDate = function () {
 		if (theDates[0].checked) {
@@ -114,7 +114,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 				console.log (data.data);
 			});
 		}
-	}
+	};
 
 
 

@@ -9,8 +9,8 @@ app.controller('DonutCtrl', function($scope) {
                 showLabels: true,
 
                 pie: {
-                    startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
-                    endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
+                    startAngle: function(d) { return d.startAngle/2 -Math.PI/2 ;},
+                    endAngle: function(d) { return d.endAngle/2 -Math.PI/2 ;}
                 },
                 duration: 500,
                 legend: {

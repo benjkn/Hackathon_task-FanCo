@@ -2,12 +2,20 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var request = require('request');
+var twilio = require('twilio');
+
+// Create a new REST API client to make authenticated requests against the
+// twilio back end
+// var client = twilio('TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN');
+var client = twilio('AC1d8c69111c146aed4c8ddccdc9eca32a', '66207c3aa0e1081ac7a79ebf0371412a');
+
 
 
 var Sales = require('../models/SalesFanco');
 var History = require('../models/History');
 var Forecast = require('../models/Forecast');
 var Price = require('../models/Prices');
+// var Sms = require("../models/SmsModel");
 
 // //Here are all the necessary router.get, router.post, router.put and router.param commands
 
@@ -162,5 +170,112 @@ router.param('product', function (req, res, next, preferences) {
 	return next();
 
 });
+
+//add data to phones  collection db
+router.post('/phones', function(req, res, next) {
+console.log('whats your phone' + req.body);
+   /* var sms = new Sms(req.body);
+
+    sms.save(function(err, phones){
+        if (err) {return next(err);}
+
+        res.json(beer);
+    });*/
+
+});
+
+//check every 'x' minute change in temperature to send sms
+// setInterval (check every 5 min)
+setTimeout(function(){
+	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	  	var data = JSON.parse(body);
+
+		  	//loop forecast temp each day and if temperature is
+		  	//for (var i = 0; i < data.list.length; i++) {
+		  			console.log(data.list[1].temp.min);
+				  	if(data.list[1].temp.min < 300){
+				  		//get list of registered phones
+				  		//get phones from mongo
+						var phones = [{phone:'+972542643440'}, {phone:'+972584219694'}];
+						//loop through the list and send sms
+
+						for (var j = 0; j < phones.length; j++) {
+
+							sendSms({
+							    to: phones[j].phone,
+							    from:'+14134713241',
+							    body:'the weather is great today!!! go out and sale FanCo, temp below 300 F '
+							});
+						}
+				  	}
+		  //	}
+
+	    // console.log(body);
+	  }else if(error) {
+	  	console.log('there is an error');
+	  }
+	});
+},1000);
+
+router.get('/alert', function(req, res) {
+	//get list of registered phones
+	/*var phones = [{phone:'+972542643440'}, {phone:'+972542643440'}];
+	//loop through the list and send sms
+
+	for (var i = 0; i < phones.length; i++) {
+
+		sendSms({
+		    to: phones[i].phone,
+		    from:'+14134713241',
+		    body:'the weather is great today!!! go out and sale FanCo '
+		});
+	}*/
+
+
+
+});
+
+
+////============================= twilio =====================================
+
+
+function sendSms(info) {
+
+console.log(info);
+
+	client.sms.messages.create(info, function(error, message) {
+    // The HTTP request to Twilio will run asynchronously. This callback
+    // function will be called when a response is received from Twilio
+    // The "error" variable will contain error information, if any.
+    // If the request was successful, this value will be "falsy"
+    if (!error) {
+        // The second argument to the callback will contain the information
+        // sent back by Twilio for the request. In this case, it is the
+        // information about the text messsage you just sent:
+        console.log('Success! The SID for this SMS message is:');
+        console.log(message.sid);
+
+        console.log('Message sent on:');
+        console.log(message.dateCreated);
+    } else {
+        console.log('Oops! There was an error.' );
+        console.log(error);
+    }
+	});
+
+
+}
+//============================= twilio =====================================
+
+/*var objToSend = {
+    to:'+972000000000',
+    from:'+14134713241',
+    body:'the weather is great today!!! go out and sale FanCo '
+};*/
+
+
+
+
 
 module.exports = router;
