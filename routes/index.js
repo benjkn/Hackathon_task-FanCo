@@ -16,9 +16,6 @@ var History = require('../models/History');
 var Forecast = require('../models/Forecast');
 var Price = require('../models/Prices');
 var Sms = require("../models/SmsModel");
-// var Text =
-
-// //Here are all the necessary router.get, router.post, router.put and router.param commands
 
 //get the data from sales collection
 router.get('/sales', function(req, res) {
@@ -50,9 +47,6 @@ router.get('/forecast', function(req, res){
 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	  	var data = JSON.parse(body);
-
-
-
 	    // console.log(body);
 	    res.send(body);
 	  }else if(error) {

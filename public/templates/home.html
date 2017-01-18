@@ -1,0 +1,102 @@
+
+<div>
+  <div id="cm-menu">
+    <nav class="cm-navbar cm-navbar-turquoise leftmenu">
+      <div class="topnav">FanCo</div>
+      <div></div>
+      <div ng-hide=true class="btn btn-turquoise md-menu-white" data-toggle="cm-menu"></div>
+    </nav>
+
+    <div id="cm-menu-content" ng-controller="MainCtrl">
+      <div id="cm-menu-items-wrapper">
+        <div id="cm-menu-scroller">
+          <ul class="cm-menu-items nav">
+            <li>
+              <a ui-sref=".totalSales">Total Sales</a>
+            </li>
+
+            <li>
+             <i class="fa fa-pie-chart" aria-hidden="true"></i> Filter view by:
+              <ul>
+                <li> <a class="dropdown" ng-Click=(show1=!show1) ui-sref=".byProduct">Products</a>
+                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
+                    <li ng-repeat="p in products"><input type="checkbox" class="productList" value={{p}} ng-click="pickProducts(this)" checked>{{p}}</li>
+                  </ul>
+                </li>
+                <li> <i class="fa fa-truck" aria-hidden="true"></i> <i class="fa fa-sitemap" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show2=!show2) ui-sref=".byChannel">Channel</a>
+                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
+                    <li ng-repeat="c in channels"><input type="radio" name="channel" class="channelList" value={{c}} ng-click="pickChannel()" checked>{{c}}</li>
+                  </ul>
+                </li>
+                <li> <i class="fa fa-map-marker" aria-hidden="true"></i> <i class="fa fa-map" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show3=!show3) ui-sref=".byNeighborhood">Neighborhood</a>
+                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
+                    <li ng-repeat="n in neighborhoods"><input type="checkbox" class="neighList" value={{n}} ng-click="pickNeighborhoods(this)" checked>{{n}}</li>
+                  </ul>
+                </li>
+                <li> <i class="fa fa-calendar" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show4=!show4)> Custom Dates</a>
+                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
+                    <li><input type="radio" name="dates" class="datesPick" value="{{fromDate}} until {{toDate}}" ng-click="pickDate()">                  Custom </input>
+                      <form ng-show=showmode ng-click="getDateDetails()">
+                        <div>
+                          From: <input type="date" ng-model="fromDate">
+                        </div>
+                        <div>
+                          To: <input type="date" ng-model="toDate">
+                        </div>
+                        <div>
+                          <input type="submit" Value="Go!">
+                        </div>
+                      </form>
+                    </li>
+                    <li><input type="radio" name="dates" class="datesPick" value="All" ng-click="pickDate()" checked> All </input>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="cm-header">
+    <nav class="navbar navbar-default" id="orizontalnav">
+      <div class="btn btn-turquoise md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
+
+
+      <!-- Inline-block not working! add it on css file -->
+      <div class="cm-navbar">
+        <ul id="navlist">
+          <li class="topnav"><a class="hiThere" ui-sref="home"> Sales </a></li>
+          <li class="topnav"><a class="hiThere" ui-sref="forecast"> Forecast </a></li>
+        </ul>
+      </div>
+
+      <div class="dropdown pull-right">
+        <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
+        <!--      Uncomment if we add users
+          <ul class="dropdown-menu">
+            <li class="disabled text-center">
+              <strong>John Smith</strong>
+            </li>
+            <li>
+              <a href="#">Profile</a>
+            </li>
+            <li>
+              <a href="#">Settings</a>
+            </li>
+            <li>
+              Sign out
+            </li>
+          </ul> -->
+      </div>
+    </nav>
+  </header>
+
+<ui-view></ui-view>
+
+  <!-- <footer class="cm-footer"><span class="pull-right">&copy; Martha, Nati and Ben dream-team</span></footer> -->
+
+</div>
+
