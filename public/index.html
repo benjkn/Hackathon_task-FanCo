@@ -8,6 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/ico" href="/favicon.ico" sizes="32x32">
   <!-- <link rel="icon" type="image/png" href="/favicon.ico" sizes="16x16"> -->
+
   <link rel="manifest" href="/manifest.json">
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="theme-color" content="#ffffff">
@@ -54,23 +55,23 @@
           <ul class="cm-menu-items nav">
             <!-- Make it responsive onchange, not on button click -->
             <li> <a class="dropdown" ng-Click=(show1=!show1)>Products</a>
-              <ul id="myDropdown" class="dropdown-content" ng-show=show1>
+              <ul id="myDropdown" class="dropdown-content" ng-show=false>
                 <li ng-repeat="p in products"><input type="checkbox" class="productList" value={{p}} ng-click="pickProducts(this)" checked>{{p}}</li>
               </ul>
             </li>
             <li> <a class="dropdown" ng-Click=(show2=!show2)>Channel</a>
-              <ul id="myDropdown" class="dropdown-content" ng-show=show2>
+              <ul id="myDropdown" class="dropdown-content" ng-show=false>
                 <li ng-repeat="c in channels"><input type="radio" name="channel" class="channelList" value={{c}} ng-click="pickChannel()" checked>{{c}}</li>
               </ul>
             </li>
             <li> <a class="dropdown" ng-Click=(show3=!show3)>Neighborhood</a>
-              <ul id="myDropdown" class="dropdown-content" ng-show=show3>
+              <ul id="myDropdown" class="dropdown-content" ng-show=false>
                 <li ng-repeat="n in neighborhoods"><input type="checkbox" class="neighList" value={{n}} ng-click="pickNeighborhoods(this)" checked>{{n}}</li>
               </ul>
             </li>
             <!-- Problem in toggling custom Dates -->
             <li> <a class="dropdown" ng-Click=(show4=!show4)>Custom Dates</a>
-              <ul id="myDropdown" class="dropdown-content" ng-show=show4>
+              <ul id="myDropdown" class="dropdown-content" ng-show=false>
                 <li><input type="radio" name="dates" class="datesPick" value="{{fromDate}} until {{toDate}}" ng-click="pickDate()">                  Custom </input>
                   <form ng-show=showmode ng-click="getDateDetails()">
                     <div>
@@ -103,9 +104,9 @@
       <!-- Inline-block not working! add it on css file -->
       <div class="cm-navbar">
         <ul id="navlist">
-          <li class="topnav"><a class="ikillu" ui-sref="home"> Sales </a></li>
+          <li class="topnav"><a class="hiThere" ui-sref="home"> Sales </a></li>
 
-          <li class="topnav"><a class="ikillu" ui-sref="forecast"> Forecast </a></li>
+          <li class="topnav"><a class="hiThere" ui-sref="forecast"> Forecast </a></li>
         </ul>
       </div>
 
@@ -131,9 +132,6 @@
     </nav>
   </header>
 
-  <!--<div class="uiviews">
-    <div ui-view></div>
-  </div>-->
 
   <main ui-view></main>
 

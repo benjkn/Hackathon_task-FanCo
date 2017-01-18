@@ -59,7 +59,7 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
   background-color: #1abc9c;
 }
 
-.ikillu {
+.hiThere {
   margin: auto;
 }
 
@@ -107,7 +107,7 @@ ul#myDropdown input {
 
 @media (max-width: 900px) {
 
-   body a.ikillu {
+   body a.hiThere {
     line-height: 12px;
   }
 
