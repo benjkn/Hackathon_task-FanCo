@@ -1,17 +1,17 @@
 app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 
-	$scope.products = ['RED - SPECIAL EDITION - FanCo. Classic', 'GREEN - FanCo. Classic', 'ORANGE - FanCo. Classic', 'All'];
-	$scope.channels = ['Retail', 'Direct Sales', 'Both'];
-	$scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];
-	$scope.preferences = {};
+	// $scope.products = ['RED - SPECIAL EDITION - FanCo. Classic', 'GREEN - FanCo. Classic', 'ORANGE - FanCo. Classic', 'All'];
+	// $scope.channels = ['Retail', 'Direct Sales', 'Both'];
+	// $scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];
+	// $scope.preferences = {};
 
-	var theProds = document.getElementsByClassName('productList');
-	var theChannel = document.getElementsByClassName('channelList');
-	var theNeighborhoods = document.getElementsByClassName('neighList');
+	// var theProds = document.getElementsByClassName('productList');
+	// var theChannel = document.getElementsByClassName('channelList');
+	// var theNeighborhoods = document.getElementsByClassName('neighList');
 	var theDates = document.getElementsByClassName('datesPick');
 
 
-	$scope.pickProducts = function (prod) {
+/*	$scope.pickProducts = function (prod) {
 		var prodcounter = 0;
 		var productSelected = [];
 		for (i=0; i<theProds.length-1; i++) {
@@ -94,7 +94,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		sales.getSales($scope.preferences).then(function (data) {
 			console.log (data.data);
 		});
-	};
+	};*/
 
 	$scope.pickDate = function () {
 		if (theDates[0].checked) {
