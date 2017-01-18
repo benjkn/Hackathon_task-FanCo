@@ -1,15 +1,15 @@
 app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 
+	$scope.preferences = {};
+
 	// $scope.products = ['RED - SPECIAL EDITION - FanCo. Classic', 'GREEN - FanCo. Classic', 'ORANGE - FanCo. Classic', 'All'];
 	// $scope.channels = ['Retail', 'Direct Sales', 'Both'];
 	// $scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];
-	// $scope.preferences = {};
 
 	// var theProds = document.getElementsByClassName('productList');
 	// var theChannel = document.getElementsByClassName('channelList');
 	// var theNeighborhoods = document.getElementsByClassName('neighList');
 	var theDates = document.getElementsByClassName('datesPick');
-
 
 /*	$scope.pickProducts = function (prod) {
 		var prodcounter = 0;
@@ -99,13 +99,6 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 	$scope.pickDate = function () {
 		if (theDates[0].checked) {
 			$scope.showmode = true;
-			$scope.getDateDetails = function () {
-				$scope.preferences.dates = theDates[1].value;
-				console.log($scope.preferences);
-				sales.getSales($scope.preferences).then(function (data) {
-					console.log (data.data);
-				});
-			}
 		} else if (theDates[1].checked) {
 			$scope.showmode = false;
 			$scope.preferences.dates = 'All';
@@ -116,6 +109,28 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		}
 	};
 
+	$scope.getDateDetails = function (x, y) {
 
+		startingDate = max(x, 31/5/2015)
+		endingDate = min(1/6/2016, y)
+
+
+
+
+
+
+				//i stoppped here
+
+
+
+
+
+
+		$scope.preferences.dates = theDates[1].value;
+		console.log($scope.preferences);
+		sales.getSales($scope.preferences).then(function (data) {
+			console.log (data.data);
+		});
+	}
 
 }]);
