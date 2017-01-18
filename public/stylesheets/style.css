@@ -44,19 +44,20 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
 
 .topnav a:hover {
   text-decoration: none;
-  color: #1abc9c;
+  /*color: #1abc9c;*/
+  color:   #aaaaaa;
 }
 
 .topnav a:active {
   text-decoration: none;
   color: white;
-  background-color: #1abc9c;
+  /*background-color: #1abc9c;*/
 }
 
 .topnav a:focus {
   text-decoration: none;
-  color: white;
-  background-color: #1abc9c;
+  color: #eee;
+  /*background-color: #1abc9c;*/
 }
 
 .hiThere {
@@ -283,6 +284,23 @@ p {
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+i.fa.fa-truck {
+    margin-right: 6px;
+}
+
+i.fa.fa-map-marker {
+    margin-right: 6px;
+}
+
+i.fa.fa-calendar{
+    margin-right: 6px;
+}
+
+.filter {
+      margin-left: 24px;
+      color: #777;
 }
 
 /* ---------- LOGIN ---------- */
