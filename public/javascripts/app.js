@@ -14,11 +14,11 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
     //     return $stateParams.filter + '.html';
     //   }
     // })
-    // .state('login', {
-    //   url: '/login',
-    //   templateUrl: 'templates/login.html',
-    //   controller: 'authCtrl'
-    // })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'authCtrl'
+    })
     .state('home.totalSales', {
       url: '/totalSales',
       templateUrl: 'templates/totalSales.html',
@@ -40,5 +40,5 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
   		controller: 'ForecastCtrl'
   	});
 
-	$urlRouterProvider.otherwise('home/totalSales');
+	$urlRouterProvider.otherwise('login');
 }]);

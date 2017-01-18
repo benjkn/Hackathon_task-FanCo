@@ -1,40 +1,40 @@
-<!-- <div ng-show="error" class="alert alert-danger row">
-  <span>{ error }</span>
-</div>
-
-<form ng-submit="logIn()"
-  style="margin-top:30px;">
-  <h3>Log In</h3>
-
-  <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="Username"
-    ng-model="user.username"></input>
-  </div>
-
-  <div class="form-group">
-    <input type="password"
-    class="form-control"
-    placeholder="Password"
-    ng-model="user.password"></input>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Log In</button>
-</form> -->
+<div class="main">
 
 
-<div id="fullscreen_bg" class="fullscreen_bg"/>
+    <div class="container">
+  <center>
+  <div class="middle">
+      <div id="login">
 
-<div class="container">
+        <form action="javascript:void(0);" method="get">
 
-  <form class="form-signin">
-    <h1 class="form-signin-heading text-muted">Sign In</h1>
-    <input type="text" class="form-control" placeholder="Email address" required="" autofocus="">
-    <input type="password" class="form-control" placeholder="Password" required="">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-      Sign In
-    </button>
-  </form>
+          <fieldset class="clearfix">
+
+            <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fa fa-lock"></span><input type="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+
+             <div>
+                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Forgot
+                password?</a></span>
+                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Sign In"></span>
+            </div>
+
+          </fieldset>
+      <div class="clearfix"></div>
+        </form>
+
+        <div class="clearfix"></div>
+
+      </div> <!-- end login -->
+      <div class="logo">FanCo
+
+          <div class="clearfix"></div>
+      </div>
+
+      </div>
+  </center>
+
+  <div class="sentence"><a>Continue as guest</a></div>
+    </div>
 
 </div>
