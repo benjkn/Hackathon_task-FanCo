@@ -33,9 +33,9 @@
                   </ul>
                 </li>
                 <li> <i class="fa fa-calendar" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show4=!show4)> Custom Dates</a>
-                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
-                    <li><input type="radio" name="dates" class="datesPick" value="{{fromDate}} until {{toDate}}" ng-click="pickDate()">                  Custom </input>
-                      <form ng-show=showmode ng-click="getDateDetails()">
+                  <ul id="myDropdown" class="dropdown-content" ng-show=show4>
+                    <li><input type="radio" name="dates" class="datesPick" ng-click="pickDate()"> Custom </input>
+                      <form ng-show=showmode ng-click="getDateDetails(fromDate, toDate)">
                         <div>
                           From: <input type="date" ng-model="fromDate">
                         </div>
