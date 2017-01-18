@@ -5,27 +5,8 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
             type: 'pieChart',
             height: 520,
             donut: true,
-<<<<<<< HEAD
             x: function (d) { return d.x; },
             y: function (d) { return d.y; },
-=======
-            x:
-            function (d) { return d.x; },
-            // function (d) {
-            //     // console.log(d);
-            //     d.values.forEach(function(v) {
-            //         return v.key;
-            //     })
-            // },
-            y:
-            function (d) { return d.y; },
-            // function (d) {
-            //     console.log(d);
-            //     d.values.forEach(function(v) {
-            //         return v.values;
-            //     })
-            // },
->>>>>>> master
             showLabels: true,
             color:['#388E3C','#81C784','#F57C00','#FFB74D','#D32F2F','#E57373'],
             // controls pie angle
