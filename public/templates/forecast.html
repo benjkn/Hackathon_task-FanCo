@@ -2,8 +2,10 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 
-		<div class="graph">
-			<h3>Boston Weather Forecast - 15 days</h3>
+
+		<div class="panel panel-default">
+				<div class="box-heading">Boston Weather Forecast - 15 days</div>
+
 			</div>
 
 
@@ -13,14 +15,73 @@
 
 	</div>
 
-
-	<div class="panel panel-default">
+	<div class="row">
+		<div class="panel panel-default">
 		<div class="panel-body">
-			<div class="panel graph ">
-				<h3> Weekly Weather Notifications </h3>
-			  <p ng-repeat="x in info track by $index"> On <strong>{{x.date}}</strong> the weather will be <strong>{{x.weather}}</strong></p>
 
-			</div>
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div class="box-heading">Weekly weather notifications </div>
+						<div class="panel-body">
+							<div class="panel">
+
+							  <p ng-repeat="x in info track by $index"> On <strong>{{x.date}}</strong> the weather will be <strong>{{x.weather}}</strong></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+		<div class="col-sm-6">
+	    <div class="panel panel-default">
+	        <div class="box-heading box1">SMS Alerts</div>
+		        <div class="panel-body">
+		        	<div class="panel">
+		        		<form ng-submit="addPhone(name,phone)">
+								  <h4>Get text message alerts based on temperature changes</h4>
+
+								  <div class="form-group">
+								    <input type="text" class="form-control" placeholder="User Name" ng-model="name"></input>
+								  </div>
+
+								  <div class="form-group">
+								    <input type="text" class="form-control" placeholder="Phone Number" ng-model="phone"></input>
+								  </div>
+
+								  <button type="submit" class="btn btn-primary">Add phone number</button>
+								</form>
+
+								<p></p>
+
+		        	</div>
+
+		        	<div class="box-heading box1">Updating Alerts</div>
+		        <div class="panel-body">
+		        	<div class="panel">
+		        		<form ng-submit="sendAlerts(alert)">
+								  <h4>Customize your alerts</h4>
+
+								  <div class="form-group">
+								    <input type="text" class="form-control" placeholder="Alert" ng-model="alert"></input>
+								  </div>
+
+								  <button type="submit" class="btn btn-primary">Send Alert</button>
+								</form>
+
+								<p></p>
+
+		        	</div>
+		      </div> <!-- panel-body -->
+	    </div>
 		</div>
+		</div>
+		</div>
+
+
+
+
 	</div>
+
 </div>
+
+

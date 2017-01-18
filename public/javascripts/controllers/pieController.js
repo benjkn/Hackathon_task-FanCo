@@ -38,7 +38,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                         uniquePrice = price[b].RevenuePerUnitSold;
                     }
                 }
-                $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
+                $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice;
             }
             // console.log($scope.salesData);
 
@@ -84,6 +84,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                 .style("fill", "steelblue")
                 .style("font-weight", "bold")
                 .text("2015-2016 - Total Revenue: $" + moneyFormat(totalRevenue));
+
 
 
         });

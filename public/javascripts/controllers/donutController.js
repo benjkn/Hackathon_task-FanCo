@@ -34,6 +34,7 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
                     right: 70,
                     bottom: 5,
                     left: 0
+
                 }
             }
         }

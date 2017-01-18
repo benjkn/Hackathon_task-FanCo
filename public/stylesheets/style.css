@@ -59,7 +59,7 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
   background-color: #1abc9c;
 }
 
-.ikillu {
+.hiThere {
   margin: auto;
 }
 
@@ -87,6 +87,16 @@ nav.cm-navbar.cm-navbar-turquoise.leftmenu {
     font-weight: bolder;
 }
 
+.box-heading {
+    font-size: 19px;
+    color: #ffac4d;
+    font-weight: bolder;
+    background: #fff;
+    text-align: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
 .provided-text {
   color: #999;
 }
@@ -97,7 +107,7 @@ ul#myDropdown input {
 
 @media (max-width: 900px) {
 
-   body a.ikillu {
+   body a.hiThere {
     line-height: 12px;
   }
 
