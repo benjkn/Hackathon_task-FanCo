@@ -28,20 +28,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
 
-
-      if (sales.mode === 'Sales') {
-    		//Nest + Rollup for Total Sales
-        // console.log('1');
-        var totalData = d3.nest()
-  			.key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
-  			.rollup(function(d){
-  				return d3.sum(d, function(g){
-  				  return g.SalesUnits;
-  				});
-  			}).entries($scope.salesData);
-      } else if (sales.mode === 'Revenue') {
-        //Nest + Rollup for Total Revenue
-        // console.log('2');
+      //nest
         var totalData = d3.nest()
         .key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
         .rollup(function(d){
@@ -49,9 +36,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             return g.revenue;
           });
         }).entries($scope.salesData);
-      } else {
-        console.log ('error');
-      }
+
 
 
   		// parse the dates!
@@ -235,16 +220,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
                 .style("opacity", 0);
           });
 
-        if (sales.mode === 'Sales') {
-          // Text label for the Y axis
-          svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("x", margin.top - (height / 2))
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Units Sold Weekly");
-        } else {
+
           // Text label for the Y axis
           svg.append("text")
             .attr("transform", "rotate(-90)")
@@ -253,7 +229,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             .attr("dy", ".71em")
             .style("text-anchor", "end")
             .text("Weekly Revenue");
-        }
+
 
       // Text label for the right Y axis
       svg.append("text")

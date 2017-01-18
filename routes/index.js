@@ -48,14 +48,14 @@ router.get('/forecast', function(req, res){
 	});
 });
 
-router.get('/sales/:product', function (req, res, next) {
+/*router.get('/sales/:product', function (req, res, next) {
 	console.log('getting here');
 	res.send(req.customData)
 });
 
 // Sales.find({$and: [{"Channel": "Direct Sales"}, {$or: [{"Neighborhood": "Allston"}, {"Neighborhood": "West End"}]}]    }).count() <--- 312
 router.param('product', function (req, res, next, preferences) {
-	var splitPrefs = preferences.split(',');
+	var splitPrefs = preferences.split('+');
 	console.log(splitPrefs)
 	var customData =[]
 	var tempVar
@@ -160,7 +160,6 @@ router.param('product', function (req, res, next, preferences) {
 
 	req.customData = customData
 	return next();
-
-});
+});*/
 
 module.exports = router;
