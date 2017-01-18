@@ -99,6 +99,16 @@ path {
     font-weight: bolder;
 }
 
+.box-heading {
+    font-size: 19px;
+    color: #ffac4d;
+    font-weight: bolder;
+    background: #fff;
+    text-align: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
 .provided-text {
   color: #999;
 }

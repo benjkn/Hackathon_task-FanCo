@@ -35,7 +35,7 @@ router.get('/history', function(req, res) {
 */
 
 router.param('product', function (req, res, next, preferences) {
-	console.log(preferences)
+	console.log(preferences);
 	//all 3 params
 	if (preferences.Neighborhood && preferences.SKU && preferences.Channel) {
 		Sales.find({Neighborhood: preferences.Neighborhood, SKU: preferences.SKU, Channel: preferences.Channel}).exec(function (err, sale) {

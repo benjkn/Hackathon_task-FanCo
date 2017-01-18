@@ -36,7 +36,7 @@ app.use('/', routes);
 app.get('/forecast', function(req, res){
 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-	    console.log(body);
+	    // console.log(body);
 	    res.send(body);
 	  }else if(error) {
 	  	console.log('hello');
