@@ -42,7 +42,7 @@ app.factory('sales', ['$http', function($http) {
       // console.log('we are in situation ALL is ALL!');
       return $http.get('/sales');
 
-      } else if (a && b && c && d) {
+      }/* else if (a && b && c && d) {
       //(4 custom, 0 'all')
       return $http.get('/sales/' + prodString + '+' + neighborhoodsString + '+' + prefs.channel + '+' + prefs.dates + '+' + pref.prods.length + '+' + prefs.neighborhoods.length + '+' + 1);
 
@@ -105,7 +105,7 @@ app.factory('sales', ['$http', function($http) {
       } else {
       //(0 custom, 4 'all') - Covered it 1st
         console.log ('I should NEVER get in here! :)');
-      }
+      }*/
 
   	},
 
