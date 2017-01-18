@@ -109,28 +109,18 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		}
 	};
 
-	// $scope.getDateDetails = function (x, y) {
+	$scope.getDateDetails = function (x, y) {
 
-	// 	startingDate = max(x, 31/5/2015)
-	// 	endingDate = min(1/6/2016, y)
+		startingDate = max(x, 31/5/2015)
+		endingDate = min(1/6/2016, y)
 
-
-
-
-
-
-	// 			//i stoppped here
+		console.log(' starting date: ' + startingDate);
+		console.log('ending date:' + endingDate);
 
 
-
-
-
-
-	// 	$scope.preferences.dates = theDates[1].value;
-	// 	console.log($scope.preferences);
-	// 	sales.getSales($scope.preferences).then(function (data) {
-	// 		console.log (data.data);
-	// 	});
-	// }
+		sales.getSalesByDate(startingDate, endingDate).then(function (data) {
+			console.log (data.data);
+		});
+	}
 
 }]);

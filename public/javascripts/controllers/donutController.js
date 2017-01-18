@@ -1,4 +1,5 @@
 app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
+
     $scope.options = {
         chart: {
             type: 'pieChart',

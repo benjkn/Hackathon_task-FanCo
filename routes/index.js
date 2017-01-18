@@ -58,6 +58,28 @@ router.get('/forecast', function(req, res){
 	});
 });
 
+router.get('/sales/:startingDate/:endingDate', function(req, res) {
+	var total =[];
+		for (i=0; i<req.after.length; i++) {
+			for (j=0; j<req.before.length; j++) {
+				if (req.before[j].WeekOf === req.after[i].WeekOf)
+					total.push(req.before[j])
+			}
+		}
+	res.send(total)
+})
+
+router.param('startingDate', function (req, res, next, sDate) {
+	req.after = Sales.find({WeekOf: {$gt: sDate}})
+	return next();
+})
+
+router.param('endingDate', function (req, res, next, eDate) {
+	req.before = Sales.find({WeekOf: {$lt: eDate}})
+	return next();
+})
+
+
 //add data to phones  collection db
 router.post('/phones', function(req, res, next) {
 console.log(req.body);

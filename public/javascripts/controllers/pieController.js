@@ -1,5 +1,4 @@
 app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
-    console.log('pie controller')
     var moneyFormat = d3.format(",.2f");
 
     $scope.options = {
@@ -23,6 +22,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
         }
     };
 
+    console.log('pie controller')
 
     $scope.salesData = [];
 
@@ -40,7 +40,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                 }
                 $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice;
             }
-            // console.log($scope.salesData);
+            console.log($scope.salesData);
 
             //Nest + Rollup for Total Sales
             var revenueData = d3.nest()
@@ -51,14 +51,14 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                     });
                 }).entries($scope.salesData);
 
-            // console.log(revenueData);
+            console.log(revenueData);
 
             totalRevenue = 0;
             revenueData.forEach(function (d) {
                 totalRevenue += d.values;
             });
 
-            // console.log(totalRevenue);
+            console.log(totalRevenue);
 
 
             $scope.data = [];
@@ -67,9 +67,9 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
             var margin = { top: 5, right: 35, bottom: 5, left: 0 }
 
             var element = document.getElementById('pi');
-            // console.log(element);
+            console.log(element);
             var positionInfo = element.getBoundingClientRect();
-            // console.log(positionInfo);
+            console.log(positionInfo);
             var height = positionInfo.height;
             var width = positionInfo.width;
 
