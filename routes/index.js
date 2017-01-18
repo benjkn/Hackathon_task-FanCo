@@ -56,7 +56,7 @@ router.get('/forecast', function(req, res){
 	});
 });
 
-router.get('/sales/:product', function (req, res, next) {
+/*router.get('/sales/:product', function (req, res, next) {
 	console.log('getting here');
 	res.send(req.customData);
 });
@@ -67,6 +67,7 @@ router.param('product', function (req, res, next, preferences) {
 	console.log(splitPrefs);
 	var customData =[];
 	var tempVar;
+
 
 
 	for (j=1; j<16; j++)
@@ -168,8 +169,7 @@ router.param('product', function (req, res, next, preferences) {
 
 	req.customData = customData;
 	return next();
-
-});
+});*/
 
 //add data to phones  collection db
 router.post('/phones', function(req, res, next) {
