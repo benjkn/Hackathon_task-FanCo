@@ -39,15 +39,14 @@ forecast.sendAlert();
 //=====================SMS ALERTS ================
 	//add phone number
 
-	$scope.addPhone = function() {
-	    if ($scope.name === '') { return; }
+	$scope.addPhone = function(name,phone) {
 
 	    forecast.create({
-	      name: $scope.name,
-	      phone: $scope.phone
+	      name: name,
+	      phone: phone
 	    });
 
-	    console.log(forecast.create);
+	    console.log(name + phone);
 	    $scope.name = '';
 	    $scope.phone = '';
 

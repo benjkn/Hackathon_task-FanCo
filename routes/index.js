@@ -15,7 +15,7 @@ var Sales = require('../models/SalesFanco');
 var History = require('../models/History');
 var Forecast = require('../models/Forecast');
 var Price = require('../models/Prices');
-// var Sms = require("../models/SmsModel");
+var Sms = require("../models/SmsModel");
 
 // //Here are all the necessary router.get, router.post, router.put and router.param commands
 
@@ -48,6 +48,28 @@ router.get('/revenue', function (req, res) {
 router.get('/forecast', function(req, res){
 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
+	  	var data = JSON.parse(body);
+
+		  	//loop forecast temp each day and if temperature is
+		  	//for (var i = 0; i < data.list.length; i++) {
+		  			console.log(data.list[1].temp.min);
+				  	/*if(data.list[1].temp.min < 300){
+				  		//get list of registered phones
+				  		//get phones from mongo
+						var phones = [{phone:'+972542643440'}, {phone:'+972584219694'}];
+						//loop through the list and send sms
+
+						for (var j = 0; j < phones.length; j++) {
+
+							sendSms({
+							    to: phones[j].phone,
+							    from:'+14134713241',
+							    body:'the weather is great today!!! go out and sale FanCo, temp below 300 F '
+							});
+						}
+				  	}*/
+		  //	}
+
 	    // console.log(body);
 	    res.send(body);
 	  }else if(error) {
@@ -173,50 +195,30 @@ router.param('product', function (req, res, next, preferences) {
 
 //add data to phones  collection db
 router.post('/phones', function(req, res, next) {
-console.log('whats your phone' + req.body);
-   /* var sms = new Sms(req.body);
+console.log(req.body);
+
+    var sms = new Sms(req.body);
 
     sms.save(function(err, phones){
         if (err) {return next(err);}
 
-        res.json(beer);
-    });*/
+        res.json(phones);
+    });
 
 });
 
 //check every 'x' minute change in temperature to send sms
 // setInterval (check every 5 min)
-setTimeout(function(){
+/*setTimeout(function(){
 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
-	  	var data = JSON.parse(body);
-
-		  	//loop forecast temp each day and if temperature is
-		  	//for (var i = 0; i < data.list.length; i++) {
-		  			console.log(data.list[1].temp.min);
-				  	if(data.list[1].temp.min < 300){
-				  		//get list of registered phones
-				  		//get phones from mongo
-						var phones = [{phone:'+972542643440'}, {phone:'+972584219694'}];
-						//loop through the list and send sms
-
-						for (var j = 0; j < phones.length; j++) {
-
-							sendSms({
-							    to: phones[j].phone,
-							    from:'+14134713241',
-							    body:'the weather is great today!!! go out and sale FanCo, temp below 300 F '
-							});
-						}
-				  	}
-		  //	}
-
-	    // console.log(body);
 	  }else if(error) {
 	  	console.log('there is an error');
 	  }
 	});
-},1000);
+},1000);*/
+
+
 
 router.get('/alert', function(req, res) {
 	//get list of registered phones
@@ -231,8 +233,6 @@ router.get('/alert', function(req, res) {
 		    body:'the weather is great today!!! go out and sale FanCo '
 		});
 	}*/
-
-
 
 });
 

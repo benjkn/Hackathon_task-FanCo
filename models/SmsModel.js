@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var SmsSchema = new Schema({
-  username: String,
-  phonenumber: String,
+  name: String,
+  phone: String
 });
 
-var Sms = mongoose.model('Sms', SalesSchema);
+var Sms = mongoose.model('message', SmsSchema);
 
 
 module.exports = Sms;
