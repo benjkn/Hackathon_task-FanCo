@@ -1,4 +1,5 @@
 app.controller('BarCtrl', ['$scope', 'sales', function ($scope, sales) {
+  console.log('barctrl')
   $scope.options = {
     chart: {
       type: 'multiBarChart',
@@ -32,7 +33,7 @@ app.controller('BarCtrl', ['$scope', 'sales', function ($scope, sales) {
 
   $scope.salesData = [];
 
-  sales.getSales(1).then(function (response) {
+  sales.getSales().then(function (response) {
     $scope.salesData = response.data;
 
     sales.getPrice().then(function (prices) {
@@ -78,7 +79,7 @@ app.controller('BarCtrl', ['$scope', 'sales', function ($scope, sales) {
 
 
 
-    
+
 
 
 
