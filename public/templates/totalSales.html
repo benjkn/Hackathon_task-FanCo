@@ -1,39 +1,56 @@
 <div class="container-fluid">
-	<div class="row">
-		<div class="panel panel-default">
-			<div class="graph panel-heading">
-				<h3>Total Sales</h3>
-			</div>
-			<div class="panel-body">
-				<linear-chart></linear-chart>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="graph panel-heading">
+          <h3>Total Sales</h3>
+        </div>
+        <div class="panel-body">
+          <linear-chart></linear-chart>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<div class="row">
+  <div class="row">
 
-		<div class="col-sm-6">
-			<div class="panel panel-default">
-				<div class="graph panel-heading">
-					<h4>Revenue By Neighborhood</h4>
-				</div>
-				<div id="pi" class="panel-body" ng-controller="PieCtrl">
-					<nvd3 options="options" data="data"></nvd3>
-				</div>
-			</div>
-		</div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="graph panel-heading">
+          <h4>Revenue By Neighborhood</h4>
+        </div>
+        <div id="pi" class="panel-body" ng-controller="PieCtrl">
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+    </div>
 
 
-		<div class="col-sm-6">
-			<div class="panel panel-default">
-				<div class="graph panel-heading">
-					<h4>Products</h4>
-				</div>
-				<div class="panel-body" ng-controller="DonutCtrl">
-					<nvd3 options="options" data="data"></nvd3>
-				</div>
-			</div>
-		</div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="graph panel-heading">
+          <h4>Color/Channel</h4>
+        </div>
+        <div class="panel-body" ng-controller="DonutCtrl">
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+    </div>
 
-	</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="graph panel-heading">
+          <h4>Sales Channel vs. Season</h4>
+        </div>
+        <div class="panel-body" ng-controller="BarCtrl">
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
