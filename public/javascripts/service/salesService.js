@@ -12,6 +12,10 @@ app.factory('sales', ['$http', function($http) {
 
     getPrice: function () {
       return $http.get('/revenue');
+    },
+
+    getSalesByDate: function (a, b) {
+      return $http.get('/sales/'+ a + '/' + b);
     }
 
 
