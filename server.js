@@ -26,7 +26,6 @@ app.use('/', routes);
 	  		console.log('dasf');
 		});*/
 
-
 var port = process.env.PORT || '7000';
 
 app.listen(port, function () {

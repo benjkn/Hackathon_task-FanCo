@@ -115,7 +115,9 @@ app.factory('sales', ['$http', function($http) {
     },
 
     getPrice: function () {
+
       return $http.get('/revenue');
+
     }
 
 
