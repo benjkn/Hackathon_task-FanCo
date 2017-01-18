@@ -7,18 +7,11 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 		forecast.getForecast().then(function(response){
       // console.log(response);
       $scope.forecastData = response.data.list;
+      console.log($scope.forecastData);
+
+      // Removing the first day to get rid of weather bug
+      $scope.forecastData.shift();
       // console.log($scope.forecastData);
-
-  		//Nest + Rollup for Total Sales
-     /* var totalData = d3.nest()
-			.key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
-			.rollup(function(d){
-				return d3.sum(d, function(g){
-				  return g.SalesUnits;
-				});
-			}).entries($scope.forecastData);
-			console.log(totalData);*/
-
 
   		// parse the date!
       // var parseDate = d3.time.format("%Y-%m-%d").parse;
