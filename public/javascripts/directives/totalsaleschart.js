@@ -159,8 +159,10 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .interpolate("step");
 
       // line colors
-      salesColor = "steelblue";
-      weatherColor = "#26A69A"
+      var salesColor = "steelblue";
+      var weatherColor = "#26A69A";
+      var numFormat = d3.format(",.");
+      
 
 
 
@@ -212,7 +214,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             div.transition()
                 .duration(200)
                 .style("opacity", .9);
-            div.html(formatTime(d.key) + "<br/>"  + d.values)
+            div.html(formatTime(d.key) + "<br/>"  + numFormat(d.values))
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
             })
@@ -275,6 +277,28 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .attr("cy", margin.top - 5)
         .style("fill", weatherColor)
         .attr("r", "5");
+
+        // Total Units
+
+console.log(totalData);
+        var totalUnits = 0;
+        totalData.forEach(function (d) {
+            totalUnits += Math.ceil(d.values);
+        });
+
+        console.log(totalUnits);
+        var wkAvg = Math.ceil(totalUnits/52);
+        console.log(wkAvg);
+        var svg2 = d3.select("#units");
+
+      svg2.append("text")
+          .attr("x", 4)
+          .attr("y", -20)
+          .attr("class", "revenueTitle")
+          .style("fill", "steelblue")
+          .style("font-weight", "bold")
+          .text("Total Units Sold: " + numFormat(totalUnits) + " (~"+wkAvg+" units/wk)" );
+
 
       }); // thisis closing getrawhistory
     }) // this is closing the getprices
