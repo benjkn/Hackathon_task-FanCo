@@ -11,29 +11,12 @@
       <div id="cm-menu-items-wrapper">
         <div id="cm-menu-scroller">
           <ul class="cm-menu-items nav">
-            <li>
-              <a ui-sref=".totalSales">Total Sales</a>
-            </li>
-
-            <li>
-             <i class="fa fa-pie-chart" aria-hidden="true"></i> Filter view by:
-              <ul>
-                <li> <a class="dropdown" ng-Click=(show1=!show1) ui-sref=".byProduct">Products</a>
-                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
-                    <li ng-repeat="p in products"><input type="checkbox" class="productList" value={{p}} ng-click="pickProducts(this)" checked>{{p}}</li>
-                  </ul>
-                </li>
-                <li> <i class="fa fa-truck" aria-hidden="true"></i> <i class="fa fa-sitemap" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show2=!show2) ui-sref=".byChannel">Channel</a>
-                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
-                    <li ng-repeat="c in channels"><input type="radio" name="channel" class="channelList" value={{c}} ng-click="pickChannel()" checked>{{c}}</li>
-                  </ul>
-                </li>
-                <li> <i class="fa fa-map-marker" aria-hidden="true"></i> <i class="fa fa-map" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show3=!show3) ui-sref=".byNeighborhood">Neighborhood</a>
-                  <ul id="myDropdown" class="dropdown-content" ng-show=false>
-                    <li ng-repeat="n in neighborhoods"><input type="checkbox" class="neighList" value={{n}} ng-click="pickNeighborhoods(this)" checked>{{n}}</li>
-                  </ul>
-                </li>
-                <li> <i class="fa fa-calendar" aria-hidden="true"></i> <a class="dropdown" ng-Click=(show4=!show4)> Custom Dates</a>
+            <li><a ui-sref=".totalSales">Total Sales</a></li>
+            <p class="filter">Filter view by:</p>
+            <li> <a ng-Click=(show1=!show1) ui-sref=".byProduct"><i class="fa fa-pie-chart" aria-hidden="true"></i> Products</a></li>
+            <li> <a ng-Click=(show2=!show2) ui-sref=".byChannel"><i class="fa fa-truck" aria-hidden="true"></i>  Channel</a></li>
+            <li><a ng-Click=(show3=!show3) ui-sref=".byNeighborhood"><i class="fa fa-map-marker" aria-hidden="true"></i> Neighborhood</a></li>
+            <li><a ng-Click=(show4=!show4)><i class="fa fa-calendar" aria-hidden="true"></i> Custom Dates</a>
                   <ul id="myDropdown" class="dropdown-content" ng-show=show4>
                     <li><input type="radio" name="dates" class="datesPick" ng-click="pickDate()"> Custom </input>
                       <form ng-show=showmode ng-click="getDateDetails(fromDate, toDate)">
@@ -51,9 +34,8 @@
                     <li><input type="radio" name="dates" class="datesPick" value="All" ng-click="pickDate()" checked> All </input>
                     </li>
                   </ul>
-                </li>
-              </ul>
             </li>
+
           </ul>
         </div>
       </div>
