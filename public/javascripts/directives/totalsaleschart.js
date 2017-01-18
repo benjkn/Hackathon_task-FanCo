@@ -4,10 +4,11 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
     $scope.salesData = [];
     $scope.weatherData = [];
+    console.log('hello there')
 
-		sales.getSales(1).then (function(response) {
+		sales.getSales().then (function(response) {
+      console.log($scope.salesData);
       $scope.salesData = response.data;
-      // console.log($scope.salesData);
 
       sales.getPrice().then (function(prices) {
         price = prices.data;
@@ -25,6 +26,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
 
       sales.getRawHistory().then(function(response){
+        console.log('lalalalalalalalla')
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
 
@@ -33,7 +35,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
         .rollup(function(d){
           return d3.sum(d, function(g){
-            return g.revenue;
+            return g.SalesUnits;
           });
         }).entries($scope.salesData);
 
@@ -228,7 +230,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             .attr("x", margin.top - (height / 2))
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Weekly Revenue");
+            .text("Weekly Sales");
 
 
       // Text label for the right Y axis

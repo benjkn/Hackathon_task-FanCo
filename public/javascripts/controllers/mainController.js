@@ -103,34 +103,34 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 			$scope.showmode = false;
 			$scope.preferences.dates = 'All';
 			console.log($scope.preferences);
-			sales.getSales($scope.preferences).then(function (data) {
+			sales.getSales().then(function (data) {
 				console.log (data.data);
 			});
 		}
 	};
 
-	$scope.getDateDetails = function (x, y) {
+	// $scope.getDateDetails = function (x, y) {
 
-		startingDate = max(x, 31/5/2015)
-		endingDate = min(1/6/2016, y)
-
-
-
-
-
-
-				//i stoppped here
+	// 	startingDate = max(x, 31/5/2015)
+	// 	endingDate = min(1/6/2016, y)
 
 
 
 
 
 
-		$scope.preferences.dates = theDates[1].value;
-		console.log($scope.preferences);
-		sales.getSales($scope.preferences).then(function (data) {
-			console.log (data.data);
-		});
-	}
+	// 			//i stoppped here
+
+
+
+
+
+
+	// 	$scope.preferences.dates = theDates[1].value;
+	// 	console.log($scope.preferences);
+	// 	sales.getSales($scope.preferences).then(function (data) {
+	// 		console.log (data.data);
+	// 	});
+	// }
 
 }]);

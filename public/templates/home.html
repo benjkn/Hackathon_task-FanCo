@@ -1,4 +1,5 @@
-<div>
+
+<div ng-controller='MainCtrl'>
   <div id="cm-menu">
     <nav class="cm-navbar cm-navbar-turquoise leftmenu">
       <div class="topnav">FanCo</div>
@@ -67,9 +68,8 @@
       <!-- Inline-block not working! add it on css file -->
       <div class="cm-navbar">
         <ul id="navlist">
-          <li class="topnav"><a class="hiThere" ui-sref="home"> Sales </a></li>
-
-          <li class="topnav"><a class="hiThere" ui-sref="forecast"> Forecast </a></li>
+          <li class="topnav"><a class="hiThere" ui-sref=".totalSales"> Sales </a></li>
+          <li class="topnav"><a class="hiThere" ui-sref=".forecast"> Forecast </a></li>
         </ul>
       </div>
 
@@ -91,7 +91,6 @@
             </li>
           </ul> -->
       </div>
-
     </nav>
   </header>
 
@@ -100,3 +99,4 @@
   <!-- <footer class="cm-footer"><span class="pull-right">&copy; Martha, Nati and Ben dream-team</span></footer> -->
 
 </div>
+
