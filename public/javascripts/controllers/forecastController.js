@@ -1,6 +1,6 @@
 app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast) {
 
-forecast.sendAlert();
+// forecast.sendAlert();
 	//needs format
 	var formatTime = d3.time.format("%c");
 
@@ -30,7 +30,7 @@ forecast.sendAlert();
 		}
 
 		//send sms alert
-		forecast.sendAlert();
+		// forecast.sendAlert();
 		// console.log($scope.info);
 	});
 
@@ -54,6 +54,38 @@ forecast.sendAlert();
 
 //=====================SMS ALERTS ================
 
+	$scope.sendAlerts = function(alerts) {
+
+		forecast.setAlert(alerts);
+
+		$scope.alert = '';
+
+	};
+
+
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

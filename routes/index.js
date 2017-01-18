@@ -16,6 +16,7 @@ var History = require('../models/History');
 var Forecast = require('../models/Forecast');
 var Price = require('../models/Prices');
 var Sms = require("../models/SmsModel");
+// var Text =
 
 // //Here are all the necessary router.get, router.post, router.put and router.param commands
 
@@ -50,25 +51,7 @@ router.get('/forecast', function(req, res){
 	  if (!error && response.statusCode == 200) {
 	  	var data = JSON.parse(body);
 
-		  	//loop forecast temp each day and if temperature is
-		  	//for (var i = 0; i < data.list.length; i++) {
-		  			console.log(data.list[1].temp.min);
-				  	/*if(data.list[1].temp.min < 300){
-				  		//get list of registered phones
-				  		//get phones from mongo
-						var phones = [{phone:'+972542643440'}, {phone:'+972584219694'}];
-						//loop through the list and send sms
 
-						for (var j = 0; j < phones.length; j++) {
-
-							sendSms({
-							    to: phones[j].phone,
-							    from:'+14134713241',
-							    body:'the weather is great today!!! go out and sale FanCo, temp below 300 F '
-							});
-						}
-				  	}*/
-		  //	}
 
 	    // console.log(body);
 	    res.send(body);
@@ -218,11 +201,62 @@ console.log(req.body);
 	});
 },1000);*/
 
+router.param('lalala', function (req,res,next, text) {
+	req.text = text;
+	return next();
+});
 
 
-router.get('/alert', function(req, res) {
-	//get list of registered phones
-	/*var phones = [{phone:'+972542643440'}, {phone:'+972542643440'}];
+
+router.get('/alert/:lalala', function(req, res, next) {
+	console.log('value1');
+	//Text.findOne({latest one})
+	Sms.find(function(error, users){
+		if(error){ return next(error);}
+		/*console.log(users);*/
+		// res.send(users);
+		console.log(users);
+		// var phones = users;
+
+		for (var j = 0; j < users.length; j++) {
+
+			sendSms({
+			    to: users[j].phone,
+			    from:'+14134713241',
+			    body: 'Hello ' + users[j].name +'! This is a message for you: ' + req.text
+			});
+		}
+
+		function sendSms(info) {
+
+			console.log(info);
+
+				client.sms.messages.create(info, function(error, message) {
+				    if (!error) {
+				        console.log('Success! The SID for this SMS message is:');
+				        console.log(message.sid);
+				        console.log('Message sent on:');
+				        console.log(message.dateCreated);
+				    } else {
+				        console.log('Oops! There was an error.' );
+				        console.log(error);
+				    }
+				});
+
+
+		}
+
+		res.end();
+
+	});
+});
+
+
+
+
+
+	/*//get list of registered phones
+	var phones = [{phone:'+972542643440'}, {phone:'+972542643440'}];
 	//loop through the list and send sms
 
 	for (var i = 0; i < phones.length; i++) {
@@ -234,39 +268,10 @@ router.get('/alert', function(req, res) {
 		});
 	}*/
 
-});
 
 
-////============================= twilio =====================================
 
 
-function sendSms(info) {
-
-console.log(info);
-
-	client.sms.messages.create(info, function(error, message) {
-    // The HTTP request to Twilio will run asynchronously. This callback
-    // function will be called when a response is received from Twilio
-    // The "error" variable will contain error information, if any.
-    // If the request was successful, this value will be "falsy"
-    if (!error) {
-        // The second argument to the callback will contain the information
-        // sent back by Twilio for the request. In this case, it is the
-        // information about the text messsage you just sent:
-        console.log('Success! The SID for this SMS message is:');
-        console.log(message.sid);
-
-        console.log('Message sent on:');
-        console.log(message.dateCreated);
-    } else {
-        console.log('Oops! There was an error.' );
-        console.log(error);
-    }
-	});
-
-
-}
-//============================= twilio =====================================
 
 /*var objToSend = {
     to:'+972000000000',
