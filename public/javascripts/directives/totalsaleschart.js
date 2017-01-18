@@ -35,7 +35,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
         .rollup(function(d){
           return d3.sum(d, function(g){
-            return g.revenue;
+            return g.SalesUnits;
           });
         }).entries($scope.salesData);
 
@@ -230,7 +230,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             .attr("x", margin.top - (height / 2))
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Weekly Revenue");
+            .text("Weekly Sales");
 
 
       // Text label for the right Y axis
