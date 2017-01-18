@@ -94,7 +94,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 		  var line = d3.svg.line()
         .x(function(d){ return x(d.dt); })
         .y(function(d){ return y(d.temp.day); })
-        .interpolate("cardinal");
+        .interpolate("linear");
 
 
       // Finally add line; Append the path to group; run line generator on data

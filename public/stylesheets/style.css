@@ -390,3 +390,16 @@ div.sentence {
     cursor: pointer;
     font-size: 18px;
 }
+
+
+
+/*Validation*/
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+input[disabled="disabled"]{
+  opacity: 0.4;
+  cursor: not-allowed; !important;
+}
