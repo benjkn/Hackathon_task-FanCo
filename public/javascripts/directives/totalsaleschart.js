@@ -228,7 +228,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             .attr("x", margin.top - (height / 2))
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Weekly Revenue");
+            .text("Weekly Units Sold");
 
 
       // Text label for the right Y axis
@@ -243,7 +243,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // Legend
 
-      // Units Sold (hardcoded..)
+      // Units Sold
       svg.append("text")
         .attr("x", (width/2) + 100)
         .attr("y", margin.top)
@@ -282,7 +282,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
   return {
 		restrict: "EA",
-		template: '<div class="fuck"></div>',
+		template: '<div class="yay"></div>',
 		replace: true,
 		link: link
 	};
