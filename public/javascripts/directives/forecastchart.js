@@ -10,7 +10,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
       console.log($scope.forecastData);
 
       // Removing the first day to get rid of weather bug
-      $scope.forecastData.shift();
+      $scope.forecastData.pop();
       // console.log($scope.forecastData);
 
   		// parse the date!
