@@ -1,5 +1,5 @@
 app.controller('BarCtrl', ['$scope', 'sales', function ($scope, sales) {
-  console.log('barctrl')
+  // console.log('barctrl')
   $scope.options = {
     chart: {
       type: 'multiBarChart',
@@ -59,7 +59,7 @@ app.controller('BarCtrl', ['$scope', 'sales', function ($scope, sales) {
           });
         }).entries($scope.salesData);
 
-      console.log(revenueData);
+      // console.log(revenueData);
 
       var parseDate = d3.time.format("%Y-%m-%d").parse;
 
@@ -70,7 +70,7 @@ app.controller('BarCtrl', ['$scope', 'sales', function ($scope, sales) {
         });
       });
 
-      console.log(revenueData);
+      // console.log(revenueData);
 
 
       $scope.data = [];

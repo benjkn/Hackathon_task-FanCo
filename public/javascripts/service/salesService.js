@@ -2,7 +2,7 @@ app.factory('sales', ['$http', function($http) {
 
   var salesService = {
     getSales: function() {
-      console.log('we are in getSales!');
+      // console.log('we are in getSales!');
       return $http.get('/sales');
   	},
 

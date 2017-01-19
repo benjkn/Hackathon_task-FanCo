@@ -19,16 +19,16 @@ var Sms = require("../models/SmsModel");
 
 //get the data from sales collection
 router.get('/sales', function(req, res) {
-	console.log('asdf')
+	// console.log('asdf')
 	Sales.find(function(error, sales) {
-		console.log(sales)
+		// console.log(sales)
 		res.send(sales);
 	});
 });
 
 //get data from history db collection
 router.get('/history', function(req, res) {
-	console.log('hello')
+	// console.log('hello')
 	History.find(function(error, history) {
 		if (error) {console.log('there is an error');}
 		// console.log("gimme history");
@@ -122,7 +122,7 @@ router.get('/alert/:lalala', function(req, res, next) {
 
 		function sendSms(info) {
 
-			console.log(info);
+			// console.log(info);
 
 				client.sms.messages.create(info, function(error, message) {
 				    if (!error) {
