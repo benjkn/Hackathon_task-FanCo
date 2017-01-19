@@ -390,3 +390,7 @@ div.sentence {
     cursor: pointer;
     font-size: 18px;
 }
+
+.topnav-right-side {
+  /*float: right;*/
+}
