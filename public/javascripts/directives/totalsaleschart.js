@@ -4,10 +4,10 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
     $scope.salesData = [];
     $scope.weatherData = [];
-    console.log('hello there')
+    // console.log('hello there')
 
 		sales.getSales().then (function(response) {
-      console.log($scope.salesData);
+      // console.log($scope.salesData);
       $scope.salesData = response.data;
 
       sales.getPrice().then (function(prices) {
@@ -26,7 +26,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
 
       sales.getRawHistory().then(function(response){
-        console.log('lalalalalalalalla')
       $scope.weatherData = response.data;
       weatherData = $scope.weatherData.splice(0,358);
 

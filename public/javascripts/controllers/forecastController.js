@@ -7,7 +7,7 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 	$scope.today = formatTime(new Date());
 
 	forecast.getForecast().then(function (data) {
-		console.log(data);
+		// console.log(data);
 		var forecastLive = data.data.list;
 		$scope.info = [];
 
@@ -46,7 +46,7 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 	      phone: phone
 	    });
 
-	    console.log(name + phone);
+	    // console.log(name + phone);
 	    $scope.name = '';
 	    $scope.phone = '';
 
