@@ -8,7 +8,7 @@
 				</div>
 				<div class="panel-body">
 					<forecast-chart></forecast-chart>
-					<p class="provided-text">Live data provided by 
+					<p class="provided-text">Live data provided by
 					<em>OpenWeatherMap,</em> last updated on <strong>{{today}}</strong>
 					</p>
 				</div>
@@ -21,18 +21,19 @@
 		<div class="col-sm-6">
 			<div class="panel panel-default">
 				<div class="box-heading">
-					Weekly weather notifications
+					Daily weather forecast
 				</div>
 				<div class="panel-body">
-					<p ng-repeat="x in info track by $index"> On <strong>{{x.date}}</strong> 
-					the weather will be <strong>{{x.weather}}</strong>
-					</p>
+					<p ng-repeat="x in info track by $index"> On <strong>{{x.date}}</strong> the temperature will be approx. <strong>{{x.temp}} &deg;C </strong> with <strong> {{x.weather}} </strong></p>
 				</div>
 			</div>
 		</div>
 
 
+
 		<div class="col-sm-6">
+
+
 			<div class="panel panel-default">
 				<div class="box-heading box1">
 					SMS Alerts
@@ -64,38 +65,33 @@
 					</form>
 				</div>
 			</div>
-		</div>
 
 
+			<div class="panel panel-default">
+				<div class="box-heading box1">Updating Alerts</div>
+				<div class="panel-body">
 
-<div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="box-heading box1">Updating Alerts</div>
-			<div class="panel-body">
+					<form ng-submit="sendAlerts(alert)" name="contactForm2" novalidate>
 
-				<form ng-submit="sendAlerts(alert)" name="contactForm2" novalidate>
-					
-					<h4>Customize your alerts</h4>
+						<h4>Customize your alerts</h4>
 
-					<div class="form-group">
-						<input type="text" name="alert" class="form-control" placeholder="Alert" ng-model="alert" 
-						ng-required="true" />
-					</div>
+						<div class="form-group">
+							<input type="text" name="alert" class="form-control" placeholder="Alert" ng-model="alert"
+							ng-required="true" />
+						</div>
 
-					<div ng-show="contactForm2.alert.$touched && contactForm2.alert.$invalid">
-					  <small style="color: red; display: block; text-align: center;">Please enter some text</small>
-					</div>
+						<div ng-show="contactForm2.alert.$touched && contactForm2.alert.$invalid">
+						  <small style="color: red; display: block; text-align: center;">Please enter some text</small>
+						</div>
 
-					<button type="submit" class="btn btn-primary" ng-disabled="contactForm2.$invalid">
-					Send Alert
-					</button>
-				</form>
+						<button type="submit" class="btn btn-primary" ng-disabled="contactForm2.$invalid">
+						Send Alert
+						</button>
+					</form>
+				</div>
 			</div>
-		</div>
-		<!-- panel-body -->
-	</div>
-	</div>
-	</div>
-	</div>
 
+		</div>
+
+		</div>
+	</div>

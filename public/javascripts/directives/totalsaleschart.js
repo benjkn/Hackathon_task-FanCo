@@ -134,7 +134,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .ticks(12)
         .orient("right");
 
-    
+
 			var svg = d3.select($el[0]).append("svg")
       	.attr("width", "100%")
     		.attr("height", height + 100)
@@ -161,7 +161,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var salesColor = "steelblue";
       var weatherColor = "#26A69A";
       var numFormat = d3.format(",.");
-      
+
 
 
 
@@ -242,7 +242,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
                 .duration(500)
                 .style("opacity", 0);
           });
-      
+
 
       // animation
       svg.transition
@@ -302,15 +302,15 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
         // Total Units
 
-console.log(totalData);
+// console.log(totalData);
         var totalUnits = 0;
         totalData.forEach(function (d) {
             totalUnits += Math.ceil(d.values);
         });
 
-        console.log(totalUnits);
+        // console.log(totalUnits);
         var wkAvg = Math.ceil(totalUnits/52);
-        console.log(wkAvg);
+        // console.log(wkAvg);
         var svg2 = d3.select("#units");
 
       svg2.append("text")

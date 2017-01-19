@@ -7,7 +7,7 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 		forecast.getForecast().then(function(response){
       // console.log(response);
       $scope.forecastData = response.data.list;
-      console.log($scope.forecastData);
+      // console.log($scope.forecastData);
 
       // Removing the first day to get rid of weather bug
       $scope.forecastData.shift();
@@ -116,15 +116,15 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
           .attr("dy", ".15em")
           .attr("transform", "rotate(-45)")
           .style("text-anchor", "end");
-      
+
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
 
       // for the tooltip dates
       var formatTime = d3.time.format("%e %b");
 
       // Define the div for the tooltip
-      var div = d3.select("body").append("div")	
-          .attr("class", "tooltip")				
+      var div = d3.select("body").append("div")
+          .attr("class", "tooltip")
           .style("opacity", 0);
 
       // circles
@@ -135,18 +135,18 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
           .attr("cx",function(d,i){ return x(d.dt); })
           .attr("cy",function(d,i){ return y(d.temp.day); })
           .attr("r","2.5")
-          .on("mouseover", function(d) {		
-            div.transition()		
-                .duration(200)		
-                .style("opacity", .9);		
-            div.html(formatTime(d.dt) + "<br/>"  + d.temp.day+" °C")	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
-            })					
-          .on("mouseout", function(d) {		
-            div.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
+          .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(formatTime(d.dt) + "<br/>"  + d.temp.day+" °C")
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+          .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
       });
 
       // Text label for the Y axis
