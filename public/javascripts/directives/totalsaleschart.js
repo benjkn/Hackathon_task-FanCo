@@ -135,7 +135,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .ticks(12)
         .orient("right");
 
-
+    
 			var svg = d3.select($el[0]).append("svg")
       	.attr("width", "100%")
     		.attr("height", height + 100)
@@ -167,19 +167,39 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
 
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path").attr("d",line(totalData))
+      var path = chartGroup.append("path").attr("d",line(totalData))
         .attr("class", "sales")
         .style("stroke", salesColor)
         .style("fill", "none")
         .style("stroke-width", "1.5px");
 
+      var totalLength = path.node().getTotalLength();
+
+      path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(1000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
+
       // Weather Line
-      chartGroup.append("path").attr("d",line2(weatherData))
+      var path2 = chartGroup.append("path").attr("d",line2(weatherData))
         .attr("class", "weather")
         .style("stroke", weatherColor)
         .style("opacity", 0.5)
         .style("fill", "none")
         .style("stroke-width", "1.5px");
+
+        var totalLength = path2.node().getTotalLength();
+
+    path2
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(1200)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
 
       // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
@@ -223,16 +243,19 @@ app.directive("linearChart", [ 'sales', function(sales) {
                 .duration(500)
                 .style("opacity", 0);
           });
+      
 
+      // animation
+      svg.transition
 
-          // Text label for the Y axis
-          svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("x", margin.top - (height / 2))
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Weekly Units Sold");
+      // Text label for the Y axis
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("x", margin.top - (height / 2))
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Weekly Units Sold");
 
 
 

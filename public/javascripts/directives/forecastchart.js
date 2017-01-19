@@ -91,12 +91,22 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 
 
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path")
+      var path = chartGroup.append("path")
       .attr("d",line($scope.forecastData))
       .attr("class", "forecast")
       .style("stroke", "steelblue")
       .style("fill", "none")
-      .style("stroke-width", "1.5px");;
+      .style("stroke-width", "1.5px");
+
+      var totalLength = path.node().getTotalLength();
+
+      path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(1000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
 
       // Add axes (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
