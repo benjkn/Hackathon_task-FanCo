@@ -39,7 +39,7 @@
 					SMS Alerts
 				</div>
 				<div class="panel-body">
-					<form ng-submit="addPhone(name,phone)" name="contactForm" novalidate>
+					<form ng-submit="addPhone(name,phone)" name="contactForm" >
 
 						<h4>Get text message alerts based on temperature changes</h4>
 
@@ -52,7 +52,7 @@
 						</div>
 
 						<div class="form-group">
-							<input type="text" name="phone" class="form-control" placeholder="Phone Number" ng-model="phone" ng-required="true" />
+							<input type="text" name="phone" class="form-control" placeholder="Phone Number" ng-model="phone" ng-required="true" value= />
 						</div>
 
 						<div ng-show="contactForm.phone.$touched && contactForm.phone.$invalid">
@@ -80,9 +80,9 @@
 							ng-required="true" />
 						</div>
 
-						<div ng-show="contactForm2.alert.$touched && contactForm2.alert.$invalid">
+	<!-- 					<div ng-show="contactForm2.alert.$touched && contactForm2.alert.$invalid">
 						  <small style="color: red; display: block; text-align: center;">Please enter some text</small>
-						</div>
+						</div> -->
 
 						<button type="submit" class="btn btn-primary" ng-disabled="contactForm2.$invalid">
 						Send Alert

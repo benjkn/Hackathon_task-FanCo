@@ -10,13 +10,13 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
       // console.log($scope.forecastData);
 
       // Removing the first day to get rid of weather bug
-      $scope.forecastData.shift();
+          $scope.forecastData.pop();
       // console.log($scope.forecastData);
 
   		// parse the date!
       // var parseDate = d3.time.format("%Y-%m-%d").parse;
   		for ( i=0; i<$scope.forecastData.length; i++) {
-        $scope.forecastData[i].dt = new Date($scope.forecastData[i].dt*1000);
+        $scope.forecastData[i].dt = new Date(($scope.forecastData[i].dt*1000));
         $scope.forecastData[i].temp.day = Math.round(($scope.forecastData[i].temp.day-273.15)*100)/100;
   		}
   		// console.log($scope.forecastData[0]);

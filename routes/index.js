@@ -82,7 +82,7 @@ router.param('endingDate', function (req, res, next, eDate) {
 
 //add data to phones  collection db
 router.post('/phones', function(req, res, next) {
-console.log(req.body);
+// console.log(req.body);
 
     var sms = new Sms(req.body);
 
@@ -102,13 +102,13 @@ router.param('lalala', function (req,res,next, text) {
 
 
 router.get('/alert/:lalala', function(req, res, next) {
-	console.log('value1');
+	// console.log('value1');
 	//Text.findOne({latest one})
 	Sms.find(function(error, users){
 		if(error){ return next(error);}
 		/*console.log(users);*/
 		// res.send(users);
-		console.log(users);
+		// console.log(users);
 		// var phones = users;
 
 		for (var j = 0; j < users.length; j++) {
