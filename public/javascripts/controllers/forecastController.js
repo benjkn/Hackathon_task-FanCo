@@ -7,14 +7,15 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 	$scope.today = formatTime(new Date());
 
 	forecast.getForecast().then(function (data) {
-		console.log(data);
+		// console.log(data);
 		var forecastLive = data.data.list;
 		$scope.info = [];
 
 		for (var i = 1; i < forecastLive.length; i++) {
 			obj = {
 				weather: forecastLive[i].weather[0].description,
-				date: (new Date(forecastLive[i].dt * 1000) + 10).slice(0, 11)
+				date: (new Date(forecastLive[i].dt * 1000) + 10).slice(0, 11),
+				temp: Math.round((forecastLive[i].temp.day-273.15)*100)/100
 			};
 			if (new Date(forecastLive[i].dt * 1000) > new Date()) {
 				$scope.info.push(obj);
@@ -46,7 +47,7 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 	      phone: phone
 	    });
 
-	    console.log(name + phone);
+	    // console.log(name + phone);
 	    $scope.name = '';
 	    $scope.phone = '';
 

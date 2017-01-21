@@ -103,7 +103,7 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 			$scope.showmode = false;
 			$scope.preferences.dates = 'All';
 			console.log($scope.preferences);
-			sales.getSales($scope.preferences).then(function (data) {
+			sales.getSales().then(function (data) {
 				console.log (data.data);
 			});
 		}
@@ -114,21 +114,11 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		startingDate = max(x, 31/5/2015)
 		endingDate = min(1/6/2016, y)
 
+		console.log(' starting date: ' + startingDate);
+		console.log('ending date:' + endingDate);
 
 
-
-
-
-				//i stoppped here
-
-
-
-
-
-
-		$scope.preferences.dates = theDates[1].value;
-		console.log($scope.preferences);
-		sales.getSales($scope.preferences).then(function (data) {
+		sales.getSalesByDate(startingDate, endingDate).then(function (data) {
 			console.log (data.data);
 		});
 	}

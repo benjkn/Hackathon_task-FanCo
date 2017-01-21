@@ -9,21 +9,14 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
       $scope.forecastData = response.data.list;
       // console.log($scope.forecastData);
 
-  		//Nest + Rollup for Total Sales
-     /* var totalData = d3.nest()
-			.key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
-			.rollup(function(d){
-				return d3.sum(d, function(g){
-				  return g.SalesUnits;
-				});
-			}).entries($scope.forecastData);
-			console.log(totalData);*/
-
+      // Removing the first day to get rid of weather bug
+          $scope.forecastData.pop();
+      // console.log($scope.forecastData);
 
   		// parse the date!
       // var parseDate = d3.time.format("%Y-%m-%d").parse;
   		for ( i=0; i<$scope.forecastData.length; i++) {
-        $scope.forecastData[i].dt = new Date($scope.forecastData[i].dt*1000);
+        $scope.forecastData[i].dt = new Date(($scope.forecastData[i].dt*1000));
         $scope.forecastData[i].temp.day = Math.round(($scope.forecastData[i].temp.day-273.15)*100)/100;
   		}
   		// console.log($scope.forecastData[0]);
@@ -94,16 +87,26 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
 		  var line = d3.svg.line()
         .x(function(d){ return x(d.dt); })
         .y(function(d){ return y(d.temp.day); })
-        .interpolate("cardinal");
+        .interpolate("linear");
 
 
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path")
+      var path = chartGroup.append("path")
       .attr("d",line($scope.forecastData))
       .attr("class", "forecast")
       .style("stroke", "steelblue")
       .style("fill", "none")
-      .style("stroke-width", "1.5px");;
+      .style("stroke-width", "1.5px");
+
+      var totalLength = path.node().getTotalLength();
+
+      path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(1000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
 
       // Add axes (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
@@ -113,15 +116,15 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
           .attr("dy", ".15em")
           .attr("transform", "rotate(-45)")
           .style("text-anchor", "end");
-      
+
       chartGroup.append("g").attr("class", "y axis").call(yAxis);
 
       // for the tooltip dates
       var formatTime = d3.time.format("%e %b");
 
       // Define the div for the tooltip
-      var div = d3.select("body").append("div")	
-          .attr("class", "tooltip")				
+      var div = d3.select("body").append("div")
+          .attr("class", "tooltip")
           .style("opacity", 0);
 
       // circles
@@ -132,18 +135,18 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
           .attr("cx",function(d,i){ return x(d.dt); })
           .attr("cy",function(d,i){ return y(d.temp.day); })
           .attr("r","2.5")
-          .on("mouseover", function(d) {		
-            div.transition()		
-                .duration(200)		
-                .style("opacity", .9);		
-            div.html(formatTime(d.dt) + "<br/>"  + d.temp.day+" °C")	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
-            })					
-          .on("mouseout", function(d) {		
-            div.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
+          .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(formatTime(d.dt) + "<br/>"  + d.temp.day+" °C")
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+          .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
       });
 
       // Text label for the Y axis

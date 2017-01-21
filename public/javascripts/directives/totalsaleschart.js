@@ -4,10 +4,11 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
     $scope.salesData = [];
     $scope.weatherData = [];
+    // console.log('hello there')
 
-		sales.getSales(1).then (function(response) {
-      $scope.salesData = response.data;
+		sales.getSales().then (function(response) {
       // console.log($scope.salesData);
+      $scope.salesData = response.data;
 
       sales.getPrice().then (function(prices) {
         price = prices.data;
@@ -33,7 +34,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .key(function(d){ return (d.WeekOf); }).sortKeys(d3.ascending)
         .rollup(function(d){
           return d3.sum(d, function(g){
-            return g.revenue;
+            return g.SalesUnits;
           });
         }).entries($scope.salesData);
 
@@ -157,25 +158,47 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .interpolate("step");
 
       // line colors
-      salesColor = "steelblue";
-      weatherColor = "#26A69A"
+      var salesColor = "steelblue";
+      var weatherColor = "#26A69A";
+      var numFormat = d3.format(",.");
+
 
 
 
       // Finally add line; Append the path to group; run line generator on data
-      chartGroup.append("path").attr("d",line(totalData))
+      var path = chartGroup.append("path").attr("d",line(totalData))
         .attr("class", "sales")
         .style("stroke", salesColor)
         .style("fill", "none")
         .style("stroke-width", "1.5px");
 
+      var totalLength = path.node().getTotalLength();
+
+      path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(1000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
+
       // Weather Line
-      chartGroup.append("path").attr("d",line2(weatherData))
+      var path2 = chartGroup.append("path").attr("d",line2(weatherData))
         .attr("class", "weather")
         .style("stroke", weatherColor)
         .style("opacity", 0.5)
         .style("fill", "none")
         .style("stroke-width", "1.5px");
+
+        var totalLength = path2.node().getTotalLength();
+
+    path2
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(1200)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
 
       // Add axes to group (shift x-axis down)
       chartGroup.append("g").attr("class", "x axis")
@@ -210,7 +233,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
             div.transition()
                 .duration(200)
                 .style("opacity", .9);
-            div.html(formatTime(d.key) + "<br/>"  + d.values)
+            div.html(formatTime(d.key) + "<br/>"  + numFormat(d.values))
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
             })
@@ -221,14 +244,18 @@ app.directive("linearChart", [ 'sales', function(sales) {
           });
 
 
-          // Text label for the Y axis
-          svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("x", margin.top - (height / 2))
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Weekly Revenue");
+      // animation
+      svg.transition
+
+      // Text label for the Y axis
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("x", margin.top - (height / 2))
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Weekly Units Sold");
+
 
 
       // Text label for the right Y axis
@@ -243,7 +270,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
       // Legend
 
-      // Units Sold (hardcoded..)
+      // Units Sold
       svg.append("text")
         .attr("x", (width/2) + 100)
         .attr("y", margin.top)
@@ -273,6 +300,28 @@ app.directive("linearChart", [ 'sales', function(sales) {
         .style("fill", weatherColor)
         .attr("r", "5");
 
+        // Total Units
+
+// console.log(totalData);
+        var totalUnits = 0;
+        totalData.forEach(function (d) {
+            totalUnits += Math.ceil(d.values);
+        });
+
+        // console.log(totalUnits);
+        var wkAvg = Math.ceil(totalUnits/52);
+        // console.log(wkAvg);
+        var svg2 = d3.select("#units");
+
+      svg2.append("text")
+          .attr("x", 4)
+          .attr("y", -20)
+          .attr("class", "revenueTitle")
+          .style("fill", "steelblue")
+          .style("font-weight", "bold")
+          .text("Total Units Sold: " + numFormat(totalUnits) + " (~"+wkAvg+" units/wk)" );
+
+
       }); // thisis closing getrawhistory
     }) // this is closing the getprices
 		}); //this is closing the getsales
@@ -282,7 +331,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
   return {
 		restrict: "EA",
-		template: '<div class="fuck"></div>',
+		template: '<div class="yay"></div>',
 		replace: true,
 		link: link
 	};
