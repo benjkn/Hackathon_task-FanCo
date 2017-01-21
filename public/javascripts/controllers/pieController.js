@@ -23,7 +23,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
 
     $scope.salesData = [];
 
-    sales.getSales(1).then(function (response) {
+    sales.getSales().then(function (response) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
