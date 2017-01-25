@@ -51,14 +51,16 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                     });
                 }).entries($scope.salesData);
 
-            // console.log(revenueData);
+            console.log('revenueData:')
+            console.log(revenueData);
 
             totalRevenue = 0;
             revenueData.forEach(function (d) {
                 totalRevenue += d.values;
             });
 
-            // console.log(totalRevenue);
+            console.log('totalRevenue:')
+            console.log(totalRevenue);
 
 
             $scope.data = [];
