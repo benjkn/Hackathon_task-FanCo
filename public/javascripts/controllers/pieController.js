@@ -38,8 +38,11 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                         uniquePrice = price[b].RevenuePerUnitSold;
                     }
                 }
-                $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice;
+                $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
+                console.log ($scope.salesData[a].revenue)
             }
+
+
 
             //Nest + Rollup for Total Sales
             var revenueData = d3.nest()
@@ -50,8 +53,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
                     });
                 }).entries($scope.salesData);
 
-            console.log('salesData:')
-            console.log($scope.salesData);
+            // console.log($scope.salesData);
 
             totalRevenue = 0;
             revenueData.forEach(function (d) {
