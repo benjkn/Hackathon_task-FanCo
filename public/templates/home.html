@@ -12,10 +12,11 @@
         <div id="cm-menu-scroller">
           <ul class="cm-menu-items nav">
             <li><a ui-sref=".totalSales">Total Sales</a></li>
+            <li><h1>HEllo</h1></li>
             <p class="filter">Filter view by:</p>
-            <li> <a ng-Click=(show1=!show1) ui-sref=".byProduct"><i class="fa fa-pie-chart" aria-hidden="true"></i> Products</a></li>
-            <li> <a ng-Click=(show2=!show2) ui-sref=".byChannel"><i class="fa fa-truck" aria-hidden="true"></i>  Channel</a></li>
-            <li><a ng-Click=(show3=!show3) ui-sref=".byNeighborhood"><i class="fa fa-map-marker" aria-hidden="true"></i> Neighborhood</a></li>
+            <li> <a ui-sref=".byProduct"><i class="fa fa-pie-chart" aria-hidden="true"></i> Products</a></li>
+            <li> <a ui-sref=".byChannel"><i class="fa fa-truck" aria-hidden="true"></i>  Channel</a></li>
+            <li><a ui-sref=".byNeighborhood"><i class="fa fa-map-marker" aria-hidden="true"></i> Neighborhood</a></li>
             <li ng-show=false><a ng-Click=(show4=!show4)><i class="fa fa-calendar" aria-hidden="true"></i> Custom Dates</a>
                   <ul id="myDropdown" class="dropdown-content" ng-show=show4>
                     <li><input type="radio" name="dates" class="datesPick" ng-click="pickDate()"> Custom </input>
@@ -47,7 +48,6 @@
       <div class="btn btn-turquoise md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
 
 
-      <!-- Inline-block not working! add it on css file -->
       <div class="cm-navbar">
         <ul id="navlist">
           <li class="topnav"><a class="hiThere"> About </a></li>

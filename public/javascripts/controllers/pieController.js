@@ -22,7 +22,7 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
         }
     };
 
-    // console.log('pie controller')
+    console.log('pie controller')
 
     $scope.salesData = [];
 
