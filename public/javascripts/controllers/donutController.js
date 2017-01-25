@@ -34,6 +34,7 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
+            console.log(prices)
             price = prices.data;
 
             for (a = 0; a < $scope.salesData.length; a++) {

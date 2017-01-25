@@ -30,13 +30,13 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
+            console.log(prices)
             price = prices.data;
 
             for (a = 0; a < $scope.salesData.length; a++) {
                 for (b = 0; b < price.length; b++) {
                     if ($scope.salesData[a].SKU === price[b].SKU && $scope.salesData[a].Channel === price[b].Channel) {
                         uniquePrice = price[b].RevenuePerUnitSold;
-                        console.log (uniquePrice)
                     }
                 }
                 $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
