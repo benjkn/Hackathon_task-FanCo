@@ -17,25 +17,30 @@
             <li> <a ui-sref=".byChannel"><i class="fa fa-truck" aria-hidden="true"></i>  Channel</a></li>
             <li><a ui-sref=".byNeighborhood"><i class="fa fa-map-marker" aria-hidden="true"></i> Neighborhood</a></li>
             <li ng-show=false><a ng-Click=(show4=!show4)><i class="fa fa-calendar" aria-hidden="true"></i> Custom Dates</a>
-                  <ul id="myDropdown" class="dropdown-content" ng-show=show4>
-                    <li><input type="radio" name="dates" class="datesPick" ng-click="pickDate()"> Custom </input>
-                      <form ng-show=showmode ng-click="getDateDetails(fromDate, toDate)">
-                        <div>
-                          From: <input type="date" ng-model="fromDate">
-                        </div>
-                        <div>
-                          To: <input type="date" ng-model="toDate">
-                        </div>
-                        <div>
-                          <input type="submit" Value="Go!">
-                        </div>
-                      </form>
-                    </li>
-                    <li><input type="radio" name="dates" class="datesPick" value="All" ng-click="pickDate()" checked> All </input>
-                    </li>
-                  </ul>
-            </li>
 
+              <ul id="myDropdown" ng-show=show4 class="dropdown-content" >
+                <li>
+                <!-- <input type="radio" name="dates" class="datesPick" ng-click="pickDate()" checked> Custom </input> -->
+                <a class="datesPick" ng-click=pickDate('Custom')> Custom </a>
+                  <form ng-show=showmode ng-click="getDateDetails(fromDate, toDate)">
+                    <div>
+                      From: <input type="date" ng-model="fromDate">
+                    </div>
+                    <div>
+                      To: <input type="date" ng-model="toDate">
+                    </div>
+                    <div>
+                      <input type="submit" Value="Go!">
+                    </div>
+                  </form>
+                </li>
+                <li>
+                  <a class="datesPick" ng-click=pickDate('All')> All </a>
+                  <!-- <input type="radio" name="dates" class="datesPick" ng-click="pickDate()"> All </input> -->
+                </li>
+              </ul>
+
+            </li>
           </ul>
         </div>
       </div>

@@ -1,13 +1,11 @@
 app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast) {
 
-// forecast.sendAlert();
-	//needs format
+
 	var formatTime = d3.time.format("%c");
 
 	$scope.today = formatTime(new Date());
 
 	forecast.getForecast().then(function (data) {
-		// console.log(data);
 		var forecastLive = data.data.list;
 		$scope.info = [];
 
@@ -22,17 +20,16 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 			}
 		}
 
-		for (j = 0; j < $scope.info.length; j++) {
-			if (($scope.info[j].weather.indexOf('rain') > 0) || ($scope.info[j].weather.indexOf('snow') > 0)) {
-				// the ones containing 'rain' and 'snow'
-				// console.log('heeeeeellllllloooooo' + i);
+			// if today there is NO snow, NO rain AND OVER 20 degrees celcius ===> send a message
+			if (!($scope.info[0].weather.indexOf('rain') > 0) || ($scope.info[0].weather.indexOf('snow') > 0)  && $scope.info[0].temp >20) {
+				//At 8 in the morning UTC (=10 in Israel) send a message
+				if (new Date().getUTCHours() === 8 && new Date().getMinutes() === 0 && new Date().getSeconds() === 0) {
+					var message = 'Today is a good day!!! :) Go out to sell fans! There will be no rain, no snow and the temperature will be: ' + $scope.info[0].temp
+					forecast.setAlert(message);
+				}
 			}
-			// console.log('on ' + $scope.info[j].date + ' the weather will be f**ing be ' + $scope.info[j].weather);
-		}
 
-		//send sms alert
-		// forecast.sendAlert();
-		// console.log($scope.info);
+
 	});
 
 
@@ -53,8 +50,7 @@ app.controller("ForecastCtrl", ["$scope", "forecast", function ($scope, forecast
 
 	};
 
-//=====================SMS ALERTS ================
-
+	//send alerts
 	$scope.sendAlerts = function(alerts) {
 
 		forecast.setAlert(alerts);

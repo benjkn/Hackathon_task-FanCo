@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 var request = require('request');
 var twilio = require('twilio');
 
-// Create a new REST API client to make authenticated requests against the
-// twilio back end
+// Create a new REST API client to make authenticated requests against the twilio back end
 // var client = twilio('TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN');
 var client = twilio('AC1d8c69111c146aed4c8ddccdc9eca32a', '66207c3aa0e1081ac7a79ebf0371412a');
 
@@ -19,19 +18,15 @@ var Sms = require("../models/SmsModel");
 
 //get the data from sales collection
 router.get('/sales', function(req, res) {
-	// console.log('asdf')
 	Sales.find(function(error, sales) {
-		// console.log(sales)
 		res.send(sales);
 	});
 });
 
 //get data from history db collection
 router.get('/history', function(req, res) {
-	// console.log('hello')
 	History.find(function(error, history) {
 		if (error) {console.log('there is an error');}
-		// console.log("gimme history");
 		res.send(history);
 	});
 });
@@ -58,6 +53,10 @@ router.get('/forecast', function(req, res){
 	});
 });
 
+
+//===============================================CUSTOM DATES========================================
+
+//get the graphs on customized dates
 router.get('/sales/:startingDate/:endingDate', function(req, res) {
 	var total =[];
 		for (i=0; i<req.after.length; i++) {
@@ -79,11 +78,11 @@ router.param('endingDate', function (req, res, next, eDate) {
 	return next();
 })
 
+//===============================================CUSTOM DATES========================================
 
-//add data to phones  collection db
+
+//add data to phones collection db
 router.post('/phones', function(req, res, next) {
-// console.log(req.body);
-
     var sms = new Sms(req.body);
 
     sms.save(function(err, phones){
@@ -91,8 +90,9 @@ router.post('/phones', function(req, res, next) {
 
         res.json(phones);
     });
-
 });
+
+
 
 router.param('lalala', function (req,res,next, text) {
 	req.text = text;
@@ -102,14 +102,9 @@ router.param('lalala', function (req,res,next, text) {
 
 
 router.get('/alert/:lalala', function(req, res, next) {
-	// console.log('value1');
-	//Text.findOne({latest one})
 	Sms.find(function(error, users){
 		if(error){ return next(error);}
-		/*console.log(users);*/
 		// res.send(users);
-		// console.log(users);
-		// var phones = users;
 
 		for (var j = 0; j < users.length; j++) {
 
@@ -122,7 +117,6 @@ router.get('/alert/:lalala', function(req, res, next) {
 
 		function sendSms(info) {
 
-			// console.log(info);
 
 				client.sms.messages.create(info, function(error, message) {
 				    if (!error) {
