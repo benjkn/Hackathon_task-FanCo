@@ -1,12 +1,13 @@
 app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
+    var moneyFormat = d3.format(",.2f");
 
     $scope.options = {
         chart: {
             type: 'pieChart',
             height: 520,
             donut: true,
-            x: function (d) { return d.x; },
-            y: function (d) { return d.y; },
+            x: function (d) { return d.key; },
+            y: function (d) { return d.values; },
             showLabels: true,
             color:['#388E3C','#81C784','#F57C00','#FFB74D','#D32F2F','#E57373'],
             // controls pie angle
@@ -34,7 +35,6 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
-            console.log(prices)
             price = prices.data;
 
             for (a = 0; a < $scope.salesData.length; a++) {
@@ -57,47 +57,24 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
                     });
                 }).entries($scope.salesData);
 
-            // console.log(revenueData);
 
-            //     totalRevenue = 0;
-            // revenueData.forEach(function(d){
-            //     totalRevenue += d.values;
-            // });
+            totalRevenue = 0;
+            revenueData.forEach(function(d){
+                totalRevenue += d.values;
+            });
 
-            // console.log(totalRevenue);
+            $scope.data = [];
 
-            // hardcoded :(
-            $scope.data =
-            [
-                {
-                    x: 'Green-Direct',
-                    y: 721306.4100000003
-                },
-                {
-                    x: 'Green-Retail',
-                    y: 594510.2599999999
-                },
-                {
-                    x: 'Orange-Direct',
-                    y: 460176.2
-                },
-                {
-                    x: 'Orange-Retail',
-                    y: 732847.5399999999
-                },
-                {
-                    x: 'Red-Direct',
-                    y: 344500.18
-                },
-                {
-                    x: 'Red-Retail',
-                    y: 1068884.2799999993
-                },
+            for (i=0; i<revenueData.length; i++) {
+                var j = i*2
+                $scope.data[j] = {}
+                $scope.data[j].key = revenueData[i].key + ' - ' + revenueData[i].values[0].key
+                $scope.data[j].values = revenueData[i].values[0].values
 
-            ];
-            // $scope.data = revenueData;
-
-
+                $scope.data[j+1] = {}
+                $scope.data[j+1].key = revenueData[i].key + ' - ' + revenueData[i].values[1].key
+                $scope.data[j+1].values = revenueData[i].values[1].values
+            }
 
 
         });

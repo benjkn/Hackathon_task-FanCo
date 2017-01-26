@@ -22,15 +22,12 @@ app.controller('PieCtrl', ['sales', '$scope', function (sales, $scope) {
         }
     };
 
-    console.log('pie controller')
-
     $scope.salesData = [];
 
     sales.getSales().then(function (response) {
         $scope.salesData = response.data;
 
         sales.getPrice().then(function (prices) {
-            console.log(prices)
             price = prices.data;
 
             for (a = 0; a < $scope.salesData.length; a++) {
