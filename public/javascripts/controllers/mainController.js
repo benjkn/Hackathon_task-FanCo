@@ -1,42 +1,43 @@
 app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 
-	$scope.preferences = {};
-
-	// $scope.products = ['RED - SPECIAL EDITION - FanCo. Classic', 'GREEN - FanCo. Classic', 'ORANGE - FanCo. Classic', 'All'];
-	// $scope.channels = ['Retail', 'Direct Sales', 'Both'];
-	// $scope.neighborhoods = ['Allston', 'Back Bay', 'Charleston', 'Downtown', 'Jamaica Plain', 'North End', 'South End', 'West End', 'All'];
-
-	// var theProds = document.getElementsByClassName('productList');
-	// var theChannel = document.getElementsByClassName('channelList');
-	// var theNeighborhoods = document.getElementsByClassName('neighList');
-	var theDates = document.getElementsByClassName('datesPick');
-
-
-	$scope.pickDate = function () {
-		if (theDates[0].checked) {
+	$scope.pickDate = function (x) {
+		if (x === 'Custom') {
 			$scope.showmode = true;
-		} else if (theDates[1].checked) {
+		} else {
 			$scope.showmode = false;
-			$scope.preferences.dates = 'All';
-			console.log($scope.preferences);
 			sales.getSales().then(function (data) {
 				console.log (data.data);
 			});
 		}
 	};
 
-	/*$scope.getDateDetails = function (x, y) {
 
-		startingDate = max(x, 31/5/2015)
-		endingDate = min(1/6/2016, y)
+	$scope.getDateDetails = function (x, y) {
+		// if ending date is before the starting date
+		if (y < x) {
+			alert ('check the dates again!')
+		}
+
+		//If the user gives dates out of the limits we set min and max
+		if (x < new Date(Date.parse('2015-05-31'))) {
+			var startingDate = new Date(Date.parse('2015-05-31'))
+		} else {
+			var startingDate = x
+		}
+		if (y > new Date(Date.parse('2016-06-01'))) {
+			var endingDate = new Date(Date.parse('2015-05-31'))
+		} else {
+			var endingDate = y
+		}
 
 		console.log(' starting date: ' + startingDate);
 		console.log('ending date:' + endingDate);
 
 
+		//returning empty array =========================================================================
 		sales.getSalesByDate(startingDate, endingDate).then(function (data) {
-			console.log (data.data);
+			console.log (data);
 		});
-	}*/
+	}
 
 }]);

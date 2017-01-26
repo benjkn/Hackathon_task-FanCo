@@ -4,10 +4,8 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
     $scope.salesData = [];
     $scope.weatherData = [];
-    // console.log('hello there')
 
 		sales.getSales().then (function(response) {
-      // console.log($scope.salesData);
       $scope.salesData = response.data;
 
       sales.getPrice().then (function(prices) {
@@ -21,7 +19,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
         }
         $scope.salesData[a].revenue = $scope.salesData[a].SalesUnits * uniquePrice
       }
-        // console.log ($scope.salesData);
 
 
 
@@ -77,13 +74,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
       // console.log(maxHigh);
       // console.log(minHigh);
 
-      // find max temp day
-      // for ( i=0; i<weatherData.length; i++) {
-      //   if (weatherData[i].maxtempC === maxHigh){
-          // console.log(weatherData[i]);
-      //   }
-      // }
-
       var minDate = d3.min(totalData,function(d){ return d.key; });
       var maxDate = d3.max(totalData, function(d){ return d.key; });
 
@@ -92,13 +82,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
       // console.log(minDate);
       // console.log(minDate2);
       // console.log("Max Sales for a day is: " + maxSales);
-
-      // // find max value day
-      // for ( i=0; i<totalData.length; i++) {
-      //   if (totalData[i].values === maxSales){
-      //     // console.log("most shit sold on " + totalData[i].key);
-      //   }
-      // }
 
       var minDate = d3.min(totalData,function(d){ return d.key; });
       var maxDate = d3.max(totalData, function(d){ return d.key; });
@@ -163,8 +146,6 @@ app.directive("linearChart", [ 'sales', function(sales) {
       var numFormat = d3.format(",.");
 
 
-
-
       // Finally add line; Append the path to group; run line generator on data
       var path = chartGroup.append("path").attr("d",line(totalData))
         .attr("class", "sales")
@@ -192,7 +173,7 @@ app.directive("linearChart", [ 'sales', function(sales) {
 
         var totalLength = path2.node().getTotalLength();
 
-    path2
+      path2
       .attr("stroke-dasharray", totalLength + " " + totalLength)
       .attr("stroke-dashoffset", totalLength)
       .transition()

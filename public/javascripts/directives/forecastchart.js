@@ -5,13 +5,13 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
     $scope.forecastData = [];
 
 		forecast.getForecast().then(function(response){
-      // console.log(response);
       $scope.forecastData = response.data.list;
-      // console.log($scope.forecastData);
 
       // Removing the first day to get rid of weather bug
+        if ($scope.forecastData[$scope.forecastData.length-1].dt < $scope.forecastData[1].dt) {
           $scope.forecastData.pop();
-      // console.log($scope.forecastData);
+        }
+
 
   		// parse the date!
       // var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -19,7 +19,6 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
         $scope.forecastData[i].dt = new Date(($scope.forecastData[i].dt*1000));
         $scope.forecastData[i].temp.day = Math.round(($scope.forecastData[i].temp.day-273.15)*100)/100;
   		}
-  		// console.log($scope.forecastData[0]);
 
 
       // Declare height and width variables(pixels)
@@ -40,11 +39,11 @@ app.directive("forecastChart", [ 'forecast', function(forecast) {
       // find max value day
       for ( i=0; i<$scope.forecastData.length; i++) {
         if ($scope.forecastData[i].temp.day === maxTemp){
-          // console.log("hottest shit temp on " + $scope.forecastData[i].dt);
+          // console.log("highest temp on " + $scope.forecastData[i].dt);
         }
 
         if($scope.forecastData[i].temp.day === minTemp){
-          // console.log("coldest shit temp on " + $scope.forecastData[i].dt);
+          // console.log("lowest temp on " + $scope.forecastData[i].dt);
         }
       }
 
