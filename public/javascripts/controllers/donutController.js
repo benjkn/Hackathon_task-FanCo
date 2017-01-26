@@ -68,11 +68,11 @@ app.controller('DonutCtrl', ['sales', '$scope', function (sales, $scope) {
             for (i=0; i<revenueData.length; i++) {
                 var j = i*2
                 $scope.data[j] = {}
-                $scope.data[j].key = revenueData[i].key + ' - ' + revenueData[i].values[0].key
+                $scope.data[j].key = revenueData[i].key.split(' ', 1) + ' - ' + revenueData[i].values[0].key
                 $scope.data[j].values = revenueData[i].values[0].values
 
                 $scope.data[j+1] = {}
-                $scope.data[j+1].key = revenueData[i].key + ' - ' + revenueData[i].values[1].key
+                $scope.data[j+1].key = revenueData[i].key.split(' ', 1) + ' - ' + revenueData[i].values[1].key
                 $scope.data[j+1].values = revenueData[i].values[1].values
             }
 
