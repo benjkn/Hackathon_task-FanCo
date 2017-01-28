@@ -55,26 +55,29 @@ router.get('/forecast', function(req, res){
 
 
 //===============================================CUSTOM DATES========================================
+//I THINK the params are working, the 'total' is not
 
 //get the graphs on customized dates
 router.get('/sales/:startingDate/:endingDate', function(req, res) {
-	var total =[];
-		for (i=0; i<req.after.length; i++) {
-			for (j=0; j<req.before.length; j++) {
-				if (req.before[j].WeekOf === req.after[i].WeekOf)
-					total.push(req.before[j])
-			}
-		}
+	var total = [];
+		// for (i=0; i<req.after.length; i++) {
+		// 	for (j=0; j<req.before.length; j++) {
+		// 		if (req.before[j].WeekOf === req.after[i].WeekOf)
+		// 			total.push(req.before[j])
+		// 	}
+		// }
 	res.send(total)
 })
 
 router.param('startingDate', function (req, res, next, sDate) {
 	req.after = Sales.find({WeekOf: {$gt: sDate}})
+	console.log(req.after)
 	return next();
 })
 
 router.param('endingDate', function (req, res, next, eDate) {
 	req.before = Sales.find({WeekOf: {$lt: eDate}})
+	console.log(req.before)
 	return next();
 })
 
