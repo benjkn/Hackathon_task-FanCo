@@ -16,28 +16,45 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 		// if ending date is before the starting date
 		if (y < x) {
 			alert ('check the dates again!')
-		}
-
-		//If the user gives dates out of the limits we set min and max
-		if (x < new Date(Date.parse('2015-05-31'))) {
-			var startingDate = new Date(Date.parse('2015-05-31'))
 		} else {
-			var startingDate = x
+			x = JSON.stringify(x).slice(1, 11)
+			y = JSON.stringify(y).slice(1, 11)
+
+			//If the user gives dates out of the limits we set min and max
+			if (x < '2015-05-31') {
+				var startingDate = '2015-05-31'
+			} else {
+				var startingDate = x
+			}
+
+			if (y > '2016-06-01') {
+				var endingDate = '2016-06-01'
+			} else {
+				var endingDate = y
+			}
+
+			//working with other Date format
+			// if (x < new Date(Date.parse('2015-05-31'))) {
+			// 	var startingDate = new Date(Date.parse('2015-05-31'))
+			// } else {
+			// 	var startingDate = x
+			// }
+			// if (y > new Date(Date.parse('2016-06-01'))) {
+			// 	var endingDate = new Date(Date.parse('2016-06-01'))
+			// } else {
+			// 	var endingDate = y
+			// }
+
+			console.log('starting date: ' + startingDate);
+			console.log('ending date: ' + endingDate);
+
+
+			//returning empty array =========================================================================
+			sales.getSalesByDate(startingDate, endingDate).then(function (data) {
+				console.log (data.data);
+			});
 		}
-		if (y > new Date(Date.parse('2016-06-01'))) {
-			var endingDate = new Date(Date.parse('2015-05-31'))
-		} else {
-			var endingDate = y
-		}
 
-		console.log(' starting date: ' + startingDate);
-		console.log('ending date:' + endingDate);
-
-
-		//returning empty array =========================================================================
-		sales.getSalesByDate(startingDate, endingDate).then(function (data) {
-			console.log (data);
-		});
 	}
 
 }]);
