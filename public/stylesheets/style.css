@@ -402,3 +402,13 @@ input[disabled="disabled"]{
   opacity: 0.4;
   cursor: not-allowed; !important;
 }
+
+/*About Pics*/
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 75px;
+    padding: 5px;
+    width: 150px;
+}
+

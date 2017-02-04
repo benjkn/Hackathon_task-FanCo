@@ -21,6 +21,12 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       controller: 'authCtrl'
     })
 
+    .state('home.about', {
+      url: '/about',
+      templateUrl: 'templates/about.html',
+      // controller: 'ForecastCtrl'
+    })
+
     .state('home.totalSales', {
       url: '/totalSales',
       views: {
