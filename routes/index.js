@@ -55,11 +55,31 @@ router.get('/forecast', function(req, res){
 
 
 //===============================================CUSTOM DATES========================================
-//I THINK the params are working, the 'total' is not
+/*//I THINK the params are working, the 'total' is not
+router.param('startingDate', function (req, res, next, sDate) {
+	console.log('===========this is the beginning of our param ==========')
+	console.log(sDate)
+	Sales.findOneAndUpdate({WeekOf: "2016-01-11"}, {WeekOf: "yo"},  function(data){
+		console.log('query')
+		console.log(data)
+		console.log('===========this is the beginning of our param ==========')
+	})
+	// console.log(req.after)
+	return next();
+})
+
+router.param('endingDate', function (req, res, next, eDate) {
+	req.before = Sales.find({WeekOf: {$lt: eDate}})
+	// console.log(req.before)
+	return next();
+})
 
 //get the graphs on customized dates
 router.get('/sales/:startingDate/:endingDate', function(req, res) {
-	var total = [];
+	console.log('------------------here we are in the get api after the router.param-----------------------')
+	var total = ['hello'];
+
+		// console.log(req.before)
 		// for (i=0; i<req.after.length; i++) {
 		// 	for (j=0; j<req.before.length; j++) {
 		// 		if (req.before[j].WeekOf === req.after[i].WeekOf)
@@ -69,18 +89,7 @@ router.get('/sales/:startingDate/:endingDate', function(req, res) {
 	res.send(total)
 })
 
-router.param('startingDate', function (req, res, next, sDate) {
-	req.after = Sales.find({WeekOf: {$gt: sDate}})
-	console.log(req.after)
-	return next();
-})
-
-router.param('endingDate', function (req, res, next, eDate) {
-	req.before = Sales.find({WeekOf: {$lt: eDate}})
-	console.log(req.before)
-	return next();
-})
-
+*/
 //===============================================CUSTOM DATES========================================
 
 
@@ -120,18 +129,17 @@ router.get('/alert/:lalala', function(req, res, next) {
 
 		function sendSms(info) {
 
-
-				client.sms.messages.create(info, function(error, message) {
-				    if (!error) {
-				        console.log('Success! The SID for this SMS message is:');
-				        console.log(message.sid);
-				        console.log('Message sent on:');
-				        console.log(message.dateCreated);
-				    } else {
-				        console.log('Oops! There was an error.' );
-				        console.log(error);
-				    }
-				});
+			client.sms.messages.create(info, function(error, message) {
+		    if (!error) {
+	        console.log('Success! The SID for this SMS message is:');
+	        console.log(message.sid);
+	        console.log('Message sent on:');
+	        console.log(message.dateCreated);
+		    } else {
+	        console.log('Oops! There was an error.' );
+	        console.log(error);
+		    }
+			});
 
 
 		}
