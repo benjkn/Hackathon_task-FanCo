@@ -57,32 +57,21 @@ router.get('/forecast', function(req, res){
 //===============================================CUSTOM DATES========================================
 //I THINK the params are working, the 'total' is not
 router.param('startingDate', function (req, res, next, sDate) {
-	sDate = JSON.stringify(sDate)
-	Sales.find({WeekOf: '2016-05-16'}, function (dtata) {
-		console.log (dtata)
-	})
-	// console.log(req.after)
+	req.after = sDate
 	return next();
 })
 
 router.param('endingDate', function (req, res, next, eDate) {
-	eDate = JSON.stringify(eDate)
-	req.before = Sales.find({WeekOf: {$lt: eDate}})
-	// console.log (req.before)
+	req.before = eDate
 	return next();
 })
 
 //get the graphs on customized dates
 router.get('/sales/:startingDate/:endingDate', function(req, res) {
-	console.log('------------------here we are in the get api after the router.param-----------------------')
-	var total = ['hello']
-	// console.log(req.after)
-
-
-	// Merge req.after and req.before
-
-	res.send(total)
-
+	Sales.find({WeekOf: {$lt: req.before, $gt: req.after}}, function (err, data) {
+		if (err) { console.log (err)}
+			res.send(data)
+	})
 })
 
 
