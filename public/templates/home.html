@@ -18,11 +18,11 @@
             <li><a ui-sref=".byNeighborhood"><i class="fa fa-map-marker" aria-hidden="true"></i> Neighborhood</a></li>
             <li><a ng-Click=(show4=!show4)><i class="fa fa-calendar" aria-hidden="true"></i> Custom Dates</a>
 
-              <ul id="myDropdown" ng-show=true class="dropdown-content" >   <!-- show4 -->
+              <ul id="myDropdown" ng-show=show4 class="dropdown-content" >
                 <li>
                 <!-- <input type="radio" name="dates" class="datesPick" ng-click="pickDate()" checked> Custom </input> -->
                 <a class="datesPick" ng-click=pickDate('Custom')> Custom </a>
-                  <form ng-show=true ng-submit="getDateDetails(fromDate, toDate)">  <!-- showmode -->
+                  <form ng-show=showmode ng-submit="getDateDetails(fromDate, toDate)">
                     <div>
                       From: <input type="date" ng-model="fromDate">
                     </div>

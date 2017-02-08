@@ -33,18 +33,6 @@ app.controller('MainCtrl', ['$scope','sales', function($scope, sales){
 				var endingDate = y
 			}
 
-			//working with other Date format
-			// if (x < new Date(Date.parse('2015-05-31'))) {
-			// 	var startingDate = new Date(Date.parse('2015-05-31'))
-			// } else {
-			// 	var startingDate = x
-			// }
-			// if (y > new Date(Date.parse('2016-06-01'))) {
-			// 	var endingDate = new Date(Date.parse('2016-06-01'))
-			// } else {
-			// 	var endingDate = y
-			// }
-
 			console.log('starting date: ' + startingDate);
 			console.log('ending date: ' + endingDate);
 

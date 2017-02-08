@@ -1,6 +1,9 @@
 app.directive("linearChart", [ 'sales', function(sales) {
 
-  var link = function($scope, $el, $attrs) {
+  var link = function($scope, $el, $attrs/*, scope*/) {
+
+//    scope.$watch('events', function () {
+//    })
 
     $scope.salesData = [];
     $scope.weatherData = [];

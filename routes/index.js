@@ -55,7 +55,7 @@ router.get('/forecast', function(req, res){
 
 
 //===============================================CUSTOM DATES========================================
-//I THINK the params are working, the 'total' is not
+
 router.param('startingDate', function (req, res, next, sDate) {
 	req.after = sDate
 	return next();
@@ -73,7 +73,6 @@ router.get('/sales/:startingDate/:endingDate', function(req, res) {
 			res.send(data)
 	})
 })
-
 
 //===============================================CUSTOM DATES========================================
 

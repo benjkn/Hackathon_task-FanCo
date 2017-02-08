@@ -15,6 +15,9 @@ app.factory('sales', ['$http', function($http) {
     },
 
     getSalesByDate: function (a, b) {
+      // if (!a) {a = '2015-05-31'}
+      // if (!b) {b = '2016-06-01'}
+
       return $http.get('/sales/'+ a + '/' + b);
     }
 
