@@ -45,7 +45,7 @@ router.get('/forecast', function(req, res){
 	request('http://api.openweathermap.org/data/2.5/forecast/daily?q=Boston&APPID=eae18de7d92e5fa1893eeb187956805f&cnt=16', function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	  	var data = JSON.parse(body);
-	    // console.log(body);
+
 	    res.send(body);
 	  }else if(error) {
 	  	console.log('there is an error');
@@ -55,41 +55,37 @@ router.get('/forecast', function(req, res){
 
 
 //===============================================CUSTOM DATES========================================
-/*//I THINK the params are working, the 'total' is not
+//I THINK the params are working, the 'total' is not
 router.param('startingDate', function (req, res, next, sDate) {
-	console.log('===========this is the beginning of our param ==========')
-	console.log(sDate)
-	Sales.findOneAndUpdate({WeekOf: "2016-01-11"}, {WeekOf: "yo"},  function(data){
-		console.log('query')
-		console.log(data)
-		console.log('===========this is the beginning of our param ==========')
+	sDate = JSON.stringify(sDate)
+	Sales.find({WeekOf: '2016-05-16'}, function (dtata) {
+		console.log (dtata)
 	})
 	// console.log(req.after)
 	return next();
 })
 
 router.param('endingDate', function (req, res, next, eDate) {
+	eDate = JSON.stringify(eDate)
 	req.before = Sales.find({WeekOf: {$lt: eDate}})
-	// console.log(req.before)
+	// console.log (req.before)
 	return next();
 })
 
 //get the graphs on customized dates
 router.get('/sales/:startingDate/:endingDate', function(req, res) {
 	console.log('------------------here we are in the get api after the router.param-----------------------')
-	var total = ['hello'];
+	var total = ['hello']
+	// console.log(req.after)
 
-		// console.log(req.before)
-		// for (i=0; i<req.after.length; i++) {
-		// 	for (j=0; j<req.before.length; j++) {
-		// 		if (req.before[j].WeekOf === req.after[i].WeekOf)
-		// 			total.push(req.before[j])
-		// 	}
-		// }
+
+	// Merge req.after and req.before
+
 	res.send(total)
+
 })
 
-*/
+
 //===============================================CUSTOM DATES========================================
 
 

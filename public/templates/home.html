@@ -16,13 +16,13 @@
             <li> <a ui-sref=".byProduct"><i class="fa fa-pie-chart" aria-hidden="true"></i> Products</a></li>
             <li> <a ui-sref=".byChannel"><i class="fa fa-truck" aria-hidden="true"></i>  Channel</a></li>
             <li><a ui-sref=".byNeighborhood"><i class="fa fa-map-marker" aria-hidden="true"></i> Neighborhood</a></li>
-            <li ng-hide=true><a ng-Click=(show4=!show4)><i class="fa fa-calendar" aria-hidden="true"></i> Custom Dates</a>
+            <li><a ng-Click=(show4=!show4)><i class="fa fa-calendar" aria-hidden="true"></i> Custom Dates</a>
 
-              <ul id="myDropdown" ng-show=show4 class="dropdown-content" >
+              <ul id="myDropdown" ng-show=true class="dropdown-content" >   <!-- show4 -->
                 <li>
                 <!-- <input type="radio" name="dates" class="datesPick" ng-click="pickDate()" checked> Custom </input> -->
                 <a class="datesPick" ng-click=pickDate('Custom')> Custom </a>
-                  <form ng-show=showmode ng-submit="getDateDetails(fromDate, toDate)">
+                  <form ng-show=true ng-submit="getDateDetails(fromDate, toDate)">  <!-- showmode -->
                     <div>
                       From: <input type="date" ng-model="fromDate">
                     </div>
